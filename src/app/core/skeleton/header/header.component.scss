@@ -1,9 +1,7 @@
-@import "../homekeep/src/themes/homekeep-default-theme/index.scss";
+@import "~src/styles";
 
-:host{
-  .header__container {
-    width: 100vw;
-    height: 3rem;
-    background-color: $color-theme-dark-blue;
-  }
+.header__container {
+  width: 100vw;
+  height: 3rem;
+  background-color: $color-theme-dark-blue;
 }

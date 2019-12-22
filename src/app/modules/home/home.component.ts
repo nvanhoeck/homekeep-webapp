@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
+import {HeaderService} from '../../core/skeleton/header';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterContentInit {
 
-  constructor() { }
+  constructor(private readonly headerService: HeaderService) {
+  }
 
-  ngOnInit() {
+
+  ngAfterContentInit(): void {
+    this.headerService.mayShowHeader(false);
   }
 
 }

@@ -1,0 +1,38 @@
+@import "~src/styles";
+
+.header__container {
+  display: none;
+}
+
+.homepage__container {
+  @include subheader-gradient;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 2fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  .homepage__title {
+    color: $color-white;
+    width: 50%;
+    margin: 25vh auto 0;
+    text-align: center;
+    grid-area: 1 / 1 / 2 / 6;
+  }
+
+  .homepage__subtitle--container {
+    display: flex;
+    flex-direction: column;
+    color: $color-white;
+    grid-area: 2 / 2 / 3 / 5;
+    align-items: center;
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+
+    h2 {
+      text-align: center;
+    }
+  }
+}
