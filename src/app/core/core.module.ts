@@ -2,24 +2,19 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
 import {LoggerService} from './logger-service';
-import {WrapperModule} from './wrapper/app-wrapper/wrapper.module';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+import {WrapperModule} from './skeleton/wrapper/wrapper.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
-    WrapperModule
+    WrapperModule,
   ],
   providers: [LoggerService],
   exports: [
-    WrapperModule
+    WrapperModule,
   ],
-  declarations: [
-    FooterComponent,
-    HeaderComponent
-  ]
+  declarations: []
   })
 export class CoreModule {
 }
