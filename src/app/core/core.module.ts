@@ -3,6 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
 import {LoggerService} from './logger-service';
 import {WrapperModule} from './wrapper/app-wrapper/wrapper.module';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
@@ -11,7 +13,13 @@ import {WrapperModule} from './wrapper/app-wrapper/wrapper.module';
     WrapperModule
   ],
   providers: [LoggerService],
-  exports: [WrapperModule]
+  exports: [
+    WrapperModule
+  ],
+  declarations: [
+    FooterComponent,
+    HeaderComponent
+  ]
   })
 export class CoreModule {
 }
