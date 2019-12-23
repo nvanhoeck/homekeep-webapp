@@ -9,7 +9,7 @@ import {ButtonSize, ButtonType} from '../../shared/components/buttons';
 })
 export class HomeComponent implements AfterContentInit {
 
-  public tapButtonSize: ButtonSize = ButtonSize.MEDIUM;
+  public tapButtonSize: ButtonSize = ButtonSize.BIG;
   public tapButtonType: ButtonType = ButtonType.SECONDARY;
 
   constructor(private readonly headerService: HeaderService) {

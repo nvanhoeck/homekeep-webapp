@@ -2,22 +2,34 @@
 /**
 ############################## DEFAULT BUTTON #############################################
  */
+
+button {
+  > *:hover {
+    cursor: pointer;
+  }
+  &:hover {
+   cursor: pointer;
+  }
+}
+
 .basic-button__size--small {
-  width: 4em;
-  height: 2em;
+  width: 4rem;
+  height: 2rem;
   font-weight: 400;
 }
 
 .basic-button__size--medium {
-  width: 6em;
-  height: 3em;
+  width: 6rem;
+  height: 3rem;
   font-weight: 600;
 }
 
 .basic-button__size--big {
-  width: 8em;
-  height: 4em;
-  font-weight: 800;
+  width: 8rem;
+  height: 4rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1rem;
 }
 
 .basic-button__type--default {
