@@ -7,6 +7,7 @@ import {CoreModule} from './core/core.module';
 import { HomeComponent } from './modules/home/home.component';
 import {HomeModule} from './modules/home/home.module';
 import { SectionComponent } from './shared/components/section/section.component';
+import {ButtonsModule} from './shared/components/buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { SectionComponent } from './shared/components/section/section.component'
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+
+    ButtonsModule,
 
     HomeModule
   ],

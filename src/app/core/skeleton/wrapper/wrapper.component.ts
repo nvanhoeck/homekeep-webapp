@@ -1,6 +1,7 @@
-import {AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {HeaderService} from '../header';
 import {Observable} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-wrapper',
@@ -8,20 +9,11 @@ import {Observable} from 'rxjs';
   styleUrls: ['./wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WrapperComponent implements OnInit, AfterContentInit {
+export class WrapperComponent {
 
-  constructor(private readonly headerService: HeaderService,
-              private readonly cdRef: ChangeDetectorRef) { }
+  public showHeader$: Observable<boolean> = this.headerService.showHeader$.pipe(delay(0));
 
-  ngOnInit() {
-  }
-
-  get showHeader(): Observable<boolean> {
-    return this.headerService.getShowHeader();
-  }
-
-  ngAfterContentInit(): void {
-    this.cdRef.detectChanges();
+  constructor(private readonly headerService: HeaderService) {
   }
 
 }

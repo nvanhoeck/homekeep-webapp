@@ -1,0 +1,36 @@
+@import "../1-settings";
+/**
+############################## DEFAULT BUTTON #############################################
+ */
+.basic-button__size--small {
+  width: 4em;
+  height: 2em;
+  font-weight: 400;
+}
+
+.basic-button__size--medium {
+  width: 6em;
+  height: 3em;
+  font-weight: 600;
+}
+
+.basic-button__size--big {
+  width: 8em;
+  height: 4em;
+  font-weight: 800;
+}
+
+.basic-button__type--default {
+  background-color: $color-white;
+  color: $color-theme-dark-grey;
+}
+
+.basic-button__type--primary {
+  background-color: $color-theme-primary;
+  color: $color-white;
+}
+
+.basic-button__type--secondary {
+  background-color: $color-white;
+  color: $color-theme-primary;
+}

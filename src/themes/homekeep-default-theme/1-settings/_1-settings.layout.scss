@@ -5,4 +5,6 @@ $borderline: 0.5rem;
 
 body, html {
   display: block;
+  max-height: 100vh;
+  overflow-y: hidden;
 }

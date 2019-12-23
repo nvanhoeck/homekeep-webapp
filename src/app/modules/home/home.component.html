@@ -3,7 +3,12 @@
     <h1 class="homepage__title">HOMEKEEP</h1>
     <div class="homepage__subtitle--container">
       <h2>Welcome to your personal home inventory</h2>
-      <button>Tap me!</button>
+      <app-default-button [buttonSize]="tapButtonSize"
+                          [buttonType]="tapButtonType"
+                  [borderRadius]="20"
+                  [text]="'Tap me'"
+      >
+      </app-default-button>
     </div>
   </div>
 </section>

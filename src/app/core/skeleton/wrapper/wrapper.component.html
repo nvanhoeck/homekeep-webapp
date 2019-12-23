@@ -1,7 +1,8 @@
 <ng-container>
-  <ng-container *ngIf="showHeader() | async">
+  <div *ngIf="(showHeader$ | async) as showHeader">
+    {{showHeader}}
     <app-header></app-header>
-  </ng-container>
+  </div>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </ng-container>
