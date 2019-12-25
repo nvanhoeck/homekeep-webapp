@@ -8,6 +8,7 @@ import { HomeComponent } from './modules/home/home.component';
 import {HomeModule} from './modules/home/home.module';
 import { SectionComponent } from './shared/components/section/section.component';
 import {ButtonsModule} from './shared/components/buttons/buttons.module';
+import {WrapperModule} from './shared/skeleton/wrapper/wrapper.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {ButtonsModule} from './shared/components/buttons/buttons.module';
     CoreModule,
 
     ButtonsModule,
+    WrapperModule,
 
     HomeModule
   ],

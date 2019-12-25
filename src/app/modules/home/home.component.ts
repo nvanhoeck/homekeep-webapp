@@ -1,5 +1,5 @@
 import {AfterContentInit, Component} from '@angular/core';
-import {HeaderService} from '../../core/skeleton/header';
+import {HeaderService} from '../../shared/skeleton/header';
 import {ButtonSize, ButtonType} from '../../shared/components/buttons';
 
 @Component({
