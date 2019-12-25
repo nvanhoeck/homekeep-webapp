@@ -1,6 +1,6 @@
 describe("homepage", () => {
   it("should redirect to the homepage", () => {
-    cy.visit("http://localhost:4200/");
+    cy.visit("");
     cy.url().should('include', '/home');
   });
 });
