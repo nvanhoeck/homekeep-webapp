@@ -9,6 +9,9 @@ import {HomeModule} from './modules/home/home.module';
 import { SectionComponent } from './shared/components/section/section.component';
 import {ButtonsModule} from './shared/components/buttons/buttons.module';
 import {WrapperModule} from './shared/skeleton/wrapper/wrapper.module';
+import {AuthModule} from './core/services/auth/auth.module';
+import {FormsModule} from '@angular/forms';
+import {BaseModule} from './shared/components/base/base.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import {WrapperModule} from './shared/skeleton/wrapper/wrapper.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    AuthModule,
+    FormsModule,
 
     ButtonsModule,
-    WrapperModule,
+    BaseModule,
 
+    WrapperModule,
     HomeModule
   ],
   providers: [],

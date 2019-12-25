@@ -357,4 +357,6 @@ button::-moz-focus-inner {
 }
 
 
-button:focus {outline:0;}
+*:focus
+{outline:0;}
+

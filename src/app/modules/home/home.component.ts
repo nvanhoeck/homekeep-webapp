@@ -1,6 +1,7 @@
 import {AfterContentInit, Component} from '@angular/core';
 import {HeaderService} from '../../shared/skeleton/header';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
+import {AuthService} from '../../core/services/auth';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +15,11 @@ export class HomeComponent implements AfterContentInit {
   public tapButtonClass: ButtonClass = ButtonClass.TEXT;
 
   private _clickEventHandler = ($event: any) => this.changeButton($event);
+  private _changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
 
 
-  constructor(private readonly headerService: HeaderService) {
+  constructor(private readonly headerService: HeaderService,
+              private readonly authService: AuthService) {
   }
 
 
@@ -28,12 +31,22 @@ export class HomeComponent implements AfterContentInit {
     return this._clickEventHandler;
   }
 
+  get changeInputEventHandler(): ($event) => void {
+    return this._changeInputEventHandler;
+  }
+
   private changeButton($event: any): void {
     this.tapButtonType = ButtonType.WHITE_BORDER_ONLY;
     const node: any = $event.target;
     node.style.width = '300px';
     node.setAttribute('width', '10rem');
     this.tapButtonClass = ButtonClass.PASSWORD;
+  }
+
+  private changeInputHandler(keyValue: string): void {
+    if (keyValue.length === 4) {
+      this.authService.validate(keyValue);
+    }
   }
 }
 
