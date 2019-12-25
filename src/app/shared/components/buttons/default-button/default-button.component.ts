@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ButtonSize, ButtonType} from '../buttons.enums';
+import {ButtonClass, ButtonSize, ButtonType} from '../buttons.enums';
 import {StyleBuilderClass} from '../../../models/style-builder.class';
 import {LoggerService, LogginLevel} from '../../../../core';
 
@@ -12,6 +12,7 @@ export class DefaultButtonComponent implements OnInit {
 
   @Input() buttonSize: ButtonSize = ButtonSize.MEDIUM;
   @Input() buttonType: ButtonType = ButtonType.DEFAULT;
+  @Input() buttonClass: ButtonClass = ButtonClass.TEXT;
   @Input() borderRadius = 0;
   @Input() text = '';
   @Input() clickEvent: any;
@@ -43,9 +44,15 @@ export class DefaultButtonComponent implements OnInit {
 
   onClick($event: MouseEvent) {
     if (this.clickEvent) {
-      this.clickEvent();
+      this.clickEvent($event);
     } else {
       this.loggerService.log('No click event handler found for ' + $event.target, LogginLevel.WARN);
     }
+  }
+
+  passEventToParent($event: any) {
+    const evObj = document.createEvent('Events');
+    evObj.initEvent('click', true, false);
+    $event.target.parentNode.dispatchEvent(evObj);
   }
 }

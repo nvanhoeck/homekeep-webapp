@@ -1,6 +1,6 @@
 import {AfterContentInit, Component} from '@angular/core';
 import {HeaderService} from '../../shared/skeleton/header';
-import {ButtonSize, ButtonType} from '../../shared/components/buttons';
+import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +11,9 @@ export class HomeComponent implements AfterContentInit {
 
   public tapButtonSize: ButtonSize = ButtonSize.BIG;
   public tapButtonType: ButtonType = ButtonType.SECONDARY;
+  public tapButtonClass: ButtonClass = ButtonClass.TEXT;
 
-  private _clickEventHandler = () => console.log('');
+  private _clickEventHandler = ($event: any) => this.changeButton($event);
 
 
   constructor(private readonly headerService: HeaderService) {
@@ -23,9 +24,16 @@ export class HomeComponent implements AfterContentInit {
     this.headerService.mayShowHeader(false);
   }
 
-  get clickEventHandler(): () => void {
+  get clickEventHandler(): ($event) => void {
     return this._clickEventHandler;
   }
 
+  private changeButton($event: any): void {
+    this.tapButtonType = ButtonType.WHITE_BORDER_ONLY;
+    const node: any = $event.target;
+    node.style.width = '300px';
+    node.setAttribute('width', '10rem');
+    this.tapButtonClass = ButtonClass.PASSWORD;
+  }
 }
 

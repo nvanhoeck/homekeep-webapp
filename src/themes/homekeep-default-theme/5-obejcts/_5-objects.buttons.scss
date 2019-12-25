@@ -4,6 +4,12 @@
  */
 
 button {
+  display: flex;
+  /* align-content: center; */
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
   > *:hover {
     cursor: pointer;
   }
@@ -45,4 +51,30 @@ button {
 .basic-button__type--secondary {
   background-color: $color-white;
   color: $color-theme-primary;
+}
+
+
+
+.basic-button__type--default_border_only {
+  background-color: $total-transparent;
+  color: $color-theme-dark-grey;
+  border: solid 0.1rem $color-white;
+}
+
+.basic-button__type--primary_border_only {
+  background-color: $total-transparent;
+  color: $color-white;
+  border: solid 0.1rem $color-theme-primary;
+}
+
+.basic-button__type--secondary_border_only {
+  background-color: $total-transparent;
+  color: $color-theme-primary;
+  border: solid 0.1rem $color-white;
+}
+
+.basic-button__type--white_border_only {
+  background-color: $total-transparent;
+  color: $color-white;
+  border: solid 0.1rem $color-white;
 }

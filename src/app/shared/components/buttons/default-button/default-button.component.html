@@ -2,5 +2,9 @@
   (click)="onClick($event)"
   [ngStyle]="getStyles"
   [ngClass]="getClasses">
-  <p>{{text}}</p>
+  <ng-container [ngSwitch]="buttonClass">
+    <p *ngSwitchCase="'text'" (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
+    <input type="password" *ngSwitchCase="'password'" />
+    <p *ngSwitchDefault (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
+  </ng-container>
 </button>
