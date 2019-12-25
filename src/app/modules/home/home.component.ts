@@ -12,6 +12,9 @@ export class HomeComponent implements AfterContentInit {
   public tapButtonSize: ButtonSize = ButtonSize.BIG;
   public tapButtonType: ButtonType = ButtonType.SECONDARY;
 
+  private _clickEventHandler = () => console.log('');
+
+
   constructor(private readonly headerService: HeaderService) {
   }
 
@@ -20,4 +23,9 @@ export class HomeComponent implements AfterContentInit {
     this.headerService.mayShowHeader(false);
   }
 
+  get clickEventHandler(): () => void {
+    return this._clickEventHandler;
+  }
+
 }
+

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ButtonSize, ButtonType} from '../buttons.enums';
 import {StyleBuilderClass} from '../../../models/style-builder.class';
+import {LoggerService, LogginLevel} from '../../../../core';
 
 @Component({
   selector: 'app-default-button',
@@ -13,8 +14,9 @@ export class DefaultButtonComponent implements OnInit {
   @Input() buttonType: ButtonType = ButtonType.DEFAULT;
   @Input() borderRadius = 0;
   @Input() text = '';
+  @Input() clickEvent: any;
 
-  constructor() {
+  constructor(private readonly loggerService: LoggerService) {
   }
 
   ngOnInit() {
@@ -32,10 +34,18 @@ export class DefaultButtonComponent implements OnInit {
   }
 
   private getSizeClass(): string {
-    return 'basic-button__size--' + this.buttonSize  + ' , ';
+    return 'basic-button__size--' + this.buttonSize + ' , ';
   }
 
   private getTypeClass(): string {
     return 'basic-button__type--' + this.buttonType + ' , ';
+  }
+
+  onClick($event: MouseEvent) {
+    if (this.clickEvent) {
+      this.clickEvent();
+    } else {
+      this.loggerService.log('No click event handler found for ' + $event.target, LogginLevel.WARN);
+    }
   }
 }

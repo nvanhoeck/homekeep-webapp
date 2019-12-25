@@ -1,3 +1,6 @@
-<button [ngStyle]="getStyles" [ngClass]="getClasses">
+<button
+  (click)="onClick($event)"
+  [ngStyle]="getStyles"
+  [ngClass]="getClasses">
   <p>{{text}}</p>
 </button>

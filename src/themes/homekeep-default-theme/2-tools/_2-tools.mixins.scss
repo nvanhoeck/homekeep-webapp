@@ -3,10 +3,16 @@
 GRADIENTS
  */
 @mixin subheader-gradient {
-  $gradient-dark-to-light-blue-base: $color-theme-dark-blue; /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/$color-theme-dark-blue+0,56aebe+100 */
   background: -moz-linear-gradient(-45deg, $color-theme-dark-blue 0%, $color-theme-light-blue 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg, $color-theme-dark-blue 0%, $color-theme-light-blue 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(135deg, $color-theme-dark-blue 0%, $color-theme-light-blue 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$color-theme-dark-blue', endColorstr='$color-theme-light-blue', GradientType=1); /* IE6-9 fallback on horizontal gradient */
 
+}
+
+
+@mixin subheader-gradient-trans {
+  background: -moz-linear-gradient(-45deg, $color-theme-dark-blue-trans 0%, $color-theme-light-blue-trans 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, $color-theme-dark-blue-trans 0%, $color-theme-light-blue-trans 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, $color-theme-dark-blue-trans 0%, $color-theme-light-blue-trans 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
