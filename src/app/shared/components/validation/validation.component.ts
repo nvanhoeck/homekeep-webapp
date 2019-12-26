@@ -13,6 +13,7 @@ export class ValidationComponent extends BaseComponent implements OnInit {
   @Input()
   validationClass: string;
   public message: string;
+  public messageType: string;
 
 
   constructor(private readonly messagingService: MessagingService,
@@ -24,8 +25,11 @@ export class ValidationComponent extends BaseComponent implements OnInit {
     this.messagingService.getMessage(this.validationClass)
       .pipe(
         takeUntil(this.destroy$)
-      ).subscribe(value => {
-      this.message = value;
+      ).subscribe(appMessage => {
+      if (appMessage) {
+        this.message = appMessage.message;
+        this.messageType = appMessage.messageType;
+      }
       this.cdref.markForCheck();
     });
   }

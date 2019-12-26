@@ -1,0 +1,33 @@
+
+@font-face {
+  font-family: 'homekeep';
+  src:  url('~src/assets/icons/homekeep/homekeep.eot?9v1a0e');
+  src:  url('~src/assets/icons/homekeep/homekeep.eot?9v1a0e#iefix') format('embedded-opentype'),
+  url('~src/assets/icons/homekeep/homekeep.ttf?9v1a0e') format('truetype'),
+  url('~src/assets/icons/homekeep/homekeep.woff?9v1a0e') format('woff'),
+  url('~src/assets/icons/homekeep/homekeep.svg?9v1a0e#homekeep') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'homekeep', sans-serif !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tick {
+  &:before {
+    content: '\e900';
+  }
+}

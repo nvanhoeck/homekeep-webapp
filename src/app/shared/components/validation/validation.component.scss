@@ -4,3 +4,9 @@
   @include error_text;
   font-weight: 600;
 }
+
+
+.validation-text--success{
+  @include success_fill;
+  font-weight: 600;
+}

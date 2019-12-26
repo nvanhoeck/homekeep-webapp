@@ -21,6 +21,7 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   @Input() text = '';
   @Input() clickEvent: any;
   @Input() inputPassChangeEvent: any;
+  @Input() icon: string;
 
   private inputValue: BehaviorSubject<string> = new BehaviorSubject('');
 

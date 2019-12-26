@@ -22,12 +22,25 @@ GRADIENTS
   color: $color-red;
 }
 
+@mixin success_text {
+  fill: $color-green;
+  color: $color-green;
+}
+
 @mixin error_border {
   border-color: $color-red;
 }
 
+@mixin success_border {
+  border-color: $color-green;
+}
+
 @mixin error_fill {
   background-color: $color-red;
+}
+
+@mixin success_fill {
+  background-color: $color-green;
 }
 
 @mixin error_all {
@@ -36,6 +49,16 @@ GRADIENTS
   @include error_fill;
 }
 
+@mixin success_all {
+  @include success_text;
+  @include success_border;
+  @include success_fill;
+}
+
 @mixin transition_width_fast {
   transition: width .333s linear;
+}
+
+@mixin transition_background-color_fast {
+  transition: background-color .333s linear;
 }

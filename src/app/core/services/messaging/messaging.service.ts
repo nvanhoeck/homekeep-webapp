@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AppMessage} from '../../../shared/models/app-message.class';
+import {AppMessage, AppMessageType} from '../../../shared/models/app-message.class';
 import {filter, map} from 'rxjs/operators';
 
 @Injectable({
@@ -16,25 +16,23 @@ export class MessagingService {
     this.lastMessage$.next(null);
   }
 
-  getMessage(validationClass: string): Observable<string> {
+  getMessage(validationClass: string): Observable<AppMessage> {
 
     return this.lastMessage$.asObservable()
       .pipe(
         filter((appMessage: AppMessage) => {
           return validationClass && validationClass.length > 0 && appMessage ?
             (validationClass === appMessage.validationControl) : true;
-        }),
-        map((appMessage: AppMessage) => {
-          return appMessage ? appMessage.message : null;
         })
       );
   }
 
-  addMessage(value: string, control: string) {
+  addMessage(value: string, control: string, type: AppMessageType) {
     this.lastMessage$.next(
       {
         message: value,
-        validationControl: control
+        validationControl: control,
+        messageType: type
       }
     );
   }

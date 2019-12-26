@@ -5,6 +5,7 @@ export enum ButtonSize {
 }
 
 export enum ButtonType {
+  SUCCESS = 'success',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   DEFAULT = 'default',
@@ -27,4 +28,5 @@ export enum ButtonClass {
   TEXT = 'text',
   INPUT = 'input',
   PASSWORD = 'password',
+  ICON = 'icon',
 }

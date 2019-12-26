@@ -1,4 +1,4 @@
 <div class="validation--content">
   <ng-content></ng-content>
-  <p [hidden]="!message" class="validation-text--error">{{message || ''}}</p>
+  <p [hidden]="!message" class="validation-text--{{messageType}}">{{message || ''}}</p>
 </div>

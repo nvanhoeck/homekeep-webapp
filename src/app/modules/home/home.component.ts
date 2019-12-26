@@ -5,6 +5,7 @@ import {AuthService} from '../../core/services/auth';
 import {MessagingService} from '../../core/services/messaging/messaging.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../shared/components/base/base.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
   public tapButtonSize: ButtonSize = ButtonSize.BIG;
   public tapButtonType: ButtonType = ButtonType.SECONDARY;
   public tapButtonClass: ButtonClass = ButtonClass.TEXT;
+  public icon = 'tick';
+  public text = 'access';
 
   private _clickEventHandler = ($event: any) => this.changeButton($event);
   private _changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
@@ -27,7 +30,8 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
   constructor(private readonly headerService: HeaderService,
               private readonly authService: AuthService,
               private readonly messagingService: MessagingService,
-              private readonly cdRef: ChangeDetectorRef) {
+              private readonly cdRef: ChangeDetectorRef,
+              private readonly router: Router) {
     super();
   }
 
@@ -69,8 +73,20 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
 
   private changeInputHandler(keyValue: string): void {
     if (keyValue.length === 4) {
-      this.authService.validate(keyValue);
+      this.text = null;
+      if (this.authService.validate(keyValue)) {
+        this.handleAccessSuccessfull();
+      }
     }
+  }
+
+  private handleAccessSuccessfull() {
+    this.tapButtonClass = ButtonClass.ICON;
+    this.tapButtonType = ButtonType.SUCCESS;
+    this.cdRef.markForCheck();
+    setTimeout(() => {
+      this.router.navigate(['/lol']);
+    }, 333);
   }
 }
 

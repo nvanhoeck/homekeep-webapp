@@ -1,5 +1,13 @@
-* {
-  font-family: 'Open Sans', sans-serif;
+/* open-sans-regular - latin */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Open Sans Regular'), local('OpenSans-Regular'),
+  url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('~src/assets/fonts/open-sans/open-sans-v17-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
 }
-
-$homekeep-sans-serif: 'Open Sans';
