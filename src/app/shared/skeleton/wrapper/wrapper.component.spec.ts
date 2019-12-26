@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WrapperComponent } from './wrapper.component';
+import {HeaderModule} from '../header/header.module';
+import {FooterModule} from '../footer/footer.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('WrapperComponent', () => {
   let component: WrapperComponent;
@@ -8,7 +11,12 @@ describe('WrapperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WrapperComponent ]
+      declarations: [ WrapperComponent ],
+      imports: [
+        HeaderModule,
+        FooterModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
