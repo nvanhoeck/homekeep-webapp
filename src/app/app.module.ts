@@ -12,12 +12,12 @@ import {WrapperModule} from './shared/skeleton/wrapper/wrapper.module';
 import {AuthModule} from './core/services/auth/auth.module';
 import {FormsModule} from '@angular/forms';
 import {BaseModule} from './shared/components/base/base.module';
+import {SectionModule} from './shared/components/section/section.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SectionComponent
   ],
   imports: [
     BrowserModule,
@@ -28,11 +28,12 @@ import {BaseModule} from './shared/components/base/base.module';
 
     ButtonsModule,
     BaseModule,
+    SectionModule,
 
     WrapperModule,
     HomeModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

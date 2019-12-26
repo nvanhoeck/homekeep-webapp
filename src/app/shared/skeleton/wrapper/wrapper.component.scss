@@ -1,1 +1,20 @@
 @import "../../../../styles";
+
+
+:host {
+  height: 100%;
+}
+
+
+.app-content--wrapper {
+  width: 100%;
+  position: relative;
+  height: auto !important;
+  min-height: 100%;
+}
+
+.app-content {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}

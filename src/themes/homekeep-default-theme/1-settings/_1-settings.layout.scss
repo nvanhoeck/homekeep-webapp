@@ -4,7 +4,8 @@ $borderline: 1rem;
 
 
 body, html {
+  margin: 0;
+  padding: 0;
   display: block;
-  max-height: 100vh;
-  overflow-y: hidden;
+  height: 100%;
 }
