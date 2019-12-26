@@ -1,13 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {MessagingService} from '../messaging/messaging.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private readonly messagingService: MessagingService) {
+  }
 
   validate(keyValue: any) {
-    console.log(keyValue);
+    if (keyValue === '0000') {
+
+    } else {
+      this.messagingService.addMessage('wrong pincode', 'access');
+    }
   }
 }

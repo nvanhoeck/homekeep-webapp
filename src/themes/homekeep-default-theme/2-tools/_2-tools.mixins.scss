@@ -16,3 +16,26 @@ GRADIENTS
   background: -webkit-linear-gradient(-45deg, $color-theme-dark-blue-trans 0%, $color-theme-light-blue-trans 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(135deg, $color-theme-dark-blue-trans 0%, $color-theme-light-blue-trans 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
+
+@mixin error_text {
+  fill: $color-red;
+  color: $color-red;
+}
+
+@mixin error_border {
+  border-color: $color-red;
+}
+
+@mixin error_fill {
+  background-color: $color-red;
+}
+
+@mixin error_all {
+  @include error_text;
+  @include error_border;
+  @include error_fill;
+}
+
+@mixin transition_width_fast {
+  transition: width .333s linear;
+}

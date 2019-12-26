@@ -3,16 +3,18 @@
     <h1 class="homepage__title">HOMEKEEP</h1>
     <div class="homepage__subtitle--container">
       <h2 class="homepage__subtitle--element">Welcome to your personal home inventory</h2>
-      <app-default-button class="homepage__subtitle--element"
-                          [buttonSize]="tapButtonSize"
-                          [buttonType]="tapButtonType"
-                          [buttonClass]="tapButtonClass"
-                          [borderRadius]="30"
-                          [text]="'access'"
-                          [clickEvent]="clickEventHandler"
-                          [inputPassChangeEvent]="changeInputEventHandler"
-      >
-      </app-default-button>
+      <app-validation [validationClass]="VALIDATION_CLASS">
+        <app-default-button class="homepage__subtitle--element"
+                            [buttonSize]="tapButtonSize"
+                            [buttonType]="tapButtonType"
+                            [buttonClass]="tapButtonClass"
+                            [borderRadius]="30"
+                            [text]="'access'"
+                            [clickEvent]="clickEventHandler"
+                            [inputPassChangeEvent]="changeInputEventHandler"
+        >
+        </app-default-button>
+      </app-validation>
     </div>
   </div>
   <div class="homepage_gradient"></div>

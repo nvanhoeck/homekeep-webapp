@@ -1,17 +1,24 @@
 @import "../1-settings";
+@import "../2-tools";
 /**
 ############################## DEFAULT BUTTON #############################################
  */
 
 button {
   display: flex;
-  /* align-content: center; */
   align-items: center;
   flex-direction: column;
   justify-content: center;
 
-  > *:hover {
-    cursor: pointer;
+  @include transition_width_fast;
+
+
+  > * {
+    transition: none;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
   &:hover {
    cursor: pointer;
@@ -64,6 +71,11 @@ button {
   color: $color-theme-primary;
 }
 
+.basic-button__type--error {
+  background-color: $color-red;
+  color: $color-white;
+}
+
 
 
 .basic-button__type--default_border_only {
@@ -88,4 +100,19 @@ button {
   background-color: $total-transparent;
   color: $color-white;
   border: solid 0.1rem $color-white;
+}
+
+
+.basic-button__type--error_border_only {
+  background-color: $total-transparent;
+  color: $color-white;
+  border: solid 0.1rem $color-red;
+}
+
+.basic-button__type--error_border_and_text {
+  background-color: $total-transparent;
+  border: solid 0.1rem $color-red;
+  & > * {
+    color: $color-red;
+  }
 }

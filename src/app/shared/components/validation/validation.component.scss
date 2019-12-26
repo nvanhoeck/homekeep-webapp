@@ -1,0 +1,6 @@
+@import "~src/styles";
+
+.validation-text--error{
+  @include error_text;
+  font-weight: 600;
+}

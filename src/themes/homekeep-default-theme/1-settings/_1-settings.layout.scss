@@ -3,6 +3,10 @@ $gutter: 1rem;
 $borderline: 1rem;
 
 
+html {
+  overflow-y: hidden;
+}
+
 body, html {
   margin: 0;
   padding: 0;
