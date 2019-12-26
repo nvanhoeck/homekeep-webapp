@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from './home.component';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 
 describe('HomeComponent', () => {
@@ -9,10 +9,10 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       imports: [ButtonsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
