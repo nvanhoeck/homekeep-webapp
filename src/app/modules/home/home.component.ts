@@ -65,6 +65,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
     const node: any = $event.target;
     node.style.width = '33vw';
     node.style.maxWidth = '300px';
+    node.style.minWidth = '200px';
     node.setAttribute('width', '10rem');
     this.tapButtonClass = ButtonClass.PASSWORD;
     this.messagingService.clear();
