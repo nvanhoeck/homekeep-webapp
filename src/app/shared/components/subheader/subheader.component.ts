@@ -21,7 +21,8 @@ export class SubheaderComponent implements OnInit {
     if (this.iconPosition && this.iconPosition === ElementPosition.CENTER) {
       return {
         width: '100vw',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'flex-start'
       };
     } else {
       return {};
