@@ -9,7 +9,9 @@
 .header__container {
   display: none;
 }
-
+.homepage__section {
+  overflow-y: hidden;
+}
 .homepage__container {
   z-index: 1;
   width: 100%;
@@ -24,6 +26,13 @@
   background-size: 100% 125vh;
   background-position: top;
   background-repeat: no-repeat;
+
+  .icon-homekeep{
+    color: $color-white;
+    font-size: 10rem;
+    z-index: 10;
+    margin: 0 auto;
+  }
 
   .homepage__title {
     z-index: 5;
@@ -41,7 +50,7 @@
     color: $color-white;
     grid-area: 2 / 2 / 3 / 5;
     align-items: center;
-    margin-top: 25vh;
+    margin-top: $gutter;
     margin-bottom: 25vh;
 
     h2 {
