@@ -85,8 +85,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
     this.tapButtonClass = ButtonClass.ICON;
     this.tapButtonType = ButtonType.SUCCESS;
     this.cdRef.markForCheck();
+    this.headerService.mayShowHeader(true);
     setTimeout(() => {
-      this.router.navigate(['/lol']);
+      this.router.navigate(['/rooms']);
     }, 333);
   }
 }

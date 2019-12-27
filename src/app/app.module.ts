@@ -15,6 +15,8 @@ import {SectionModule} from './shared/components/section/section.module';
 import {MessagingModule} from './core/services/messaging/messaging.module';
 import {ValidationModule} from './shared/components/validation/validation.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RoomsOverviewModule} from './modules/rooms-overview/rooms-overview.module';
+import {SubheaderModule} from './shared/components/subheader/subheader.module';
 
 @NgModule({
   declarations: [
@@ -34,9 +36,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ButtonsModule,
     BaseModule,
     SectionModule,
+    SubheaderModule,
 
     WrapperModule,
-    HomeModule
+    HomeModule,
+    RoomsOverviewModule
   ],
   providers: [],
   bootstrap: [AppComponent],
