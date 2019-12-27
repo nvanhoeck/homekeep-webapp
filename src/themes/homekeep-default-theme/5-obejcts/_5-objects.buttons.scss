@@ -38,6 +38,10 @@ button {
   }
 }
 
+.basic-button__shadow{
+  @include shadow_base;
+}
+
 .basic-button__size--small {
   width: 4rem;
   height: 2rem;
@@ -62,26 +66,46 @@ button {
 .basic-button__type--default {
   background-color: $color-white;
   color: $color-theme-dark-grey;
+
+  &:hover{
+    background-color: lighten($color-white, 30);
+  }
 }
 
 .basic-button__type--success {
   background-color: $color-green;
   color: $color-white;
+
+  &:hover{
+    background-color: lighten($color-green, 30);
+  }
 }
 
 .basic-button__type--primary {
   background-color: $color-theme-primary;
   color: $color-white;
+
+  &:hover{
+    background-color: lighten($color-theme-primary, 30);
+  }
 }
 
 .basic-button__type--secondary {
   background-color: $color-white;
   color: $color-theme-primary;
+
+  &:hover{
+    background-color: lighten($color-white, 30);
+  }
 }
 
 .basic-button__type--error {
   background-color: $color-red;
   color: $color-white;
+
+  &:hover{
+    background-color: lighten($color-red, 30);
+  }
 }
 
 
@@ -90,24 +114,40 @@ button {
   background-color: $total-transparent;
   color: $color-theme-dark-grey;
   border: solid 0.1rem $color-white;
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
+  }
 }
 
 .basic-button__type--primary_border_only {
   background-color: $total-transparent;
   color: $color-white;
   border: solid 0.1rem $color-theme-primary;
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
+  }
 }
 
 .basic-button__type--secondary_border_only {
   background-color: $total-transparent;
   color: $color-theme-primary;
   border: solid 0.1rem $color-white;
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
+  }
 }
 
 .basic-button__type--white_border_only {
   background-color: $total-transparent;
   color: $color-white;
   border: solid 0.1rem $color-white;
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
+  }
 }
 
 
@@ -115,6 +155,10 @@ button {
   background-color: $total-transparent;
   color: $color-white;
   border: solid 0.1rem $color-red;
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
+  }
 }
 
 .basic-button__type--error_border_and_text {
@@ -122,5 +166,9 @@ button {
   border: solid 0.1rem $color-red;
   & > * {
     color: $color-red;
+  }
+
+  &:hover{
+    background-color: lighten($total-transparent, 30);
   }
 }

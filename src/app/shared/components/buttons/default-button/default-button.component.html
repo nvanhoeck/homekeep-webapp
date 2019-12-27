@@ -1,4 +1,6 @@
 <button
+  (mouseenter)="elevate()"
+  (mouseleave)="reelevate()"
   (click)="onClick($event)"
   [ngStyle]="getStyles"
   [ngClass]="getClasses">

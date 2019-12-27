@@ -48,7 +48,8 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
     this.cdRef.markForCheck();
     return ''
       + (this.buttonSize ? this.getSizeClass() : '')
-      + (this.buttonType ? this.getTypeClass() : '');
+      + (this.buttonType ? this.getTypeClass() : '')
+      + (this.hasShadow ? this.getShadowClass() : '');
   }
 
   get getStyles(): StyleBuilderClass {
@@ -57,8 +58,37 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
     return styleBuilder
       .withBorderRadius(this.borderRadius)
       .withHeight(this.height)
-      .withWidth(this.width)
-      .withShadow(this.hasShadow);
+      .withWidth(this.width);
+  }
+
+  public onClick($event: MouseEvent) {
+    if (this.clickEvent) {
+      this.clickEvent($event);
+    } else {
+      this.loggerService.log('No click event handler found for ' + $event.target + ' at default button', LogginLevel.WARN);
+    }
+  }
+
+  public detectInputPassChanges($event: any) {
+    if (this.clickEvent) {
+      this.inputValue.next($event.target.value);
+    } else {
+      this.loggerService.log('No change event handler found for ' + $event.target + ' at default button', LogginLevel.WARN);
+    }
+  }
+
+  public passEventToParent($event: any) {
+    const evObj = document.createEvent('Events');
+    evObj.initEvent('click', true, false);
+    $event.target.parentNode.dispatchEvent(evObj);
+  }
+
+  public reelevate(): void {
+
+  }
+
+  public elevate(): void {
+
   }
 
   private getSizeClass(): string {
@@ -69,26 +99,7 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
     return 'basic-button__type--' + this.buttonType + ' , ';
   }
 
-  onClick($event: MouseEvent) {
-    if (this.clickEvent) {
-      this.clickEvent($event);
-    } else {
-      this.loggerService.log('No click event handler found for ' + $event.target + ' at default button', LogginLevel.WARN);
-    }
+  private getShadowClass(): string {
+    return 'basic-button__shadow';
   }
-
-  detectInputPassChanges($event: any) {
-    if (this.clickEvent) {
-      this.inputValue.next($event.target.value);
-    } else {
-      this.loggerService.log('No change event handler found for ' + $event.target + ' at default button', LogginLevel.WARN);
-    }
-  }
-
-  passEventToParent($event: any) {
-    const evObj = document.createEvent('Events');
-    evObj.initEvent('click', true, false);
-    $event.target.parentNode.dispatchEvent(evObj);
-  }
-
 }
