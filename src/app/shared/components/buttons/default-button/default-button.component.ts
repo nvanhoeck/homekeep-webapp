@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ButtonClass, ButtonSize, ButtonType} from '../buttons.enums';
 import {StyleBuilderClass} from '../../../models/style-builder.class';
 import {LoggerService, LogginLevel} from '../../../../core';
 import {BehaviorSubject} from 'rxjs';
-import {debounceTime, takeUntil} from 'rxjs/operators';
+import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../base/base.component';
 
 @Component({
@@ -17,24 +17,27 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   @Input() buttonSize: ButtonSize = ButtonSize.MEDIUM;
   @Input() buttonType: ButtonType = ButtonType.DEFAULT;
   @Input() buttonClass: ButtonClass = ButtonClass.TEXT;
-  @Input() borderRadius: number = 0;
+  @Input() borderRadius = 0;
   @Input() text = '';
   @Input() clickEvent: any;
   @Input() inputPassChangeEvent: any;
   @Input() icon: string;
   @Input() width: string;
   @Input() height: string;
+  @Input() hasShadow: boolean;
 
   private inputValue: BehaviorSubject<string> = new BehaviorSubject('');
 
 
-  constructor(private readonly loggerService: LoggerService) {
+  constructor(private readonly loggerService: LoggerService,
+              private readonly cdRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
     this.inputValue
       .pipe(
+        filter(value => this.inputPassChangeEvent),
         debounceTime(400),
         takeUntil(this.destroy$)
       )
@@ -42,17 +45,20 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   }
 
   get getClasses() {
+    this.cdRef.markForCheck();
     return ''
-      + this.buttonSize ? this.getSizeClass() : ''
-      + this.buttonType ? this.getTypeClass() : '';
+      + (this.buttonSize ? this.getSizeClass() : '')
+      + (this.buttonType ? this.getTypeClass() : '');
   }
 
   get getStyles(): StyleBuilderClass {
+    this.cdRef.markForCheck();
     const styleBuilder = StyleBuilderClass.build();
     return styleBuilder
       .withBorderRadius(this.borderRadius)
       .withHeight(this.height)
-      .withWidth(this.width);
+      .withWidth(this.width)
+      .withShadow(this.hasShadow);
   }
 
   private getSizeClass(): string {

@@ -9,6 +9,7 @@ button {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  margin: 0 auto;
 
   @include transition_width_fast;
   @include transition_background-color_fast;
@@ -46,6 +47,7 @@ button {
 .basic-button__size--medium {
   width: 6rem;
   height: 3rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -53,7 +55,7 @@ button {
   width: 8rem;
   height: 4rem;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1rem;
 }
 

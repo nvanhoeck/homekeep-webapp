@@ -28,9 +28,30 @@
     align-items: center;
     padding: $gutter;
 
-    .rooms-overview--empty-block-title {
-      color: $color-theme-primary;
+    .rooms-overview--empty-block--upper-part,
+    .rooms-overview--empty-block--lower-part {
+      height: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+
+      .rooms-overview--empty-block-title {
+        color: $color-theme-primary;
+        margin-bottom: $gutter;
+      }
+
+      .rooms-overview--empty-block-action-text {
+        margin-top: $gutter;
+        color: $color-theme-primary;
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
+
 
     .rooms-overview--background-logo {
       position: absolute;

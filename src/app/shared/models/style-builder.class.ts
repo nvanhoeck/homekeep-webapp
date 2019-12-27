@@ -7,17 +7,32 @@ export class StyleBuilderClass {
   }
 
   public withBorderRadius(radius: number): StyleBuilderClass {
-    _.set(this, 'borderRadius',  radius + 'px');
+    if (radius) {
+      _.set(this, 'borderRadius', radius + 'px');
+    }
     return this;
   }
 
   public withHeight(value: string): StyleBuilderClass {
-    _.set(this, 'height',  value);
+    if (value) {
+      _.set(this, 'height', value);
+    }
     return this;
   }
 
   public withWidth(value: string): StyleBuilderClass {
-    _.set(this, 'width',  value);
+    if (value) {
+      _.set(this, 'width', value);
+    }
+    return this;
+  }
+
+  withShadow(hasShadow: boolean): StyleBuilderClass {
+    if (hasShadow) {
+      _.set(this, 'webkitBoxShadow', '0px 3px 6px 0px rgba(0, 0, 0, 0.15)');
+      _.set(this, 'mozBoxShadow', '0px 3px 6px 0px rgba(0, 0, 0, 0.15)');
+      _.set(this, 'boxShadow', '0px 3px 6px 0px rgba(0, 0, 0, 0.15)');
+    }
     return this;
   }
 }

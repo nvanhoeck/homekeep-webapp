@@ -9,7 +9,7 @@ import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/bu
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsOverviewComponent implements OnInit {
-  addRoomEmptyButtonClass: ButtonClass = ButtonClass.ICON;
+  addRoomEmptyButtonClass: ButtonClass = ButtonClass.TEXT;
   addRoomEmptyButtonType: ButtonType = ButtonType.PRIMARY;
   addRoomEmptyButtonSize: ButtonSize = ButtonSize.BIG;
 

@@ -1,17 +1,25 @@
 <app-subheader [icon]="'tick'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container">
   <div class="rooms-overview--empty-block">
-    <i class="rooms-overview--background-logo icon icon-tick"></i>
-    <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
-    <p class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build some roosm</p>
-    <app-default-button
-      [buttonClass]="addRoomEmptyButtonClass"
-      [buttonType]="addRoomEmptyButtonType"
-      [borderRadius]="100"
-      [width]="'50px'"
-      [height]="'50px'"
-    ></app-default-button>
-    <p>or load starters template</p>
+    <i class="rooms-overview--background-logo icon icon-grid"></i>
+    <div class="rooms-overview--empty-block--upper-part">
+      <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
+      <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build
+        some rooms</h4>
+    </div>
+    <div class="rooms-overview--empty-block--lower-part">
+      <app-default-button class="rooms-overview--empty-block-button"
+                          [buttonClass]="addRoomEmptyButtonClass"
+                          [buttonType]="addRoomEmptyButtonType"
+                          [buttonSize]="addRoomEmptyButtonSize"
+                          [borderRadius]="100"
+                          [width]="'66px'"
+                          [height]="'66px'"
+                          [text]="'+'"
+                          [hasShadow]="true"
+      ></app-default-button>
+      <p class="rooms-overview--empty-block-action-text">or load starters template</p>
+    </div>
   </div>
 
 </section>
