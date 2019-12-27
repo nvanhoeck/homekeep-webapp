@@ -1,8 +1,8 @@
 <section class="subheader--container">
-  <div class="subheader--left-block">
-    <h1>{{title}}</h1>
+  <div class="subheader--left-block" [ngStyle]="determineTextPosition()">
+    <h2>{{title}}</h2>
   </div>
-  <div class="subheader--right-block">
+  <div  class="subheader--right-block" [ngStyle]="determineIconPosition()">
     <i class="icon icon-{{icon}}"></i>
   </div>
 </section>

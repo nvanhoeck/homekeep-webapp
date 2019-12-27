@@ -1,1 +1,17 @@
-<app-subheader [title]="'test'" [icon]="'tick'"></app-subheader>
+<app-subheader [icon]="'tick'" [iconPosition]="'center'"></app-subheader>
+<section class="rooms-overview--container">
+  <div class="rooms-overview--empty-block">
+    <i class="rooms-overview--background-logo icon icon-tick"></i>
+    <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
+    <p class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build some roosm</p>
+    <app-default-button
+      [buttonClass]="addRoomEmptyButtonClass"
+      [buttonType]="addRoomEmptyButtonType"
+      [borderRadius]="100"
+      [width]="'50px'"
+      [height]="'50px'"
+    ></app-default-button>
+    <p>or load starters template</p>
+  </div>
+
+</section>

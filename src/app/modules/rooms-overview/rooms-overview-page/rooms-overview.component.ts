@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HeaderService} from '../../../shared/skeleton/header';
+import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -8,6 +9,9 @@ import {HeaderService} from '../../../shared/skeleton/header';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsOverviewComponent implements OnInit {
+  addRoomEmptyButtonClass: ButtonClass = ButtonClass.ICON;
+  addRoomEmptyButtonType: ButtonType = ButtonType.PRIMARY;
+  addRoomEmptyButtonSize: ButtonSize = ButtonSize.BIG;
 
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef) { }

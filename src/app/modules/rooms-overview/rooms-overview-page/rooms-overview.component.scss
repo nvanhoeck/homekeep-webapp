@@ -1,0 +1,45 @@
+@import "~src/styles";
+
+:host {
+  height: 100%;
+}
+
+.rooms-overview--container {
+  position: absolute;
+  padding: $gutter;
+  width: 100%;
+  min-height: 70%;
+  max-width: 100vw;
+  top: 4rem;
+
+  .rooms-overview--empty-block {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 85vh;
+    height: auto;
+    background-color: $color-white;
+    border-radius: 20px;
+    @include shadow_base;
+    margin-bottom: $gutter;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: $gutter;
+
+    .rooms-overview--empty-block-title {
+      color: $color-theme-primary;
+    }
+
+    .rooms-overview--background-logo {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      color: $color-theme-light-grey;
+      font-size: 5rem;
+      text-align: center;
+    }
+  }
+}
+

@@ -1,4 +1,5 @@
 @import "../1-settings";
+
 /**
 GRADIENTS
  */
@@ -61,4 +62,10 @@ GRADIENTS
 
 @mixin transition_background-color_fast {
   transition: background-color .333s linear;
+}
+
+@mixin shadow_base {
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
 }

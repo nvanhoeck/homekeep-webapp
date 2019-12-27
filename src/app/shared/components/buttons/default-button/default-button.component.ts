@@ -17,11 +17,13 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   @Input() buttonSize: ButtonSize = ButtonSize.MEDIUM;
   @Input() buttonType: ButtonType = ButtonType.DEFAULT;
   @Input() buttonClass: ButtonClass = ButtonClass.TEXT;
-  @Input() borderRadius = 0;
+  @Input() borderRadius: number = 0;
   @Input() text = '';
   @Input() clickEvent: any;
   @Input() inputPassChangeEvent: any;
   @Input() icon: string;
+  @Input() width: string;
+  @Input() height: string;
 
   private inputValue: BehaviorSubject<string> = new BehaviorSubject('');
 
@@ -41,13 +43,16 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
 
   get getClasses() {
     return ''
-      + this.getSizeClass()
-      + this.getTypeClass();
+      + this.buttonSize ? this.getSizeClass() : ''
+      + this.buttonType ? this.getTypeClass() : '';
   }
 
   get getStyles(): StyleBuilderClass {
-    return StyleBuilderClass.build()
-      .withBorderRadius(this.borderRadius);
+    const styleBuilder = StyleBuilderClass.build();
+    return styleBuilder
+      .withBorderRadius(this.borderRadius)
+      .withHeight(this.height)
+      .withWidth(this.width);
   }
 
   private getSizeClass(): string {
