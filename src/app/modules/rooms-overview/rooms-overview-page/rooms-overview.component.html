@@ -1,6 +1,6 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container">
-  <div class="rooms-overview--empty-block">
+  <app-section class="rooms-overview--empty-block">
     <i class="rooms-overview--background-logo icon icon-grid"></i>
     <div class="rooms-overview--empty-block--upper-part">
       <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
@@ -17,9 +17,10 @@
                           [height]="'66px'"
                           [text]="'+'"
                           [hasShadow]="true"
+                          [clickEvent]="addRoomRedirect()"
       ></app-default-button>
       <p class="rooms-overview--empty-block-action-text">or load starters template</p>
     </div>
-  </div>
+  </app-section>
 
 </section>

@@ -10,6 +10,7 @@ export class SubheaderComponent implements OnInit {
   @Input() title: string;
   @Input() icon: string;
   @Input() iconPosition: ElementPosition;
+  @Input() textPosition: ElementPosition;
 
   constructor() {
   }
@@ -34,7 +35,12 @@ export class SubheaderComponent implements OnInit {
       return {
         display: 'none'
       };
+    } else if (this.textPosition === ElementPosition.TOP) {
+      return {
+        alignItems: 'flex-start'
+      };
+    } else {
+      return {};
     }
-    return {};
   }
 }

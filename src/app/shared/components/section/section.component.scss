@@ -1,7 +1,21 @@
 @import "~src/styles";
 
 :host {
+  height: 100%;
+
   section {
+    width: 100%;
+    max-width: 900px;
+
+    background-color: $color-white;
+    border-radius: 20px;
+    @include shadow_base;
+    margin: 0 auto $gutter;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     padding: $gutter;
   }
 }

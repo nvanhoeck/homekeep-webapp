@@ -8,7 +8,7 @@
   display: flex;
   width: 100vw;
   max-width: 100vw;
-  height: 6rem;
+  height: 7rem;
 
   flex-direction: row;
 
@@ -18,9 +18,7 @@
 
   .subheader--left-block,
   .subheader--right-block {
-    padding-left: $gutter;
-    padding-right: $gutter;
-    padding-bottom: $gutter;
+    padding: $gutter;
     display: flex;
     flex-direction: row;
     height: auto;

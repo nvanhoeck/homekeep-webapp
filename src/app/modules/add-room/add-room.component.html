@@ -1,0 +1,34 @@
+<app-subheader [title]="'Add a room'" [textPosition]="titlePosition"></app-subheader>
+
+<form class="add-room--container" [formGroup]="roomForm">
+  <app-section class="add-room--title-block">
+    <label id="add-room--room-name__label" for="add-room--room-name__input">Room name</label>
+    <input id="add-room--room-name__input" type="text" formControlName="roomName"/>
+  </app-section>
+  <app-section class="add-room--icons-container">
+    <p>Choose an icon</p>
+    <div class="add-room--icons-block">
+      <div *ngFor="let icon of icons"
+           (click)="selectIcon(icon)"
+           class="add-room--icon-block {{isSelected(icon) ?
+           'add-room--icon-block__active' :
+           'add-room--icon-block__non-active'}}"
+      >
+        <i class="icon icon-{{icon.name}}"></i>
+      </div>
+    </div>
+    <div class="submit--container">
+      <p>Cancel</p>
+      <app-default-button
+        [buttonSize]="submitButtonSize"
+        [buttonType]="submitButtonType"
+        [buttonClass]="submitButtonClass"
+        [text]="'Save Room'"
+        [borderRadius]="20"
+        [height]="'35px'"
+        [width]="'100px'"
+        [hasShadow]="true"
+      ></app-default-button>
+    </div>
+  </app-section>
+</form>

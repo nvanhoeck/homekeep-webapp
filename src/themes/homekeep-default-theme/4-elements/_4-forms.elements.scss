@@ -1,0 +1,12 @@
+@import "../1-settings";
+
+input {
+  border: none;
+  border-bottom: solid 2px $color-theme-primary;
+  padding-bottom: 1px;
+
+  transition: padding-bottom 0.2s linear;
+  &:hover {
+    padding-bottom: 5px;
+  }
+}

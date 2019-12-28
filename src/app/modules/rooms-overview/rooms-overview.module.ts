@@ -5,6 +5,7 @@ import {RoomsOverviewRoutingModule} from './rooms-overview-routing.module';
 import {RoomsOverviewComponent} from './rooms-overview-page/rooms-overview.component';
 import {SubheaderModule} from '../../shared/components/subheader/subheader.module';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
+import {SectionModule} from '../../shared/components/section/section.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
     CommonModule,
     RoomsOverviewRoutingModule,
     SubheaderModule,
-    ButtonsModule
+    ButtonsModule,
+    SectionModule
   ],
   exports: [RoomsOverviewComponent]
 })

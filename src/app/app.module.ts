@@ -9,7 +9,7 @@ import {HomeModule} from './modules/home/home.module';
 import {ButtonsModule} from './shared/components/buttons/buttons.module';
 import {WrapperModule} from './shared/skeleton/wrapper/wrapper.module';
 import {AuthModule} from './core/services/auth/auth.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BaseModule} from './shared/components/base/base.module';
 import {SectionModule} from './shared/components/section/section.module';
 import {MessagingModule} from './core/services/messaging/messaging.module';
@@ -17,6 +17,7 @@ import {ValidationModule} from './shared/components/validation/validation.module
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RoomsOverviewModule} from './modules/rooms-overview/rooms-overview.module';
 import {SubheaderModule} from './shared/components/subheader/subheader.module';
+import {AddRoomModule} from './modules/add-room/add-room.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {SubheaderModule} from './shared/components/subheader/subheader.module';
     MessagingModule,
     ValidationModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
 
     ButtonsModule,
     BaseModule,
@@ -40,9 +42,10 @@ import {SubheaderModule} from './shared/components/subheader/subheader.module';
 
     WrapperModule,
     HomeModule,
-    RoomsOverviewModule
+    RoomsOverviewModule,
+    AddRoomModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

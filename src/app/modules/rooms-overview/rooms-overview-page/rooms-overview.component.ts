@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HeaderService} from '../../../shared/skeleton/header';
 import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -14,11 +15,17 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomEmptyButtonSize: ButtonSize = ButtonSize.BIG;
 
   constructor(private readonly headerService: HeaderService,
-              private readonly cdref: ChangeDetectorRef) { }
+              private readonly cdref: ChangeDetectorRef,
+              private readonly router: Router) { }
 
   ngOnInit() {
     this.headerService.mayShowHeader(true);
     this.cdref.markForCheck();
   }
 
+  public addRoomRedirect(): () => void {
+    return () => {
+      this.router.navigate(['/add-room']);
+    };
+  }
 }

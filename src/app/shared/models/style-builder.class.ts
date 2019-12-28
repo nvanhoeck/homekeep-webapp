@@ -35,4 +35,11 @@ export class StyleBuilderClass {
     }
     return this;
   }
+
+  withMinHeight(value: string): StyleBuilderClass {
+    if (value) {
+      _.set(this, 'minHeight', value);
+    }
+    return this;
+  }
 }
