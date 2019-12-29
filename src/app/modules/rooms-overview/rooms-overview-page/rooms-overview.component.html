@@ -1,6 +1,6 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container">
-  <app-section class="rooms-overview--empty-block">
+  <app-section *ngIf="!rooms || rooms.length === 0; else roomsSection" class="rooms-overview--empty-block">
     <i class="rooms-overview--background-logo icon icon-grid"></i>
     <div class="rooms-overview--empty-block--upper-part">
       <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
@@ -22,5 +22,12 @@
       <p class="rooms-overview--empty-block-action-text">or load starters template</p>
     </div>
   </app-section>
-
+  <ng-template #roomsSection>
+    <app-section>
+      <div *ngFor="let room of rooms">
+        <p>{{room.name}}</p>
+        <p>{{room.icon}}</p>
+      </div>
+    </app-section>
+  </ng-template>
 </section>

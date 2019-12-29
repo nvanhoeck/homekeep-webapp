@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {HeaderService} from '../../../shared/skeleton/header';
 import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
 import {Router} from '@angular/router';
+import {RoomModel} from '../../../shared/models';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -14,9 +15,12 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomEmptyButtonType: ButtonType = ButtonType.PRIMARY;
   addRoomEmptyButtonSize: ButtonSize = ButtonSize.BIG;
 
+  public rooms: RoomModel[] = JSON.parse(localStorage.getItem('rooms'));
+
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef,
-              private readonly router: Router) { }
+              private readonly router: Router) {
+  }
 
   ngOnInit() {
     this.headerService.mayShowHeader(true);

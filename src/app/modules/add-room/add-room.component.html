@@ -1,6 +1,6 @@
 <app-subheader [title]="'Add a room'" [textPosition]="titlePosition"></app-subheader>
 
-<form #form="ngForm" class="add-room--container" [formGroup]="roomForm">
+<form #form="ngForm" class="add-room--container" [formGroup]="roomForm" (ngSubmit)="handleSubmit()">
   <app-section class="add-room--title-block">
     <label id="add-room--room-name__label" for="add-room--room-name__input">Room name</label>
     <app-validation

@@ -3,6 +3,8 @@ import {ElementPosition} from '../../shared/models/element-position.enum';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
 import {IconModel} from '../../shared/models/icon-model';
+import {RoomModel} from '../../shared/models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-room',
@@ -108,8 +110,8 @@ export class AddRoomComponent implements OnInit {
 
   ];
 
-  constructor(private readonly cdRef: ChangeDetectorRef
-  ) {
+  constructor(private readonly cdRef: ChangeDetectorRef,
+              private readonly router: Router) {
   }
 
   ngOnInit() {
@@ -124,5 +126,26 @@ export class AddRoomComponent implements OnInit {
   public isSelected(icon: IconModel): boolean {
     this.cdRef.markForCheck();
     return icon.name === this.selectedIcon;
+  }
+
+  public handleSubmit(): void {
+    this.saveForm();
+    this.router.navigate(['rooms']);
+  }
+
+  private saveForm() {
+    let rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
+    if (!rooms) {
+      rooms = [];
+    }
+
+    rooms.push({
+        id: 1,
+        name: this.roomName.value,
+        icon: this.selectedIcon,
+        items: []
+      } as RoomModel);
+
+    localStorage.setItem('rooms', JSON.stringify(rooms));
   }
 }
