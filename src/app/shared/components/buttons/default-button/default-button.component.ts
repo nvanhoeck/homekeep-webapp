@@ -5,6 +5,8 @@ import {LoggerService, LogginLevel} from '../../../../core';
 import {BehaviorSubject} from 'rxjs';
 import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../base/base.component';
+import {FormGroup} from '@angular/forms';
+import {ValidationService} from '../../../../core/services/forms/validation.service';
 
 @Component({
   selector: 'app-default-button',
@@ -25,12 +27,14 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   @Input() width: string;
   @Input() height: string;
   @Input() hasShadow: boolean;
+  @Input() formGroup: FormGroup;
 
   private inputValue: BehaviorSubject<string> = new BehaviorSubject('');
 
 
   constructor(private readonly loggerService: LoggerService,
-              private readonly cdRef: ChangeDetectorRef) {
+              private readonly cdRef: ChangeDetectorRef,
+              private readonly validationService: ValidationService) {
     super();
   }
 
@@ -101,5 +105,13 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
 
   private getShadowClass(): string {
     return 'basic-button__shadow';
+  }
+
+  public onSubmit(): void {
+    if (this.formGroup) {
+      this.validationService.markFormGroupTouched(this.formGroup);
+    } else {
+      this.loggerService.log('No Formgroup provided', LogginLevel.WARN);
+    }
   }
 }

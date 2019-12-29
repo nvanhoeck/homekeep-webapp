@@ -1,7 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {MessagingService} from '../../../core/services/messaging/messaging.service';
 import {BaseComponent} from '../base/base.component';
-import {filter, takeUntil} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-validation',
@@ -10,8 +11,9 @@ import {filter, takeUntil} from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ValidationComponent extends BaseComponent implements OnInit {
-  @Input()
-  validationClass: string;
+  @Input() validationClass: string;
+  @Input() control: FormControl;
+
   public message: string;
   public messageType: string;
 
@@ -22,7 +24,8 @@ export class ValidationComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messagingService.getMessage(this.validationClass)
+    const validationCheck: any = this.validationClass ? this.validationClass : this.control;
+    this.messagingService.getMessage(validationCheck)
       .pipe(
         takeUntil(this.destroy$)
       ).subscribe(appMessage => {

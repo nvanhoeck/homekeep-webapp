@@ -29,4 +29,5 @@ export enum ButtonClass {
   INPUT = 'input',
   PASSWORD = 'password',
   ICON = 'icon',
+  SUBMIT = 'submit'
 }

@@ -7,6 +7,7 @@ import {SubheaderModule} from '../../shared/components/subheader/subheader.modul
 import {SectionModule} from '../../shared/components/section/section.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
+import {ValidationModule} from '../../shared/components/validation/validation.module';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
     SubheaderModule,
     SectionModule,
     ReactiveFormsModule,
-    ButtonsModule
+    ButtonsModule,
+
+    ValidationModule
   ],
   exports: [AddRoomComponent]
 })

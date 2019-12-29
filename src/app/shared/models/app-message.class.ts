@@ -1,3 +1,5 @@
+import {FormControl} from '@angular/forms';
+
 export enum AppMessageType {
   ERROR = 'error',
   SUCCESS = 'success',
@@ -6,6 +8,6 @@ export enum AppMessageType {
 }
 export class AppMessage {
   message: string;
-  validationControl: string;
+  validationControl: string | FormControl;
   messageType: AppMessageType;
 }

@@ -1,13 +1,16 @@
-<button
-  (mouseenter)="elevate()"
-  (mouseleave)="reelevate()"
-  (click)="onClick($event)"
-  [ngStyle]="getStyles"
-  [ngClass]="getClasses">
+<button *ngIf="buttonClass !== 'submit'; else submit"
+        (mouseenter)="elevate()"
+        (mouseleave)="reelevate()"
+        (click)="onClick($event)"
+        [ngStyle]="getStyles"
+        [ngClass]="getClasses">
   <ng-container [ngSwitch]="buttonClass">
     <p *ngSwitchCase="'text'" (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
-    <input *ngSwitchCase="'password'" (keyup)="detectInputPassChanges($event)" maxlength="4" type="password" />
-    <p *ngSwitchCase="'icon'" ><span class="icon icon-{{icon}}"></span>{{text}}</p>
+    <input *ngSwitchCase="'password'" (keyup)="detectInputPassChanges($event)" maxlength="4" type="password"/>
+    <p *ngSwitchCase="'icon'"><span class="icon icon-{{icon}}"></span>{{text}}</p>
     <p *ngSwitchDefault (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
   </ng-container>
 </button>
+<ng-template #submit>
+    <button type="submit" [ngStyle]="getStyles" [ngClass]="getClasses" (click)="onSubmit()">{{text}}</button>
+</ng-template>

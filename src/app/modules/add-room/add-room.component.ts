@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ElementPosition} from '../../shared/models/element-position.enum';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
 import {IconModel} from '../../shared/models/icon-model';
 
@@ -11,19 +11,26 @@ import {IconModel} from '../../shared/models/icon-model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddRoomComponent implements OnInit {
+  roomName = new FormControl('',
+    {validators: [Validators.required, Validators.min(3)], updateOn: 'submit'}
+  );
+  icon = new FormControl('');
+  roomForm = new FormGroup({
+    roomName: this.roomName,
+    icon: this.icon,
+  });
 
   public submitButtonSize: ButtonSize = ButtonSize.MEDIUM;
   public submitButtonType: ButtonType = ButtonType.PRIMARY;
-  public submitButtonClass: ButtonClass = ButtonClass.TEXT;
+  public submitButtonClass: ButtonClass = ButtonClass.SUBMIT;
   public selectedIcon = '';
+  public validationClass = this.roomName;
 
 
   titlePosition: ElementPosition = ElementPosition.TOP;
 
-  roomForm = new FormGroup({
-    roomName: new FormControl(''),
-    icon: new FormControl(''),
-  });
+
+// TODO refactor to factory
   icons: IconModel[] = [
     {
       name: 'bed'
@@ -101,7 +108,8 @@ export class AddRoomComponent implements OnInit {
 
   ];
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {
+  constructor(private readonly cdRef: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit() {

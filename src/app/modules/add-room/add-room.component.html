@@ -1,9 +1,14 @@
 <app-subheader [title]="'Add a room'" [textPosition]="titlePosition"></app-subheader>
 
-<form class="add-room--container" [formGroup]="roomForm">
+<form #form="ngForm" class="add-room--container" [formGroup]="roomForm">
   <app-section class="add-room--title-block">
     <label id="add-room--room-name__label" for="add-room--room-name__input">Room name</label>
-    <input id="add-room--room-name__input" type="text" formControlName="roomName"/>
+    <app-validation
+      [validationClass]="validationClass"
+      [control]="roomName"
+    >
+      <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}" type="text" formControlName="roomName"/>
+    </app-validation>
   </app-section>
   <app-section class="add-room--icons-container">
     <p>Choose an icon</p>
@@ -28,6 +33,7 @@
         [height]="'35px'"
         [width]="'100px'"
         [hasShadow]="true"
+        [formGroup]="roomForm"
       ></app-default-button>
     </div>
   </app-section>
