@@ -12,7 +12,7 @@ import {IconModel} from '../../shared/models/icon-model';
 })
 export class AddRoomComponent implements OnInit {
   roomName = new FormControl('',
-    {validators: [Validators.required, Validators.min(3)], updateOn: 'submit'}
+    {validators: [Validators.required, Validators.min(3)]}
   );
   icon = new FormControl('');
   roomForm = new FormGroup({

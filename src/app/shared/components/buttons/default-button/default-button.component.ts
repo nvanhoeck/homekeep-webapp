@@ -108,6 +108,7 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.cdRef.markForCheck();
     if (this.formGroup) {
       this.validationService.markFormGroupTouched(this.formGroup);
     } else {

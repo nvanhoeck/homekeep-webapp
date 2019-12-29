@@ -12,6 +12,7 @@ export class ValidationService {
   }
 
   public markFormGroupTouched(formGroup: FormGroup) {
+    this.messagingService.clear();
     Object.keys(formGroup.controls)
       .map(controlName => formGroup.get(controlName))
       .forEach(
@@ -20,6 +21,8 @@ export class ValidationService {
             control.markAsTouched({onlySelf: true});
             if (!control.valid) {
               this.messagingService.addControlMessage(this.getErrorMessage(control), control, AppMessageType.ERROR);
+            } else {
+              this.messagingService.addControlMessage(null, control, AppMessageType.SUCCESS);
             }
           } else if (control instanceof FormGroup) {
             this.markFormGroupTouched(control);

@@ -31,7 +31,7 @@ export class MessagingService {
       return validationClass && validationClass.length > 0 && appMessage ?
         (validationClass === appMessage.validationControl) : true;
     } else {
-      return appMessage && validationClass === appMessage.validationControl;
+      return appMessage ? validationClass === appMessage.validationControl : true;
     }
   }
 

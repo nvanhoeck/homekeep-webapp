@@ -5,9 +5,10 @@
     <label id="add-room--room-name__label" for="add-room--room-name__input">Room name</label>
     <app-validation
       [validationClass]="validationClass"
-      [control]="roomName"
+      [control]="roomForm.controls['roomName']"
     >
-      <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}" type="text" formControlName="roomName"/>
+      <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}" type="text"
+      [formControl]="roomForm.controls['roomName']"/>
     </app-validation>
   </app-section>
   <app-section class="add-room--icons-container">
@@ -19,7 +20,7 @@
            'add-room--icon-block__active' :
            'add-room--icon-block__non-active'}}"
       >
-        <i class="icon icon-{{icon.name}}"></i>
+        <i ngDefaultControl class="icon icon-{{icon.name}}"></i>
       </div>
     </div>
     <div class="submit--container">
