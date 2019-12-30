@@ -1,5 +1,5 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
-<section class="rooms-overview--container">
+<section class="rooms-overview--container" (mousedown)="deactivateElement()">
   <i class="rooms-overview--background-logo icon icon-grid"></i>
   <app-section *ngIf="!rooms || rooms.length === 0; else roomsSection" class="rooms-overview--empty-block">
     <div class="rooms-overview--empty-block--upper-part">
@@ -24,7 +24,8 @@
   </app-section>
   <ng-template #roomsSection>
     <div class="rooms-overview--room-block-container">
-      <app-container (click)="navigateToAddRoom()" class="rooms-overview--room-block__add-room" [width]="'8rem'" [height]="'12rem'">
+      <app-container (click)="navigateToAddRoom()" class="rooms-overview--room-block__add-room" [width]="'8rem'"
+                     [height]="'12rem'">
         <div class="rooms-overview--content-block">
           <app-default-button [text]="'+'"
                               [buttonClass]="addRoomButtonClass"
@@ -36,7 +37,16 @@
           <p>Add room</p>
         </div>
       </app-container>
-      <app-container class="rooms-overview--room-block" *ngFor="let room of rooms" [width]="'8rem'" [height]="'12rem'">
+      <app-container
+        id="'room-'{{room.id}}"
+        class="rooms-overview--room-block {{activeElement === room.id ? 'active-room-block' : ''}}"
+        holdable
+        (dblclick)="activeElement = room.id"
+        (holdTime)="holdHandler($event, room.id)"
+        *ngFor="let room of rooms;"
+        [width]="'8rem'"
+        [height]="'12rem'"
+      >
         <div class="rooms-overview--content-block">
           <div>
             <p class="rooms-overview--room-block--title">{{room.name}}</p>
@@ -47,4 +57,11 @@
       </app-container>
     </div>
   </ng-template>
+</section>
+<section *ngIf="activeElement" class="room-element--action-bar">
+  <p>{{getActiveElementName()}}</p>
+  <div class="room-element--actions">
+    <i class="icon icon-bin" (click)="deleteRoom()"></i>
+    <i class="icon icon-pencil"></i>
+  </div>
 </section>

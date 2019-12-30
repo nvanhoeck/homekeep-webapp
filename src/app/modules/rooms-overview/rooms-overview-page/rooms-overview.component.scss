@@ -4,6 +4,16 @@
   height: 100%;
 }
 
+.rooms-overview--background-logo {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  color: $color-theme-light-grey;
+  font-size: 5rem;
+  text-align: center;
+  z-index: 10;
+}
+
 .rooms-overview--container {
   position: absolute;
   padding: $gutter;
@@ -11,17 +21,6 @@
   min-height: 70%;
   max-width: 100vw;
   top: 5rem;
-
-  .rooms-overview--background-logo {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    color: $color-theme-light-grey;
-    font-size: 5rem;
-    text-align: center;
-    z-index: 10;
-  }
-
 
   .rooms-overview--room-block-container {
     position: relative;
@@ -83,39 +82,93 @@
       }
     }
 
-    .rooms-overview--empty-block {
+    .active-room-block {
       ::ng-deep {
+        color: $color-white;
         section {
-          min-height: 450px;
-          height: 85vh;
-        }
-      }
-
-      .rooms-overview--empty-block--upper-part,
-      .rooms-overview--empty-block--lower-part {
-        height: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-content: center;
-
-        .rooms-overview--empty-block-title {
-          color: $color-theme-primary;
-          margin-bottom: $gutter;
-        }
-
-        .rooms-overview--empty-block-action-text {
-          margin-top: $gutter;
-          color: $color-theme-primary;
-          text-decoration: underline;
-
-          &:hover {
-            cursor: pointer;
-          }
+          background-color: $color-theme-secundary;
         }
       }
     }
+  }
 
+  .rooms-overview--empty-block {
+    ::ng-deep {
+      section {
+        min-height: 450px;
+        height: 85vh;
+      }
+    }
+
+    .rooms-overview--empty-block--upper-part,
+    .rooms-overview--empty-block--lower-part {
+      height: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: center;
+
+      .rooms-overview--empty-block-title {
+        color: $color-theme-primary;
+        margin-bottom: $gutter;
+      }
+
+      .rooms-overview--empty-block-action-text {
+        margin-top: $gutter;
+        color: $color-theme-primary;
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.room-element--action-bar{
+  position: fixed;
+  width: 90vw;
+  height: 6rem;
+  background-color: $color-white;
+  border-top-left-radius: 50rem;
+  border-top-right-radius: 50rem;
+  bottom: 0;
+  margin: 0 auto 0 5vw;
+  @include shadow_base_inverted;
+  z-index: 20;
+
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+
+  .room-element--actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+
+    .icon {
+      font-size: 2.5rem;
+      color: $color-theme-light-grey;
+    }
+
+    .icon-bin:hover{
+      color: $color-red;
+      cursor: pointer;
+    }
+
+    .icon-pencil:hover{
+      color: $color-theme-primary;
+      cursor: pointer;
+    }
+  }
+
+  p {
+    color: $color-theme-primary;
+    font-size: 1.25rem;
+    font-weight: 400;
   }
 }
 

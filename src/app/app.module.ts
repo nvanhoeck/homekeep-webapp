@@ -19,6 +19,7 @@ import {RoomsOverviewModule} from './modules/rooms-overview/rooms-overview.modul
 import {SubheaderModule} from './shared/components/subheader/subheader.module';
 import {AddRoomModule} from './modules/add-room/add-room.module';
 import {ContainerModule} from './shared/components/container/container.module';
+import {DirectivesModule} from './shared/directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {ContainerModule} from './shared/components/container/container.module';
     ValidationModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    DirectivesModule,
 
     ButtonsModule,
     BaseModule,
@@ -50,4 +52,5 @@ import {ContainerModule} from './shared/components/container/container.module';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -150,7 +150,7 @@ export class AddRoomComponent implements OnInit {
     }
 
     rooms.push({
-      id: 1,
+      id: 1 + rooms.length,
       name: this.roomName.value,
       icon: this.selectedIcon,
       items: []

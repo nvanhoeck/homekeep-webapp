@@ -7,6 +7,7 @@ import {SubheaderModule} from '../../shared/components/subheader/subheader.modul
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
 import {ContainerModule} from '../../shared/components/container/container.module';
+import {DirectivesModule} from '../../shared/directives/directives.module';
 
 
 @NgModule({
@@ -17,8 +18,11 @@ import {ContainerModule} from '../../shared/components/container/container.modul
     SubheaderModule,
     ButtonsModule,
     SectionModule,
-    ContainerModule
+    ContainerModule,
+
+    DirectivesModule
   ],
   exports: [RoomsOverviewComponent]
 })
-export class RoomsOverviewModule { }
+export class RoomsOverviewModule {
+}

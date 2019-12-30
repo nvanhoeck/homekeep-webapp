@@ -20,6 +20,7 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomButtonSize: ButtonSize = ButtonSize.XL;
 
   public rooms: RoomModel[] = JSON.parse(localStorage.getItem('rooms'));
+  public activeElement: number;
 
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef,
@@ -37,7 +38,33 @@ export class RoomsOverviewComponent implements OnInit {
     };
   }
 
-  navigateToAddRoom() {
-    this.router.navigate(['/add-room']);
+  public navigateToAddRoom(): void {
+    this.router.navigate(['/add-room']).finally();
+  }
+
+  public holdHandler(time: number, id: number): void {
+    if (time >= 400) {
+      this.activeElement = id;
+    }
+  }
+
+  public deactivateElement(): void {
+    this.activeElement = null;
+  }
+
+  public getActiveElementName(): string {
+    return this.getActiveElementRoom().name;
+  }
+
+  public deleteRoom() {
+    console.log(this.rooms);
+    console.log(this.rooms.indexOf(this.getActiveElementRoom()));
+    this.rooms.splice(this.rooms.indexOf(this.getActiveElementRoom()), 1);
+    localStorage.setItem('rooms', JSON.stringify(this.rooms));
+    this.activeElement = null;
+  }
+
+  private getActiveElementRoom(): RoomModel {
+    return this.rooms.find(value => value.id === this.activeElement);
   }
 }
