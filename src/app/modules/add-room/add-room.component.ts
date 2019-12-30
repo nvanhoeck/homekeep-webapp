@@ -129,22 +129,32 @@ export class AddRoomComponent implements OnInit {
   }
 
   public handleSubmit(): void {
-    this.saveForm();
+    if (this.roomForm.valid) {
+      this.saveForm();
+      this.navigateToRoomsOverview();
+    }
+  }
+
+  public cancel(): void {
+    this.navigateToRoomsOverview();
+  }
+
+  private navigateToRoomsOverview(): void {
     this.router.navigate(['rooms']);
   }
 
-  private saveForm() {
+  private saveForm(): void {
     let rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
     if (!rooms) {
       rooms = [];
     }
 
     rooms.push({
-        id: 1,
-        name: this.roomName.value,
-        icon: this.selectedIcon,
-        items: []
-      } as RoomModel);
+      id: 1,
+      name: this.roomName.value,
+      icon: this.selectedIcon,
+      items: []
+    } as RoomModel);
 
     localStorage.setItem('rooms', JSON.stringify(rooms));
   }

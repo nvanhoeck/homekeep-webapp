@@ -12,47 +12,110 @@
   max-width: 100vw;
   top: 5rem;
 
-  .rooms-overview--empty-block {
-    ::ng-deep {
-      section {
-        min-height: 450px;
-        height: 85vh;
-      }
-    }
+  .rooms-overview--background-logo {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: $color-theme-light-grey;
+    font-size: 5rem;
+    text-align: center;
+    z-index: 10;
+  }
 
-    .rooms-overview--empty-block--upper-part,
-    .rooms-overview--empty-block--lower-part {
-      height: 20%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-content: center;
 
-      .rooms-overview--empty-block-title {
-        color: $color-theme-primary;
-        margin-bottom: $gutter;
-      }
+  .rooms-overview--room-block-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem $gutter $gutter;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
 
-      .rooms-overview--empty-block-action-text {
-        margin-top: $gutter;
-        color: $color-theme-primary;
-        text-decoration: underline;
+    .rooms-overview--room-block__add-room {
+      ::ng-deep {
+        section {
+          background-color: $color-theme-lighter-grey;
+        }
 
-        &:hover {
-          cursor: pointer;
+        p {
+          color: $color-theme-primary;
         }
       }
     }
 
+    .rooms-overview--room-block,
+    .rooms-overview--room-block__add-room {
+      position: relative;
+      display: inline-block;
+      width: 8rem;
+      height: 100%;
+      margin: $gutter;
 
-    .rooms-overview--background-logo {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      color: $color-theme-light-grey;
-      font-size: 5rem;
-      text-align: center;
+      &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+
+      ::ng-deep {
+        .rooms-overview--content-block {
+          display: flex;
+          position: relative;
+          justify-content: space-between;
+          flex-direction: column;
+          height: 100%;
+          width: 100%;
+
+          .rooms-overview--room-block--title {
+            color: $color-theme-primary;
+            font-weight: 600;
+            font-size: 1.1rem;
+          }
+
+          i {
+            color: $color-theme-primary;
+            font-size: 5rem;
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
     }
+
+    .rooms-overview--empty-block {
+      ::ng-deep {
+        section {
+          min-height: 450px;
+          height: 85vh;
+        }
+      }
+
+      .rooms-overview--empty-block--upper-part,
+      .rooms-overview--empty-block--lower-part {
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+
+        .rooms-overview--empty-block-title {
+          color: $color-theme-primary;
+          margin-bottom: $gutter;
+        }
+
+        .rooms-overview--empty-block-action-text {
+          margin-top: $gutter;
+          color: $color-theme-primary;
+          text-decoration: underline;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
   }
 }
 

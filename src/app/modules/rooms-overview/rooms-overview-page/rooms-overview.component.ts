@@ -15,6 +15,10 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomEmptyButtonType: ButtonType = ButtonType.PRIMARY;
   addRoomEmptyButtonSize: ButtonSize = ButtonSize.BIG;
 
+  addRoomButtonClass: ButtonClass = ButtonClass.TEXT;
+  addRoomButtonType: ButtonType = ButtonType.PRIMARY_TEXT_ONLY;
+  addRoomButtonSize: ButtonSize = ButtonSize.XL;
+
   public rooms: RoomModel[] = JSON.parse(localStorage.getItem('rooms'));
 
   constructor(private readonly headerService: HeaderService,
@@ -29,7 +33,11 @@ export class RoomsOverviewComponent implements OnInit {
 
   public addRoomRedirect(): () => void {
     return () => {
-      this.router.navigate(['/add-room']);
+      this.navigateToAddRoom();
     };
+  }
+
+  navigateToAddRoom() {
+    this.router.navigate(['/add-room']);
   }
 }

@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RoomsOverviewModule} from './modules/rooms-overview/rooms-overview.module';
 import {SubheaderModule} from './shared/components/subheader/subheader.module';
 import {AddRoomModule} from './modules/add-room/add-room.module';
+import {ContainerModule} from './shared/components/container/container.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {AddRoomModule} from './modules/add-room/add-room.module';
     ButtonsModule,
     BaseModule,
     SectionModule,
+    ContainerModule,
     SubheaderModule,
 
     WrapperModule,

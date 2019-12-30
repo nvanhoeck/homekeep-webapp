@@ -1,7 +1,7 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container">
+  <i class="rooms-overview--background-logo icon icon-grid"></i>
   <app-section *ngIf="!rooms || rooms.length === 0; else roomsSection" class="rooms-overview--empty-block">
-    <i class="rooms-overview--background-logo icon icon-grid"></i>
     <div class="rooms-overview--empty-block--upper-part">
       <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
       <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build
@@ -23,11 +23,28 @@
     </div>
   </app-section>
   <ng-template #roomsSection>
-    <app-section>
-      <div *ngFor="let room of rooms">
-        <p>{{room.name}}</p>
-        <p>{{room.icon}}</p>
-      </div>
-    </app-section>
+    <div class="rooms-overview--room-block-container">
+      <app-container (click)="navigateToAddRoom()" class="rooms-overview--room-block__add-room" [width]="'8rem'" [height]="'12rem'">
+        <div class="rooms-overview--content-block">
+          <app-default-button [text]="'+'"
+                              [buttonClass]="addRoomButtonClass"
+                              [buttonType]="addRoomButtonType"
+                              [buttonSize]="addRoomButtonSize"
+                              [width]="'3rem'"
+          >
+          </app-default-button>
+          <p>Add room</p>
+        </div>
+      </app-container>
+      <app-container class="rooms-overview--room-block" *ngFor="let room of rooms" [width]="'8rem'" [height]="'12rem'">
+        <div class="rooms-overview--content-block">
+          <div>
+            <p class="rooms-overview--room-block--title">{{room.name}}</p>
+            <p class="rooms-overview--room-block--subtitle">{{room.items.length + ' items'}}</p>
+          </div>
+          <i class="icon icon-{{room.icon}}"></i>
+        </div>
+      </app-container>
+    </div>
   </ng-template>
 </section>

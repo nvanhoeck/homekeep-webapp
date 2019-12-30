@@ -19,6 +19,14 @@
         color: $color-theme-primary;
         font-weight: 600;
       }
+
+      app-validation{
+        width: 100%;
+      }
+
+      #add-room--room-name__input {
+        width: 100%;
+      }
     }
   }
 
@@ -77,6 +85,17 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+
+      .submit__cancel {
+        font-weight: 800;
+
+        &:hover,
+        &:active {
+          color: $color-theme-primary;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
     }
 
     ::ng-deep {

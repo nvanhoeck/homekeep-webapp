@@ -1,7 +1,8 @@
 export enum ButtonSize {
   SMALL = 'small',
   MEDIUM = 'medium',
-  BIG  = 'big'
+  BIG  = 'big',
+  XL = 'xl'
 }
 
 export enum ButtonType {
@@ -20,6 +21,9 @@ export enum ButtonType {
   ERROR_BORDER_ONLY = 'error_border_only',
 
   ERROR_BORDER_AND_TEXT = 'error_border_and_text',
+
+  PRIMARY_TEXT_ONLY = 'primary_text_only',
+
 
 
 }

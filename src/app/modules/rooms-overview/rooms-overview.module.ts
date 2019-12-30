@@ -6,6 +6,7 @@ import {RoomsOverviewComponent} from './rooms-overview-page/rooms-overview.compo
 import {SubheaderModule} from '../../shared/components/subheader/subheader.module';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
+import {ContainerModule} from '../../shared/components/container/container.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {SectionModule} from '../../shared/components/section/section.module';
     RoomsOverviewRoutingModule,
     SubheaderModule,
     ButtonsModule,
-    SectionModule
+    SectionModule,
+    ContainerModule
   ],
   exports: [RoomsOverviewComponent]
 })
