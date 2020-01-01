@@ -12,6 +12,7 @@
   font-size: 5rem;
   text-align: center;
   z-index: 10;
+  padding-right: $gutter * 2;
 }
 
 .rooms-overview--container {
@@ -85,6 +86,7 @@
     .active-room-block {
       ::ng-deep {
         color: $color-white;
+
         section {
           background-color: $color-theme-secundary;
         }
@@ -126,7 +128,7 @@
   }
 }
 
-.room-element--action-bar{
+.room-element--action-bar {
   position: fixed;
   width: 90vw;
   height: 6rem;
@@ -154,12 +156,12 @@
       color: $color-theme-light-grey;
     }
 
-    .icon-bin:hover{
+    .icon-bin:hover {
       color: $color-red;
       cursor: pointer;
     }
 
-    .icon-pencil:hover{
+    .icon-pencil:hover {
       color: $color-theme-primary;
       cursor: pointer;
     }

@@ -5,6 +5,8 @@
   width: 100%;
 
   .room--section-header {
+    max-width: 1266px;
+    margin: 0 auto;
     padding: $gutter;
     height: 4rem;
     width: 100%;
@@ -18,7 +20,7 @@
     .room--section-header--title {
       display: flex;
       color: $color-theme-primary;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       font-weight: 400;
       float: left;
       width: 25%;
@@ -27,7 +29,7 @@
     .room--section-header--action {
       float: right;
       display: flex;
-      width: 25%;
+      width: 100px;
       align-items: center;
       justify-content: space-around;
 
