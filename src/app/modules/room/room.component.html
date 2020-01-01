@@ -1,0 +1,29 @@
+<ng-container *ngIf="room">
+  <app-subheader [title]="room.name" [icon]="room.icon"></app-subheader>
+  <div class="room--container">
+    <div class="room--section-header">
+      <p class="room--section-header--title">Items</p>
+      <div class="room--section-header--action">
+        <p class="room--section-header--action--text" (click)="back()">Back</p>
+        <app-default-button class="room--section-header--action--button"
+                            [text]="'+'"
+                            [buttonSize]="backButtonSize"
+                            [buttonType]="backButtonType"
+                            [buttonClass]="backButtonClass"
+                            [width]="'35px'"
+                            [height]="'35px'"
+                            [borderRadius]="25"
+                            [clickEvent]="getAddItemToRoom()">
+        </app-default-button>
+      </div>
+    </div>
+    <div *ngIf="room.items.length === 0" class="room--empty-container">
+      <app-section>
+        <div class="rooms--empty-data-block">
+          <i class="rooms--empty-data--logo icon icon-grid"></i>
+          <p class="rooms--empty-data--text">No data could be found</p>
+        </div>
+      </app-section>
+    </div>
+  </div>
+</ng-container>

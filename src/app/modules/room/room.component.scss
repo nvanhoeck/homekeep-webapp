@@ -1,0 +1,73 @@
+@import "~src/styles";
+
+.room--container {
+  padding: $gutter;
+  width: 100%;
+
+  .room--section-header {
+    padding: $gutter;
+    height: 4rem;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+
+    .room--section-header--title {
+      display: flex;
+      color: $color-theme-primary;
+      font-size: 1.1rem;
+      font-weight: 400;
+      float: left;
+      width: 25%;
+    }
+
+    .room--section-header--action {
+      float: right;
+      display: flex;
+      width: 25%;
+      align-items: center;
+      justify-content: space-around;
+
+      .room--section-header--action--text {
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .room--empty-container {
+    ::ng-deep {
+
+      section {
+        min-height: 70vh;
+      }
+
+      .rooms--empty-data-block {
+        position: absolute;
+        display: inline-block;
+        top: 50%;
+        width: 100%;
+        color: $color-theme-light-grey;
+        text-align: center;
+        z-index: 10;
+
+        .rooms--empty-data--logo {
+          color: $color-theme-light-grey;
+          font-size: 5rem;
+          text-align: center;
+          z-index: 10;
+        }
+
+        .rooms--empty-data--text {
+          margin-top: $gutter;
+        }
+      }
+    }
+  }
+}

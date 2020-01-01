@@ -57,14 +57,17 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   public deleteRoom() {
-    console.log(this.rooms);
-    console.log(this.rooms.indexOf(this.getActiveElementRoom()));
     this.rooms.splice(this.rooms.indexOf(this.getActiveElementRoom()), 1);
     localStorage.setItem('rooms', JSON.stringify(this.rooms));
     this.activeElement = null;
   }
 
+  public navigateToRoom(id: number) {
+    this.router.navigate(['/room', id]).finally();
+  }
+
   private getActiveElementRoom(): RoomModel {
     return this.rooms.find(value => value.id === this.activeElement);
   }
+
 }

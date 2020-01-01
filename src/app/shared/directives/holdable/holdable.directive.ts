@@ -25,14 +25,12 @@ export class HoldableDirective {
   @HostListener('mouseleave', ['$event'])
   @HostListener('touchstart', ['$event'])
   onExit() {
-    console.log('on cancel');
     this.state.next('cancel');
   }
 
   @HostListener('mousedown', ['$event'])
   @HostListener('touchend', ['$event'])
   onHold() {
-    console.log('on hold');
     this.state.next('hold');
 
     const n = 100;

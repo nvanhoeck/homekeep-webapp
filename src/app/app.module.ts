@@ -20,6 +20,7 @@ import {SubheaderModule} from './shared/components/subheader/subheader.module';
 import {AddRoomModule} from './modules/add-room/add-room.module';
 import {ContainerModule} from './shared/components/container/container.module';
 import {DirectivesModule} from './shared/directives/directives.module';
+import {RoomModule} from './modules/room/room.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {DirectivesModule} from './shared/directives/directives.module';
     WrapperModule,
     HomeModule,
     RoomsOverviewModule,
-    AddRoomModule
+    AddRoomModule,
+    RoomModule
   ],
   providers: [],
   bootstrap: [AppComponent]
