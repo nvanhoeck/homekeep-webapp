@@ -21,6 +21,8 @@ import {AddRoomModule} from './modules/add-room/add-room.module';
 import {ContainerModule} from './shared/components/container/container.module';
 import {DirectivesModule} from './shared/directives/directives.module';
 import {RoomModule} from './modules/room/room.module';
+import {ModalModule} from './shared/components/modal/modal.module';
+import {AddItemModalModule} from './modules/modals/add-item-modal/add-item-modal.module';
 
 @NgModule({
   declarations: [
@@ -44,12 +46,14 @@ import {RoomModule} from './modules/room/room.module';
     SectionModule,
     ContainerModule,
     SubheaderModule,
+    ModalModule,
 
     WrapperModule,
     HomeModule,
     RoomsOverviewModule,
     AddRoomModule,
-    RoomModule
+    RoomModule,
+    AddItemModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

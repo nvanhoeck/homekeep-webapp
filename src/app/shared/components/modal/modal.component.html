@@ -1,0 +1,14 @@
+<div class="modal-background">
+  <section class="modal-container">
+    <app-default-button
+      class="modal--close-button"
+      [text]="'close'"
+      [buttonType]="buttonType"
+      [buttonClass]="buttonClass"
+      [buttonSize]="buttonSize"
+      [icon]="'tick'"
+      [clickEvent]="closeModal()"
+    ></app-default-button>
+    <ng-content></ng-content>
+  </section>
+</div>

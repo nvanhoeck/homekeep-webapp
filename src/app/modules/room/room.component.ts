@@ -3,6 +3,8 @@ import {RoomModel} from '../../shared/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
+import {ModalService} from '../../shared/components/modal/services/modal.service';
+import {AddItemModalComponent} from '../modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-room',
@@ -20,7 +22,8 @@ export class RoomComponent implements OnInit {
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly cdRef: ChangeDetectorRef,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly modalService: ModalService) {
   }
 
   ngOnInit() {
@@ -36,7 +39,7 @@ export class RoomComponent implements OnInit {
 
   public getAddItemToRoom(): any {
     return (room: RoomModel): void => {
-      // TODO
+      this.modalService.openModal(this.room, AddItemModalComponent);
     };
   }
 

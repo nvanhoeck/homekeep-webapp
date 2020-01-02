@@ -1,0 +1,34 @@
+@import "~src/styles";
+
+:host{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  z-index: 999;
+}
+
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-black-trans;
+  padding: $gutter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal-container {
+    max-width: 600px;
+    max-height: 600px;
+    width: 66vw;
+    height: 66vw;
+    background-color: $color-white;
+    border-radius: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @include shadow_base;
+  }
+}

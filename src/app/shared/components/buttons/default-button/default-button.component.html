@@ -7,7 +7,7 @@
   <ng-container [ngSwitch]="buttonClass">
     <p *ngSwitchCase="'text'" (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
     <input *ngSwitchCase="'password'" (keyup)="detectInputPassChanges($event)" maxlength="4" type="password"/>
-    <p *ngSwitchCase="'icon'"><span class="icon icon-{{icon}}"></span>{{text}}</p>
+    <p *ngSwitchCase="'icon'" class="icon icon-{{icon}}">{{text}}</p>
     <p *ngSwitchDefault (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
   </ng-container>
 </button>
