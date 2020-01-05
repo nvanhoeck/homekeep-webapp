@@ -9,17 +9,20 @@ import {ModalService} from './services/modal.service';
 })
 export class ModalComponent implements OnInit {
   buttonType: ButtonType = ButtonType.PRIMARY;
-  buttonSize: ButtonSize = ButtonSize.BIG;
+  buttonSize: ButtonSize = ButtonSize.MEDIUM;
   buttonClass: ButtonClass = ButtonClass.ICON;
 
-  constructor(private readonly modalService: ModalService) { }
+  public listener: ModalService;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
   public closeModal(): any {
     return _ => {
-      this.modalService.closeModal();
+      this.listener.closeModal();
     };
   }
 }

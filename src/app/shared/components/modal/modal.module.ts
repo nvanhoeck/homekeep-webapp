@@ -12,7 +12,9 @@ import {ButtonsModule} from '../buttons/buttons.module';
     ButtonsModule
   ],
   exports: [ModalComponent],
-  providers: [ModalService],
+  providers: [
+    ModalService
+  ],
   entryComponents: [ModalComponent]
 })
 export class ModalModule { }

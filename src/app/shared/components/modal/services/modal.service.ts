@@ -13,7 +13,7 @@ import {ModalComponent} from '../modal.component';
 })
 export class ModalService {
 
-  modalComponentRef: ComponentRef<any>;
+  modalComponentRef: ComponentRef<ModalComponent | any>;
 
   constructor(private readonly componentFactoryResolver: ComponentFactoryResolver,
               private readonly appRef: ApplicationRef,
@@ -21,7 +21,6 @@ export class ModalService {
   }
 
   openModal(data: any, componentClass: any): void {
-    debugger;
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
 
     const componentRef = componentFactory.create(this.injector);
@@ -35,6 +34,9 @@ export class ModalService {
     this.modalComponentRef = componentRef;
 
     this.modalComponentRef.instance.childComponentType = componentClass;
+
+    const instance = this.modalComponentRef.instance;
+    instance.listener = this;
   }
 
   closeModal(): void {

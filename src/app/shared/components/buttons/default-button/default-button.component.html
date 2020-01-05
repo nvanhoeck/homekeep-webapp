@@ -1,4 +1,4 @@
-<button *ngIf="buttonClass !== 'submit'; else submit"
+<button class="default-button" *ngIf="buttonClass !== 'submit'; else submit"
         (mouseenter)="elevate()"
         (mouseleave)="reelevate()"
         (click)="onClick($event)"

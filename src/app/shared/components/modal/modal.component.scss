@@ -8,6 +8,18 @@
   left: 0;
   display: inline-block;
   z-index: 999;
+
+  ::ng-deep {
+    app-default-button {
+      height: 100%;
+      button {
+        position: relative;
+        top: 100%;
+        transform: translateY(-110%);
+        border-radius: 20px;
+      }
+    }
+  }
 }
 
 .modal-background {
