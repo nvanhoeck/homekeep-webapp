@@ -1,5 +1,5 @@
 import {
-  AfterContentInit,
+  AfterViewInit,
   ChangeDetectorRef,
   Compiler,
   Component,
@@ -20,8 +20,8 @@ import * as _ from 'lodash';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnChanges, AfterContentInit, OnDestroy {
-  @ViewChild('injected', {read: ViewContainerRef, static: false}) target;
+export class ModalComponent implements OnChanges, AfterViewInit, OnDestroy {
+  @ViewChild('target', {read: ViewContainerRef, static: false}) target;
 
   public injectedType: Type<any> | any;
   public injectedProperties: ComponentPropertyModel[];
@@ -60,12 +60,12 @@ export class ModalComponent implements OnChanges, AfterContentInit, OnDestroy {
     this.cdRef.detectChanges();
   }
 
-  ngOnChanges() {
+  ngAfterViewInit(): void {
+    this.isViewInitialized = true;
     this.updateComponent();
   }
 
-  ngAfterContentInit() {
-    this.isViewInitialized = true;
+  ngOnChanges() {
     this.updateComponent();
   }
 

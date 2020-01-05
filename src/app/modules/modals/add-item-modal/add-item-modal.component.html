@@ -1,1 +1,24 @@
-<p>add-item-modal works!</p>
+<form #form class="add-item-modal--container">
+  <h1 class="add-item-modal--title">Add a new item</h1>
+  <div class="add-item-modal--formgroup">
+    <label for="add-item-modal--name-input">Name</label>
+    <input id="add-item-modal--name-input" type="text"/>
+  </div>
+  <div class="add-item-modal--formgroup">
+    <label for="add-item-modal--price-input">Price /piece</label>
+    <input id="add-item-modal--price-input" type="number"/>
+  </div>
+  <div class="add-item-modal--formgroup">
+    <label for="add-item-modal--needed-input">Amount</label>
+    <input id="add-item-modal--needed-input" type="number"/>
+  </div>
+  <div class="add-item-modal--actions">
+    <p class="add-item-modal--cancel">Cancel</p>
+    <app-default-button class="add-item-modal--add-item"
+                        [buttonType]="buttonType"
+                        [buttonSize]="buttonSize"
+                        [buttonClass]="buttonClass"
+                        [text]="'+ Add item'"
+    ></app-default-button>
+  </div>
+</form>

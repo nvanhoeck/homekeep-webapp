@@ -33,7 +33,7 @@ export class ModalService {
 
     this.modalComponentRef = componentRef;
 
-    this.modalComponentRef.instance.childComponentType = componentClass;
+    this.modalComponentRef.instance.injectedType = componentClass;
 
     const instance = this.modalComponentRef.instance;
     instance.listener = this;

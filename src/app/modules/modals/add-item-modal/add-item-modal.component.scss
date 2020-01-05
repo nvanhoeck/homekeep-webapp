@@ -1,0 +1,27 @@
+@import "~src/styles";
+
+
+.add-item-modal--container {
+  .add-item-modal--title {
+    color: $color-theme-primary;
+    font-size: 1.25rem;
+    margin-bottom: $gutter;
+  }
+
+  .add-item-modal--formgroup {
+    margin-bottom: $gutter;
+  }
+
+  .add-item-modal--actions {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: $gutter *2;
+
+    .add-item-modal--cancel {
+      text-decoration: underline;
+    }
+  }
+}
