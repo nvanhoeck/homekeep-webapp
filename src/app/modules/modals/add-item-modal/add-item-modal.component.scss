@@ -1,7 +1,14 @@
 @import "~src/styles";
 
+:host {
+  height: 100%;
+}
 
 .add-item-modal--container {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+
   .add-item-modal--title {
     color: $color-theme-primary;
     font-size: 1.25rem;
@@ -10,6 +17,10 @@
 
   .add-item-modal--formgroup {
     margin-bottom: $gutter;
+    display: inline-block;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .add-item-modal--actions {
@@ -18,10 +29,22 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: $gutter *2;
+    padding: $gutter *2;
 
     .add-item-modal--cancel {
       text-decoration: underline;
     }
+  }
+
+  label {
+    display: inline-block;
+    position: relative;
+    width: 25%;
+  }
+
+  input {
+    display: inline-block;
+    position: relative;
+    width: 70%;
   }
 }
