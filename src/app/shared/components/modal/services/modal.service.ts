@@ -7,6 +7,9 @@ import {
   Injector
 } from '@angular/core';
 import {ModalComponent} from '../modal.component';
+import {InputTupple} from '../../../types/InputTupple';
+import * as _ from 'lodash';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,7 @@ export class ModalService {
               private readonly injector: Injector) {
   }
 
-  openModal(data: any, componentClass: any): void {
+  openModal(componentClass: any, keyValues: InputTupple[]): void {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
 
     const componentRef = componentFactory.create(this.injector);
@@ -37,6 +40,9 @@ export class ModalService {
 
     const instance = this.modalComponentRef.instance;
     instance.listener = this;
+    keyValues.forEach(tupple => {
+      _.set(this.modalComponentRef.instance, tupple.attributePath, tupple.value);
+    });
   }
 
   closeModal(): void {

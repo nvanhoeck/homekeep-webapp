@@ -1,19 +1,19 @@
-<form #form class="add-item-modal--container">
+<form #form class="add-item-modal--container" [formGroup]="itemForm" (ngSubmit)="handleSubmit()">
   <h1 class="add-item-modal--title">Add a new item</h1>
   <div class="add-item-modal--formgroup">
     <label for="add-item-modal--name-input">Name</label>
-    <input id="add-item-modal--name-input" type="text"/>
+    <input id="add-item-modal--name-input" type="text" [formControl]="itemForm.controls['itemName']"/>
   </div>
   <div class="add-item-modal--formgroup">
     <label for="add-item-modal--price-input">Price /piece</label>
-    <input id="add-item-modal--price-input" type="number"/>
+    <input id="add-item-modal--price-input" type="number" [formControl]="itemForm.controls['itemPrice']" [(ngModel)]="itemPrice"/>
   </div>
   <div class="add-item-modal--formgroup">
     <label for="add-item-modal--needed-input">Amount</label>
-    <input id="add-item-modal--needed-input" type="number"/>
+    <input id="add-item-modal--needed-input" type="number" [formControl]="itemForm.controls['itemAmount']" [(ngModel)]="itemAmount"/>
   </div>
   <div class="add-item-modal--actions">
-    <p class="add-item-modal--cancel">Cancel</p>
+    <p class="add-item-modal--cancel" (click)="cancel()">Cancel</p>
     <app-default-button class="add-item-modal--add-item"
                         [buttonType]="buttonType"
                         [buttonSize]="buttonSize"

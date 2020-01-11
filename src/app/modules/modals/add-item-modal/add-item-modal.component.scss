@@ -33,6 +33,14 @@
 
     .add-item-modal--cancel {
       text-decoration: underline;
+      font-weight: 800;
+
+      &:hover,
+      &:active {
+        color: $color-theme-primary;
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 

@@ -39,7 +39,7 @@ export class RoomComponent implements OnInit {
 
   public getAddItemToRoom(): any {
     return (room: RoomModel): void => {
-      this.modalService.openModal(this.room, AddItemModalComponent);
+      this.modalService.openModal(AddItemModalComponent, [{attributePath: 'room', value: this.room}]);
     };
   }
 
