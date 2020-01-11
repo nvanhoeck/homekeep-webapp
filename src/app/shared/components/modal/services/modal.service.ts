@@ -17,6 +17,7 @@ import {InputTupple} from '../../../types/InputTupple';
 export class ModalService {
 
   modalComponentRef: ComponentRef<ModalComponent | any>;
+  listener: any;
 
   constructor(private readonly componentFactoryResolver: ComponentFactoryResolver,
               private readonly appRef: ApplicationRef,
@@ -41,7 +42,11 @@ export class ModalService {
   closeModal(): void {
     this.appRef.detachView(this.modalComponentRef.hostView);
     this.modalComponentRef.destroy();
+    this.listener.modalClosed();
   }
 
 
+  addListener(listener: any) {
+    this.listener = listener;
+  }
 }

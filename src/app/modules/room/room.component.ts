@@ -16,6 +16,7 @@ export class RoomComponent implements OnInit {
   private roomId;
 
   public room: RoomModel;
+
   public backButtonSize: ButtonSize = ButtonSize.MEDIUM;
   public backButtonClass: ButtonClass = ButtonClass.TEXT;
   public backButtonType: ButtonType = ButtonType.PRIMARY;
@@ -40,10 +41,46 @@ export class RoomComponent implements OnInit {
   public getAddItemToRoom(): any {
     return (room: RoomModel): void => {
       this.modalService.openModal(AddItemModalComponent, [{attributePath: 'room', value: this.room}]);
+      this.modalService.addListener(this);
     };
+  }
+
+  public modalClosed(): void {
+    this.room = (JSON.parse(localStorage.getItem('rooms')) as RoomModel[]).find(room => room.id = this.room.id);
+    this.cdRef.markForCheck();
   }
 
   public back(): void {
     this.router.navigate(['/rooms']).finally();
+  }
+
+  getTotalItems(): string {
+    return ''
+      + this.room.items.map(value => value.amountOwned).reduce((previousValue, currentValue) => previousValue + currentValue)
+      + '/'
+      + this.room.items.map(value => value.amountWanted).reduce((previousValue, currentValue) => previousValue + currentValue);
+  }
+
+  getTotalCost(): string {
+    return '' + this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue)
+      + ' / '
+      + this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue);
+  }
+
+  getToPay(): string {
+    return '' + (this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue) -
+      this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue));
+  }
+
+  deleteItem(id: number): () => void {
+    return () => {
+      const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
+
+      this.room.items.splice(this.room.items.indexOf(this.room.items.find(item => item.id === id)));
+
+      const updatedRooms = rooms.splice(rooms.indexOf(this.room), 1);
+      updatedRooms.push(this.room);
+      localStorage.setItem('rooms', JSON.stringify(updatedRooms));
+    };
   }
 }

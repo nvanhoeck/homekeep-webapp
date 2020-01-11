@@ -17,7 +17,7 @@
         </app-default-button>
       </div>
     </div>
-    <div *ngIf="room.items.length === 0" class="room--empty-container">
+    <div *ngIf="room.items.length === 0; else roomItems" class="room--empty-container">
       <app-section>
         <div class="rooms--empty-data-block">
           <i class="rooms--empty-data--logo icon icon-grid"></i>
@@ -26,4 +26,48 @@
       </app-section>
     </div>
   </div>
+  <ng-template #roomItems>
+    <app-section>
+      <h1 class="room-overview--title">Overview</h1>
+      <div class="room-overview--group">
+        <div class="room--overview--group-element">
+          <label>Amount</label>
+          <p>{{getTotalItems()}}</p>
+        </div>
+        <div class="room--overview--group-element">
+          <label>Total Cost</label>
+          <p>{{getTotalCost()}}</p>
+        </div>
+        <div class="room--overview--group-element">
+          <label>To pay</label>
+          <p>{{getToPay()}}</p>
+        </div>
+      </div>
+    </app-section>
+    <app-section>
+      <p class="room-overview--items--title">Items</p>
+      <div *ngFor="let item of room.items" class="room-overview--items-container">
+        <div class="room-overview--items-data-block">
+          <div class="room-overview--items-name-and-cost-block">
+            <p class="room-overview--items-name">{{item.name}}</p>
+            <p>{{item.spendedCost + '/' + item.totalCost}}</p>
+          </div>
+          <div class="room-overview--items-amount-block">
+            <app-default-button
+              [buttonClass]="'icon'"
+              [buttonSize]="'small'"
+              [buttonType]="'error'"
+              [width]="'30px'"
+              [height]="'30px'"
+              [icon]="'cross'"
+              [borderRadius]="50"
+              [clickEvent]="deleteItem(item.id)"
+            >
+            </app-default-button>
+            <p>{{item.amountOwned + '/' + item.amountWanted}}</p>
+          </div>
+        </div>
+      </div>
+    </app-section>
+  </ng-template>
 </ng-container>
