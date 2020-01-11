@@ -100,15 +100,24 @@
     margin-bottom: 1rem;
   }
 
+
+  .room-overview--items {
+    align-self: flex-start;
+    max-width: 100%;
+
+  }
+
   .room-overview--items-container {
     position: relative;
     display: inline-block;
     align-self: flex-start;
     width: 25rem;
+    max-width: 100%;
     height: 5rem;
     @include shadow_base;
     @include rectangle-block-primary;
     padding: ($gutter/2) ($gutter/2) ($gutter/2) ($gutter * 2);
+    margin: 0.25rem;
 
     &:hover {
       cursor: pointer;

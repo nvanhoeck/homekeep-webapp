@@ -75,10 +75,10 @@ export class RoomComponent implements OnInit {
   deleteItem(id: number): () => void {
     return () => {
       const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
+      const updatedRooms = rooms.splice(rooms.indexOf(this.room), 1);
 
       this.room.items.splice(this.room.items.indexOf(this.room.items.find(item => item.id === id)));
 
-      const updatedRooms = rooms.splice(rooms.indexOf(this.room), 1);
       updatedRooms.push(this.room);
       localStorage.setItem('rooms', JSON.stringify(updatedRooms));
     };
