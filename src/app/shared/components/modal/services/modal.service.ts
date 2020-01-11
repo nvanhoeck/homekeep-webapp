@@ -4,11 +4,11 @@ import {
   ComponentRef,
   EmbeddedViewRef,
   Injectable,
-  Injector
+  Injector,
+  Type
 } from '@angular/core';
 import {ModalComponent} from '../modal.component';
 import {InputTupple} from '../../../types/InputTupple';
-import * as _ from 'lodash';
 
 
 @Injectable({
@@ -23,9 +23,8 @@ export class ModalService {
               private readonly injector: Injector) {
   }
 
-  openModal(componentClass: any, keyValues: InputTupple[]): void {
+  openModal(componentClass: Type<any>, keyValues: InputTupple[]): void {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ModalComponent);
-
     const componentRef = componentFactory.create(this.injector);
 
     this.appRef.attachView(componentRef.hostView);
@@ -35,18 +34,14 @@ export class ModalService {
     document.body.appendChild(domElemen);
 
     this.modalComponentRef = componentRef;
-
     this.modalComponentRef.instance.injectedType = componentClass;
-
-    const instance = this.modalComponentRef.instance;
-    instance.listener = this;
-    keyValues.forEach(tupple => {
-      _.set(this.modalComponentRef.instance, tupple.attributePath, tupple.value);
-    });
+    this.modalComponentRef.instance.injectedProperties = keyValues;
   }
 
   closeModal(): void {
     this.appRef.detachView(this.modalComponentRef.hostView);
     this.modalComponentRef.destroy();
   }
+
+
 }

@@ -14,6 +14,7 @@ import {
 import {ButtonClass, ButtonSize, ButtonType} from '../buttons';
 import {ModalService} from './services/modal.service';
 import * as _ from 'lodash';
+import {InputTupple} from '../../types/InputTupple';
 
 @Component({
   selector: 'app-modal',
@@ -24,7 +25,7 @@ export class ModalComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('target', {read: ViewContainerRef, static: false}) target;
 
   public injectedType: Type<any> | any;
-  public injectedProperties: ComponentPropertyModel[];
+  public injectedProperties: InputTupple[];
 
   buttonType: ButtonType = ButtonType.PRIMARY;
   buttonSize: ButtonSize = ButtonSize.MEDIUM;
@@ -53,7 +54,7 @@ export class ModalComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     if (this.injectedProperties) {
       for (const property of this.injectedProperties) {
-        _.set(this.compRef.instance, property.key, property.value);
+        _.set(this.compRef.instance, property.attributePath, property.value);
       }
     }
 
@@ -81,9 +82,4 @@ export class ModalComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.listener.closeModal();
     };
   }
-}
-
-export interface ComponentPropertyModel {
-  key: string;
-  value: any;
 }

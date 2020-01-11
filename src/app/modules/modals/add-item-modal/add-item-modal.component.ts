@@ -12,6 +12,8 @@ import {RoomItemModel, RoomModel} from '../../../shared/models';
   styleUrls: ['./add-item-modal.component.scss']
 })
 export class AddItemModalComponent implements OnInit, OnDestroy {
+  public room: RoomModel;
+
   private destroy$: Subject<boolean> = new Subject();
 
   public itemPrice = 0.0;
@@ -30,7 +32,6 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
     itemPrice: this.itemPriceFC,
     itemAmount: this.itemAmountFC,
   });
-  private id: number;
 
   constructor(private readonly modalService: ModalService) {
   }
@@ -70,30 +71,16 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   private saveForm(): void {
     const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
 
-    const roomModel = rooms.find(room => room.id === this.id);
+    const roomModel = rooms.find(room => room.id === this.room.id);
 
-    const newItem = this.createRoomItem(rooms, roomModel);
+    this.createRoomItem(rooms, roomModel);
 
+    localStorage.setItem('rooms', JSON.stringify(rooms));
 
-    const updatedRooms = this.updateItemInRoom(rooms, newItem);
-
-
-    localStorage.setItem('rooms', JSON.stringify(updatedRooms));
+    this.modalService.closeModal();
   }
 
-  private updateItemInRoom(rooms, newItem) {
-    return rooms.map(room => {
-        if (room.id === this.id) {
-          return {
-            ...room, items: {...room.items, newItem}
-          };
-        }
-        return room;
-      }
-    );
-  }
-
-  private createRoomItem(rooms, roomModel) {
+  private createRoomItem(rooms, roomModel): void {
     const newItem = {
       id: (rooms.length * roomModel.id * roomModel.items.length + 1),
       name: this.itemNameFC.value,
@@ -103,7 +90,7 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
       totalCost: this.itemPriceFC.value * this.itemAmountFC.value,
       spendedCost: 0
     } as RoomItemModel;
+
     roomModel.items.push(newItem);
-    return newItem;
   }
 }
