@@ -21,15 +21,15 @@ export class HoldableDirective {
     );
   }
 
-  @HostListener('mouseup', ['$event'])
-  @HostListener('mouseleave', ['$event'])
-  @HostListener('touchstart', ['$event'])
+  @HostListener('mouseup')
+  @HostListener('mouseleave')
+  @HostListener('touchstart')
   onExit() {
     this.state.next('cancel');
   }
 
-  @HostListener('mousedown', ['$event'])
-  @HostListener('touchend', ['$event'])
+  @HostListener('mousedown')
+  @HostListener('touchend')
   onHold() {
     this.state.next('hold');
 

@@ -2,7 +2,9 @@ import {Component, OnDestroy} from '@angular/core';
 import {Subject} from 'rxjs';
 
 
-@Component({})
+@Component({
+  template: ''
+})
 export class BaseComponent implements OnDestroy {
   protected destroy$: Subject<boolean> = new Subject();
 

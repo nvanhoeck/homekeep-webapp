@@ -23,6 +23,8 @@ import {DirectivesModule} from './shared/directives/directives.module';
 import {RoomModule} from './modules/room/room.module';
 import {ModalModule} from './shared/components/modal/modal.module';
 import {AddItemModalModule} from './modules/modals/add-item-modal/add-item-modal.module';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import {AddItemModalModule} from './modules/modals/add-item-modal/add-item-modal
     RoomsOverviewModule,
     AddRoomModule,
     RoomModule,
-    AddItemModalModule
+    AddItemModalModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
