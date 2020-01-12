@@ -46,7 +46,8 @@ export class RoomComponent implements OnInit {
   }
 
   public modalClosed(): void {
-    this.room = (JSON.parse(localStorage.getItem('rooms')) as RoomModel[]).find(room => room.id = this.room.id);
+    const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
+    this.room = rooms.find(room => room.id = this.roomId);
     this.cdRef.markForCheck();
   }
 
@@ -75,12 +76,12 @@ export class RoomComponent implements OnInit {
   deleteItem(id: number): () => void {
     return () => {
       const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-      const updatedRooms = rooms.splice(rooms.indexOf(this.room), 1);
-
-      this.room.items.splice(this.room.items.indexOf(this.room.items.find(item => item.id === id)));
-
-      updatedRooms.push(this.room);
-      localStorage.setItem('rooms', JSON.stringify(updatedRooms));
+      console.log(rooms);
+      const roomModel = rooms.find(room => room.id == this.roomId);
+      roomModel.items.splice(roomModel.items.indexOf(roomModel.items.find(item => item.id == id)), 1);
+      console.log(rooms);
+      this.room = roomModel;
+      localStorage.setItem('rooms', JSON.stringify(rooms));
     };
   }
 }

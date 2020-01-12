@@ -71,7 +71,7 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   private saveForm(): void {
     const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
 
-    const roomModel = rooms.find(room => room.id === this.room.id);
+    const roomModel = rooms.find(room => room.id == this.room.id);
 
     this.createRoomItem(rooms, roomModel);
 
