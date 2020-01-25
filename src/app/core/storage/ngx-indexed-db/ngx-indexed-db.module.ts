@@ -4,7 +4,7 @@ import {DBConfig, NgxIndexedDBModule, ObjectStoreSchema} from 'ngx-indexed-db';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
 
 
-function buildModel(type: Type<any>): ObjectStoreSchema[] {
+export function buildModel(type: Type<any>): ObjectStoreSchema[] {
   return Object.keys(type)
     .map(key => {
       return {
