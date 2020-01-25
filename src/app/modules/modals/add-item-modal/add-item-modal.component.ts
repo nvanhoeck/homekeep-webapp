@@ -5,6 +5,7 @@ import {ModalService} from '../../../shared/components/modal/services/modal.serv
 import {Subject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
+import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 
 @Component({
   selector: 'app-add-item-modal',
@@ -33,7 +34,8 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
     itemAmount: this.itemAmountFC,
   });
 
-  constructor(private readonly modalService: ModalService) {
+  constructor(private readonly modalService: ModalService,
+              private readonly roomItemsService: RoomItemsService) {
   }
 
   ngOnInit() {
@@ -69,28 +71,17 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   }
 
   private saveForm(): void {
-    const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-
-    const roomModel = rooms.find(room => room.id == this.room.id);
-
-    this.createRoomItem(rooms, roomModel);
-
-    localStorage.setItem('rooms', JSON.stringify(rooms));
-
-    this.modalService.closeModal();
-  }
-
-  private createRoomItem(rooms, roomModel): void {
-    const newItem = {
-      id: (rooms.length * roomModel.id * roomModel.items.length + 1),
+    const newItem: RoomItemModel = {
       name: this.itemNameFC.value,
       amountWanted: this.itemAmountFC.value,
       amountOwned: 0,
       costPerItem: this.itemPriceFC.value,
       totalCost: this.itemPriceFC.value * this.itemAmountFC.value,
-      spendedCost: 0
-    } as RoomItemModel;
+      spendedCost: 0,
+      roomId: this.room.id
+    };
 
-    roomModel.items.push(newItem);
+    this.roomItemsService.addItem(newItem).finally();
+    this.modalService.closeModal();
   }
 }

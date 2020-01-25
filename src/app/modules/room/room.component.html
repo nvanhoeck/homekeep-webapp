@@ -1,4 +1,4 @@
-<ng-container *ngIf="room">
+<ng-container *ngIf="room && items">
   <app-subheader [title]="room.name" [icon]="room.icon"></app-subheader>
   <div class="room--container">
     <div class="room--section-header">
@@ -17,7 +17,7 @@
         </app-default-button>
       </div>
     </div>
-    <div *ngIf="room.items.length === 0; else roomItems" class="room--empty-container">
+    <div *ngIf="items.length === 0; else roomItems" class="room--empty-container">
       <app-section>
         <div class="rooms--empty-data-block">
           <i class="rooms--empty-data--logo icon icon-grid"></i>
@@ -48,7 +48,7 @@
     <app-section>
       <p class="room-overview--items--title">Items</p>
       <div class="room-overview--items">
-        <div *ngFor="let item of room.items"
+        <div *ngFor="let item of items"
              class="room-overview--items-container {{item.id == selectedItem?.id ? 'selectedItem' : ''}}">
           <div class="room-overview--items-data-block">
             <div class="room-overview--items-name-and-cost-block">

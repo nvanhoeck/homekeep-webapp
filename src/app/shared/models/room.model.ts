@@ -1,7 +1,5 @@
 export class RoomModel {
-  id: number;
+  id?: number;
   name: string;
   icon: string;
-  // a collection of roomItemModel ids
-  items: string[];
 }

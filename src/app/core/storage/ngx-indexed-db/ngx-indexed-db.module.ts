@@ -17,7 +17,7 @@ function buildModel(type: Type<any>): ObjectStoreSchema[] {
 
 const dbConfig: DBConfig = {
   name: 'homekeep',
-  version: 1,
+  version: 2,
   objectStoresMeta: [{
     store: 'rooms',
     storeConfig: {keyPath: 'id', autoIncrement: true},

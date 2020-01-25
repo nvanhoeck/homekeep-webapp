@@ -1,0 +1,43 @@
+import {Injectable} from '@angular/core';
+import {NgxIndexedDBService} from 'ngx-indexed-db';
+import {RoomItemModel, RoomModel} from '../../../../shared/models';
+import {RoomService} from '../rooms/room.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RoomItemsService {
+
+  private readonly TABLE_NAME = 'items';
+
+  constructor(private readonly dbService: NgxIndexedDBService,
+              private readonly roomDbService: RoomService) {
+  }
+
+
+  public addItem(item: RoomItemModel): Promise<number> {
+    return this.dbService.add(this.TABLE_NAME, item);
+  }
+
+  public updateItem(item: RoomItemModel): Promise<number> {
+    return this.dbService.update(this.TABLE_NAME, item);
+  }
+
+  public findItemById(id: number): Promise<RoomModel> {
+    return this.dbService.getByKey(this.TABLE_NAME, id);
+  }
+
+  public findAll(): Promise<RoomItemModel[]> {
+    return this.dbService.getAll(this.TABLE_NAME);
+  }
+
+  public deleteItem(id: number): Promise<number> {
+    return this.dbService.delete(this.TABLE_NAME, id);
+  }
+
+  findByRoomId(id: number): Promise<RoomItemModel[]> {
+    return this.dbService.getAll(this.TABLE_NAME).then((items: RoomItemModel[]) => {
+      return items.filter(item => item.roomId === id);
+    });
+  }
+}

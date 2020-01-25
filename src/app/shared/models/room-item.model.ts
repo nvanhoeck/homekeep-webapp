@@ -1,5 +1,5 @@
 export class RoomItemModel {
-  id: number;
+  id?: number;
   name: string;
   costPerItem: number;
   totalCost: number;
@@ -7,5 +7,5 @@ export class RoomItemModel {
   amountWanted: number;
   amountOwned: number;
   // backreference
-  roomId: string;
+  roomId: number;
 }

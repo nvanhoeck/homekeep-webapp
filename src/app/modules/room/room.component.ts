@@ -1,9 +1,14 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {RoomItemModel, RoomModel} from '../../shared/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
 import {ModalService} from '../../shared/components/modal/services/modal.service';
 import {AddItemModalComponent} from '../modals/add-item-modal/add-item-modal.component';
+import {RoomItemsService} from '../../core/services/data/roomItems/room-items.service';
+import {RoomService} from '../../core/services/data/rooms/room.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-room',
@@ -11,10 +16,12 @@ import {AddItemModalComponent} from '../modals/add-item-modal/add-item-modal.com
   styleUrls: ['./room.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RoomComponent implements OnInit {
-  private roomId;
+export class RoomComponent implements OnInit, OnDestroy {
+  private roomId: number;
+  private destroy$ = new Subject();
 
   public room: RoomModel;
+  public items: RoomItemModel[];
   public selectedItem: RoomItemModel;
 
   public backButtonSize: ButtonSize = ButtonSize.MEDIUM;
@@ -24,78 +31,75 @@ export class RoomComponent implements OnInit {
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly cdRef: ChangeDetectorRef,
               private readonly router: Router,
-              private readonly modalService: ModalService) {
+              private readonly modalService: ModalService,
+              private readonly roomsService: RoomService,
+              private readonly roomItemsSerivce: RoomItemsService) {
   }
 
   ngOnInit() {
-    /*this.activatedRoute.params.subscribe(params => {
-      this.roomId = _.get(params, 'id');
-      const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-      this.room = rooms.find(value => {
-        return value.id == this.roomId;
+    this.activatedRoute.params.pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.roomId = +_.get(params, 'id');
+        this.loadRoomWithItems();
+        this.loadItems();
       });
-      this.cdRef.markForCheck();
-    });*/
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   public getAddItemToRoom(): any {
-    return (room: RoomModel): void => {
+    return (): void => {
       this.modalService.openModal(AddItemModalComponent, [{attributePath: 'room', value: this.room}]);
       this.modalService.addListener(this);
     };
   }
 
   public modalClosed(): void {
-    const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-    this.room = rooms.find(room => room.id = this.roomId);
-    this.cdRef.markForCheck();
+    this.loadRoomWithItems();
   }
 
   public back(): void {
     this.router.navigate(['/rooms']).finally();
   }
-/*
+
   public getTotalItems(): string {
     return ''
-      + this.room.items.map(value => value.amountOwned).reduce((previousValue, currentValue) => previousValue + currentValue)
+      + this.items.map(value => value.amountOwned).reduce((previousValue, currentValue) => previousValue + currentValue)
       + '/'
-      + this.room.items.map(value => value.amountWanted).reduce((previousValue, currentValue) => previousValue + currentValue);
+      + this.items.map(value => value.amountWanted).reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 
   public getTotalCost(): string {
-    return '' + this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue)
+    return '' + this.items.map(item => item.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue)
       + ' / '
-      + this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue);
+      + this.items.map(item => item.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 
   public getToPay(): string {
-    return '' + (this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue) -
-      this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue));
+    return '' + (this.items.map(item => item.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue) -
+      this.items.map(item => item.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue));
   }
 
   public deleteItem(id: number): () => void {
     return () => {
-      const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-
-      const roomModel = rooms.find(room => room.id == this.roomId);
-      roomModel.items.splice(roomModel.items.indexOf(roomModel.items.find(item => item.id == id)), 1);
-
-      this.room = roomModel;
-      localStorage.setItem('rooms', JSON.stringify(rooms));
+      this.roomItemsSerivce.deleteItem(id).finally();
       this.selectedItem = undefined;
     };
   }
 
   public selectItem(id: number): () => void {
     return () => {
-      this.selectedItem = this.room.items.find(room => room.id == id);
+      this.selectedItem = this.items.find(room => room.id === id);
     };
   }
 
   public addItemAmount(id: number): () => void {
     return () => {
       if (this.selectedItem.amountOwned < this.selectedItem.amountWanted) {
-        this.updateRoomItemModelAmount(id, 1);
+        this.updateRoomItemModelAmount(id, 1, this.selectedItem);
       }
     };
   }
@@ -103,11 +107,33 @@ export class RoomComponent implements OnInit {
   reduceItemAmount(id: number) {
     return () => {
       if (this.selectedItem.amountOwned > 0) {
-        this.updateRoomItemModelAmount(id, -1);
+        this.updateRoomItemModelAmount(id, -1, this.selectedItem);
       }
     };
   }
 
-  private updateRoomItemModelAmount(id: number, amount: number) {
-  }*/
+  private updateRoomItemModelAmount(id: number, amount: number, selectedItem: RoomItemModel) {
+    selectedItem.amountOwned += amount;
+    this.calculatePriceAndToPay(selectedItem);
+    this.roomItemsSerivce.updateItem(selectedItem).finally();
+  }
+
+  private loadRoomWithItems(): void {
+    this.roomsService.findRoomById(this.roomId).then(room => {
+      this.room = room;
+      this.loadItems();
+    });
+  }
+
+  private loadItems(): void {
+    this.roomItemsSerivce.findByRoomId(this.roomId).then(items => {
+      this.items = items;
+      this.cdRef.markForCheck();
+    });
+  }
+
+  // to service
+  private calculatePriceAndToPay(selectedItem: RoomItemModel) {
+    selectedItem.spendedCost = selectedItem.costPerItem * selectedItem.amountOwned;
+  }
 }
