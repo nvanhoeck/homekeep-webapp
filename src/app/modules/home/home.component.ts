@@ -18,7 +18,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
   public readonly VALIDATION_CLASS = 'access';
 
   public tapButtonSize: ButtonSize = ButtonSize.BIG;
-  public tapButtonType: ButtonType = ButtonType.SECONDARY;
+  public tapButtonType: ButtonType = ButtonType.WHITE_BORDER_ONLY;
   public tapButtonClass: ButtonClass = ButtonClass.TEXT;
   public icon = 'tick';
   public text = 'access';

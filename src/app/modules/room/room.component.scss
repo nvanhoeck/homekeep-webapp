@@ -4,6 +4,10 @@
   padding: $gutter;
   width: 100%;
 
+  br {
+    height: 0.1rem;
+  }
+
   .room--section-header {
     max-width: 1266px;
     margin: 0 auto;
@@ -124,6 +128,15 @@
       transform: scale(1.01);
     }
 
+    &.selectedItem {
+      @include rectangle-block-secundary;
+      padding: ($gutter/2) ($gutter/2) ($gutter/2) (30%);
+
+      .room-overview--items-data-block .room-overview--items-name {
+        color: $color-theme-secondary !important;
+      }
+    }
+
     .room-overview--items-data-block {
       display: flex;
       width: 100%;
@@ -131,12 +144,25 @@
       flex-direction: row;
       justify-content: space-between;
 
-      > .room-overview--items-amount-block {
+      > .room-overview--items-amount-block__unselected,
+      .room-overview--items-amount-block__selected {
         align-self: flex-end;
         justify-content: space-between;
         flex-direction: column;
         height: 100%;
         display: flex;
+      }
+
+      .room-overview--items-amount-block__selected,
+      .room-overview--items-name-and-cost-block {
+        justify-content: center;
+      }
+
+      .room-overview--selected-item-amount-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
       }
 
       .room-overview--items-name-and-cost-block {

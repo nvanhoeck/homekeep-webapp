@@ -63,7 +63,9 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   public navigateToRoom(id: number) {
-    this.router.navigate(['/room', id]).finally();
+    if (this.activeElement !== id) {
+      this.router.navigate(['/room', id]).finally();
+    }
   }
 
   private getActiveElementRoom(): RoomModel {

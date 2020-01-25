@@ -99,11 +99,11 @@ button {
 }
 
 .basic-button__type--secondary {
-  background-color: $color-white;
-  color: $color-theme-primary;
+  background-color: $color-theme-secondary;
+  color: $color-white;
 
   &:hover{
-    background-color: lighten($color-white, 30);
+    background-color: lighten($color-theme-secondary, 30);
   }
 }
 
@@ -140,8 +140,8 @@ button {
 
 .basic-button__type--secondary_border_only {
   background-color: $total-transparent;
-  color: $color-theme-primary;
-  border: solid 0.1rem $color-white;
+  color: $color-white;
+  border: solid 0.1rem $color-theme-secondary;
 
   &:hover{
     background-color: lighten($total-transparent, 30);

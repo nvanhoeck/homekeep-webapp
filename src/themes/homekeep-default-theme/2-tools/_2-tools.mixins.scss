@@ -31,10 +31,10 @@ GRADIENTS
 
 @mixin rectangle-block-secundary {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff3232+0,ff0000+25,ffffff+25,ffffff+100 */
-  background: $color-theme-secundary; /* Old browsers */
-  background: -moz-linear-gradient(left,  $color-theme-secundary 0%, $color-theme-secundary 25%, #ffffff 25%, #ffffff 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left,  $color-theme-secundary 0%,$color-theme-secundary 25%,#ffffff 25%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right,  $color-theme-secundary 0%,$color-theme-secundary 25%,#ffffff 25%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: $color-theme-secondary; /* Old browsers */
+  background: -moz-linear-gradient(left,  $color-theme-secondary 0%, $color-theme-secondary 25%, #ffffff 25%, #ffffff 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,  $color-theme-secondary 0%, $color-theme-secondary 25%,#ffffff 25%,#ffffff 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  $color-theme-secondary 0%, $color-theme-secondary 25%,#ffffff 25%,#ffffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#BF7C3F', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 
 

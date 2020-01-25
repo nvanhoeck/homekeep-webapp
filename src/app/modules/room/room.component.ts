@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {RoomModel} from '../../shared/models';
+import {RoomItemModel, RoomModel} from '../../shared/models';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
@@ -16,6 +16,7 @@ export class RoomComponent implements OnInit {
   private roomId;
 
   public room: RoomModel;
+  public selectedItem: RoomItemModel;
 
   public backButtonSize: ButtonSize = ButtonSize.MEDIUM;
   public backButtonClass: ButtonClass = ButtonClass.TEXT;
@@ -55,25 +56,25 @@ export class RoomComponent implements OnInit {
     this.router.navigate(['/rooms']).finally();
   }
 
-  getTotalItems(): string {
+  public getTotalItems(): string {
     return ''
       + this.room.items.map(value => value.amountOwned).reduce((previousValue, currentValue) => previousValue + currentValue)
       + '/'
       + this.room.items.map(value => value.amountWanted).reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 
-  getTotalCost(): string {
+  public getTotalCost(): string {
     return '' + this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue)
       + ' / '
       + this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue);
   }
 
-  getToPay(): string {
+  public getToPay(): string {
     return '' + (this.room.items.map(room => room.totalCost).reduce((previousValue, currentValue) => previousValue + currentValue) -
       this.room.items.map(room => room.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue));
   }
 
-  deleteItem(id: number): () => void {
+  public deleteItem(id: number): () => void {
     return () => {
       const rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
 
@@ -82,6 +83,32 @@ export class RoomComponent implements OnInit {
 
       this.room = roomModel;
       localStorage.setItem('rooms', JSON.stringify(rooms));
+      this.selectedItem = undefined;
     };
+  }
+
+  public selectItem(id: number): () => void {
+    return () => {
+      this.selectedItem = this.room.items.find(room => room.id == id);
+    };
+  }
+
+  public addItemAmount(id: number): () => void {
+    return () => {
+      if (this.selectedItem.amountOwned < this.selectedItem.amountWanted) {
+        this.updateRoomItemModelAmount(id, 1);
+      }
+    };
+  }
+
+  reduceItemAmount(id: number) {
+    return () => {
+      if (this.selectedItem.amountOwned > 0) {
+        this.updateRoomItemModelAmount(id, -1);
+      }
+    };
+  }
+
+  private updateRoomItemModelAmount(id: number, amount: number) {
   }
 }

@@ -44,29 +44,58 @@
         </div>
       </div>
     </app-section>
+    <!--Refactor to component-->
     <app-section>
       <p class="room-overview--items--title">Items</p>
       <div class="room-overview--items">
-        <div *ngFor="let item of room.items" class="room-overview--items-container">
+        <div *ngFor="let item of room.items"
+             class="room-overview--items-container {{item.id == selectedItem?.id ? 'selectedItem' : ''}}">
           <div class="room-overview--items-data-block">
             <div class="room-overview--items-name-and-cost-block">
               <p class="room-overview--items-name">{{item.name}}</p>
               <p>{{item.spendedCost + '/' + item.totalCost}}</p>
             </div>
-            <div class="room-overview--items-amount-block">
+            <div *ngIf="item.id !== selectedItem?.id; else editRoomItem"
+                 class="room-overview--items-amount-block__unselected">
               <app-default-button
                 [buttonClass]="'icon'"
                 [buttonSize]="'small'"
-                [buttonType]="'error'"
+                [buttonType]="'primary'"
                 [width]="'30px'"
                 [height]="'30px'"
-                [icon]="'cross'"
+                [icon]="'pencil'"
                 [borderRadius]="50"
-                [clickEvent]="deleteItem(item.id)"
-              >
+                [clickEvent]="selectItem(item.id)">
               </app-default-button>
               <p>{{item.amountOwned + '/' + item.amountWanted}}</p>
             </div>
+            <ng-template #editRoomItem>
+              <div class="room-overview--selected-item-amount-btn">
+                <app-default-button
+                  [buttonClass]="'icon'"
+                  [buttonSize]="'medium'"
+                  [buttonType]="'secondary'"
+                  [width]="'30px'"
+                  [height]="'30px'"
+                  [borderRadius]="50"
+                  [text]="'+'"
+                  [clickEvent]="addItemAmount(item.id)">
+                </app-default-button>
+                <app-default-button
+                  [buttonClass]="'icon'"
+                  [buttonSize]="'medium'"
+                  [buttonType]="'secondary'"
+                  [width]="'30px'"
+                  [height]="'30px'"
+                  [borderRadius]="50"
+                  [text]="'-'"
+                  [clickEvent]="reduceItemAmount(item.id)">
+                </app-default-button>
+              </div>
+              <div class="room-overview--items-amount-block__selected">
+                <p>{{item.amountOwned + '/' + item.amountWanted}}</p>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
