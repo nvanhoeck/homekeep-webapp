@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NgxIndexedDBService} from 'ngx-indexed-db';
 import {RoomItemModel, RoomModel} from '../../../../shared/models';
-import {RoomService} from '../rooms/room.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,7 @@ export class RoomItemsService {
 
   private readonly TABLE_NAME = 'items';
 
-  constructor(private readonly dbService: NgxIndexedDBService,
-              private readonly roomDbService: RoomService) {
+  constructor(private readonly dbService: NgxIndexedDBService) {
   }
 
 

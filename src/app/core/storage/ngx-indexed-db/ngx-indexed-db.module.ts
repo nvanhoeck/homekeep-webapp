@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {DBConfig, NgxIndexedDBModule, ObjectStoreSchema} from 'ngx-indexed-db';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
 
-
 export function buildModel(type: Type<any>): ObjectStoreSchema[] {
   return Object.keys(type)
     .map(key => {
@@ -16,8 +15,8 @@ export function buildModel(type: Type<any>): ObjectStoreSchema[] {
 }
 
 const dbConfig: DBConfig = {
-  name: 'homekeep',
-  version: 2,
+  name: 'homekeepDB',
+  version: 1,
   objectStoresMeta: [{
     store: 'rooms',
     storeConfig: {keyPath: 'id', autoIncrement: true},
@@ -27,7 +26,7 @@ const dbConfig: DBConfig = {
       store: 'items',
       storeConfig: {keyPath: 'id', autoIncrement: true},
       storeSchema: buildModel(RoomItemModel),
-    }]
+    }],
 };
 
 
