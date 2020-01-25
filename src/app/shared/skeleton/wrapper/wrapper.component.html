@@ -4,6 +4,9 @@
   </div>
   <div class="app-content--wrapper">
     <div class="app-content">
+      <button *ngIf="promptEvent" (click)="installPwa()" style=
+        "position: fixed; height: 50px; width: 50px; background-color: grey; color:  white; bottom: 0; margin: 0 auto"
+      >Install</button>
       <router-outlet></router-outlet>
     </div>
   </div>

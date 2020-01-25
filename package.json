@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "cypress open"
+    "e2e": "cypress open",
+    "pwa-https": "http-server -c-l dist/homekeep -S -C cert.pem -o",
+    "pwa-http": "http-server -c-l dist/homekeep -o",
+    "https": "ng serve --ssl"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +24,9 @@
     "@angular/pwa": "^0.803.22",
     "@angular/router": "~8.2.14",
     "@angular/service-worker": "~8.2.14",
+    "angular-http-server": "^1.9.0",
     "file-saver": "latest",
+    "http-server-ssl": "0.0.7",
     "lodash": "^4.17.15",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
