@@ -6,4 +6,6 @@ export class RoomItemModel {
   spendedCost: number;
   amountWanted: number;
   amountOwned: number;
+  // backreference
+  roomId: string;
 }

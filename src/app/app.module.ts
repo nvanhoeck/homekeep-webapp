@@ -25,6 +25,7 @@ import {ModalModule} from './shared/components/modal/modal.module';
 import {AddItemModalModule} from './modules/modals/add-item-modal/add-item-modal.module';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {environment} from '../environments/environment';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     DirectivesModule,
+    NgxIndexedDbModule,
 
     ButtonsModule,
     BaseModule,
