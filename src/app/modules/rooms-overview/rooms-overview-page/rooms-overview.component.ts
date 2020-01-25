@@ -4,6 +4,7 @@ import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/bu
 import {Router} from '@angular/router';
 import {RoomModel} from '../../../shared/models';
 import {RoomService} from '../../../core/services/data/rooms/room.service';
+import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -27,7 +28,9 @@ export class RoomsOverviewComponent implements OnInit {
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef,
               private readonly router: Router,
-              private readonly roomsDBService: RoomService) {
+              // TODO place in facade
+              private readonly roomsDBService: RoomService,
+              private readonly roomsItemDbService: RoomItemsService) {
   }
 
   ngOnInit() {
@@ -63,6 +66,7 @@ export class RoomsOverviewComponent implements OnInit {
 
   public deleteRoom() {
     this.roomsDBService.deleteRoom(this.activeElement).finally();
+    this.roomsItemDbService.deleteItemsByRoomId(this.activeElement);
     this.activeElement = null;
     this.loadRooms();
   }

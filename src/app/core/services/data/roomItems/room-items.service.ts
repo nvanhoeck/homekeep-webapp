@@ -40,4 +40,12 @@ export class RoomItemsService {
       return items.filter(item => item.roomId === id);
     });
   }
+
+  deleteItemsByRoomId(activeElement: number) {
+    this.findByRoomId(activeElement).then((roomItems: RoomItemModel[]) => {
+      roomItems.forEach(roomItem => {
+        this.dbService.delete(this.TABLE_NAME, roomItem.id).finally();
+      });
+    });
+  }
 }
