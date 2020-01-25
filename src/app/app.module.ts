@@ -26,6 +26,7 @@ import {AddItemModalModule} from './modules/modals/add-item-modal/add-item-modal
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
+import {DataModule} from './core/services/data/data.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.m
     ContainerModule,
     SubheaderModule,
     ModalModule,
+    DataModule,
 
     WrapperModule,
     HomeModule,

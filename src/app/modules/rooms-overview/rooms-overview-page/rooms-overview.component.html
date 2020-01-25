@@ -17,8 +17,8 @@
                           [height]="'66px'"
                           [text]="'+'"
                           [hasShadow]="true"
-                          [clickEvent]="addRoomRedirect()"
-      ></app-default-button>
+                          [clickEvent]="addRoomRedirect()">
+      </app-default-button>
       <p class="rooms-overview--empty-block-action-text">or load starters template</p>
     </div>
   </app-section>
@@ -31,8 +31,7 @@
                               [buttonClass]="addRoomButtonClass"
                               [buttonType]="addRoomButtonType"
                               [buttonSize]="addRoomButtonSize"
-                              [width]="'3rem'"
-          >
+                              [width]="'3rem'">
           </app-default-button>
           <p>Add room</p>
         </div>
@@ -46,8 +45,7 @@
         (holdTime)="holdHandler($event, room.id)"
         *ngFor="let room of rooms;"
         [width]="'8rem'"
-        [height]="'12rem'"
-      >
+        [height]="'12rem'">
         <div class="rooms-overview--content-block">
           <div>
             <p class="rooms-overview--room-block--title">{{room.name}}</p>

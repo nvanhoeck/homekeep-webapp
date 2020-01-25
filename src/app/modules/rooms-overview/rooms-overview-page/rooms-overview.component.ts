@@ -3,6 +3,7 @@ import {HeaderService} from '../../../shared/skeleton/header';
 import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
 import {Router} from '@angular/router';
 import {RoomModel} from '../../../shared/models';
+import {RoomService} from '../../../core/services/data/rooms/room.service';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -19,15 +20,19 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomButtonType: ButtonType = ButtonType.PRIMARY_TEXT_ONLY;
   addRoomButtonSize: ButtonSize = ButtonSize.XL;
 
-  public rooms: RoomModel[] = JSON.parse(localStorage.getItem('rooms'));
+  public rooms: RoomModel[];
+
   public activeElement: number;
 
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly roomsDBService: RoomService) {
   }
 
   ngOnInit() {
+    this.loadRooms();
+
     this.headerService.mayShowHeader(true);
     this.cdref.markForCheck();
   }
@@ -57,9 +62,9 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   public deleteRoom() {
-    this.rooms.splice(this.rooms.indexOf(this.getActiveElementRoom()), 1);
-    localStorage.setItem('rooms', JSON.stringify(this.rooms));
+    this.roomsDBService.deleteRoom(this.activeElement).finally();
     this.activeElement = null;
+    this.loadRooms();
   }
 
   public navigateToRoom(id: number) {
@@ -72,4 +77,11 @@ export class RoomsOverviewComponent implements OnInit {
     return this.rooms.find(value => value.id === this.activeElement);
   }
 
+  private loadRooms(): void {
+    this.roomsDBService.findAll()
+      .then(rooms => {
+        this.rooms = rooms;
+        this.cdref.markForCheck();
+      });
+  }
 }

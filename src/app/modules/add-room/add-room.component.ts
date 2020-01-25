@@ -5,6 +5,7 @@ import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/butto
 import {IconModel} from '../../shared/models/icon-model';
 import {RoomModel} from '../../shared/models';
 import {Router} from '@angular/router';
+import {RoomService} from '../../core/services/data/rooms/room.service';
 
 @Component({
   selector: 'app-add-room',
@@ -111,7 +112,8 @@ export class AddRoomComponent implements OnInit {
   ];
 
   constructor(private readonly cdRef: ChangeDetectorRef,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly roomsService: RoomService) {
   }
 
   ngOnInit() {
@@ -140,22 +142,16 @@ export class AddRoomComponent implements OnInit {
   }
 
   private navigateToRoomsOverview(): void {
-    this.router.navigate(['rooms']);
+    this.router.navigate(['rooms']).finally();
   }
 
   private saveForm(): void {
-    let rooms = JSON.parse(localStorage.getItem('rooms')) as RoomModel[];
-    if (!rooms) {
-      rooms = [];
-    }
-
-    rooms.push({
-      id: 1 + rooms.length,
+    const room = {
       name: this.roomName.value,
       icon: this.selectedIcon,
       items: []
-    } as RoomModel);
+    } as RoomModel;
 
-    localStorage.setItem('rooms', JSON.stringify(rooms));
+    this.roomsService.addRoom(room).finally();
   }
 }
