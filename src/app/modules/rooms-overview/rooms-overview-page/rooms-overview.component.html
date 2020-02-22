@@ -49,7 +49,7 @@
         <div class="rooms-overview--content-block">
           <div>
             <p class="rooms-overview--room-block--title">{{room.name}}</p>
-            <p class="rooms-overview--room-block--subtitle">{{room.items.length + ' items'}}</p>
+            <p class="rooms-overview--room-block--subtitle">{{'todo' + ' items'}}</p>
           </div>
           <i class="icon icon-{{room.icon}}"></i>
         </div>
@@ -57,10 +57,7 @@
     </div>
   </ng-template>
 </section>
-<section *ngIf="activeElement" class="room-element--action-bar">
-  <p>{{getActiveElementName()}}</p>
-  <div class="room-element--actions">
-    <i class="icon icon-bin" (click)="deleteRoom()"></i>
-    <i class="icon icon-pencil"></i>
-  </div>
-</section>
+<app-action *ngIf="hasActiveElement()" [title]="getActiveElementName()">
+  <i class="icon icon-bin" (click)="deleteRoom()"></i>
+  <i class="icon icon-pencil"></i>
+</app-action>

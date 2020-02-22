@@ -77,6 +77,10 @@ export class RoomsOverviewComponent implements OnInit {
     }
   }
 
+  public hasActiveElement(): boolean {
+    return !!this.activeElement;
+  }
+
   private getActiveElementRoom(): RoomModel {
     return this.rooms.find(value => value.id === this.activeElement);
   }

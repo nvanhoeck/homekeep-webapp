@@ -8,6 +8,7 @@ import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
 import {ContainerModule} from '../../shared/components/container/container.module';
 import {DirectivesModule} from '../../shared/directives/directives.module';
+import {ActionModule} from '../../shared/components/action/action.module';
 
 
 @NgModule({
@@ -19,8 +20,9 @@ import {DirectivesModule} from '../../shared/directives/directives.module';
     ButtonsModule,
     SectionModule,
     ContainerModule,
+    ActionModule,
 
-    DirectivesModule
+    DirectivesModule,
   ],
   exports: [RoomsOverviewComponent]
 })
