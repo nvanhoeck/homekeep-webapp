@@ -1,0 +1,47 @@
+<div class="room-overview--items-data-block">
+  <div class="room-overview--items-name-and-cost-block">
+    <p class="room-overview--items-name">{{item.name}}</p>
+    <p>{{item.spendedCost + '/' + item.totalCost}}</p>
+  </div>
+  <div *ngIf="!isSelected; else editRoomItem"
+       class="room-overview--items-amount-block__unselected">
+    <app-default-button
+      [buttonClass]="'icon'"
+      [buttonSize]="'small'"
+      [buttonType]="'primary'"
+      [width]="'30px'"
+      [height]="'30px'"
+      [icon]="'pencil'"
+      [borderRadius]="50"
+      [clickEvent]="selectItem(item.id)">
+    </app-default-button>
+    <p>{{item.amountOwned + '/' + item.amountWanted}}</p>
+  </div>
+  <ng-template #editRoomItem>
+    <div class="room-overview--selected-item-amount-btn">
+      <app-default-button
+        [buttonClass]="'icon'"
+        [buttonSize]="'medium'"
+        [buttonType]="'secondary'"
+        [width]="'30px'"
+        [height]="'30px'"
+        [borderRadius]="50"
+        [text]="'+'"
+        [clickEvent]="addItemAmount(item.id)">
+      </app-default-button>
+      <app-default-button
+        [buttonClass]="'icon'"
+        [buttonSize]="'medium'"
+        [buttonType]="'secondary'"
+        [width]="'30px'"
+        [height]="'30px'"
+        [borderRadius]="50"
+        [text]="'-'"
+        [clickEvent]="reduceItemAmount(item.id)">
+      </app-default-button>
+    </div>
+    <div class="room-overview--items-amount-block__selected">
+      <p>{{item.amountOwned + '/' + item.amountWanted}}</p>
+    </div>
+  </ng-template>
+</div>

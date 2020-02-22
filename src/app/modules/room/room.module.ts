@@ -2,14 +2,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {RoomRoutingModule} from './room-routing.module';
-import {RoomComponent} from './room.component';
+import {RoomComponent} from './room-component/room.component';
 import {SubheaderModule} from '../../shared/components/subheader/subheader.module';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
+import {RoomItemComponent} from './room-item-component/room-item.component';
 
 
 @NgModule({
-  declarations: [RoomComponent],
+  declarations: [RoomComponent, RoomItemComponent],
   imports: [
     CommonModule,
     RoomRoutingModule,
@@ -18,7 +19,8 @@ import {SectionModule} from '../../shared/components/section/section.module';
     SectionModule
   ],
   exports: [
-    RoomComponent
+    RoomComponent,
+    RoomItemComponent
   ]
 })
 export class RoomModule {

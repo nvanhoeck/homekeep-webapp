@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {RoomItemModel, RoomModel} from '../../shared/models';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
-import {ModalService} from '../../shared/components/modal/services/modal.service';
-import {AddItemModalComponent} from '../modals/add-item-modal/add-item-modal.component';
-import {RoomItemsService} from '../../core/services/data/roomItems/room-items.service';
-import {RoomService} from '../../core/services/data/rooms/room.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import * as _ from 'lodash';
+import {RoomItemModel, RoomModel} from '../../../shared/models';
+import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
+import {ModalService} from '../../../shared/components/modal/services/modal.service';
+import {RoomService} from '../../../core/services/data/rooms/room.service';
+import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
+import {AddItemModalComponent} from '../../modals/add-item-modal/add-item-modal.component';
 
 @Component({
   selector: 'app-room',
@@ -90,28 +90,6 @@ export class RoomComponent implements OnInit, OnDestroy {
     };
   }
 
-  public selectItem(id: number): () => void {
-    return () => {
-      this.selectedItem = this.items.find(room => room.id === id);
-    };
-  }
-
-  public addItemAmount(id: number): () => void {
-    return () => {
-      if (this.selectedItem.amountOwned < this.selectedItem.amountWanted) {
-        this.updateRoomItemModelAmount(id, 1, this.selectedItem);
-      }
-    };
-  }
-
-  reduceItemAmount(id: number) {
-    return () => {
-      if (this.selectedItem.amountOwned > 0) {
-        this.updateRoomItemModelAmount(id, -1, this.selectedItem);
-      }
-    };
-  }
-
   private updateRoomItemModelAmount(id: number, amount: number, selectedItem: RoomItemModel) {
     selectedItem.amountOwned += amount;
     this.calculatePriceAndToPay(selectedItem);
@@ -135,5 +113,21 @@ export class RoomComponent implements OnInit, OnDestroy {
   // to service
   private calculatePriceAndToPay(selectedItem: RoomItemModel) {
     selectedItem.spendedCost = selectedItem.costPerItem * selectedItem.amountOwned;
+  }
+
+  selectItem($event: number) {
+    this.selectedItem = this.items.find(item => item.id === $event);
+  }
+
+  addItemAmount($event: number) {
+    if (this.selectedItem.amountOwned < this.selectedItem.amountWanted) {
+      this.updateRoomItemModelAmount($event, 1, this.selectedItem);
+    }
+  }
+
+  reduceItemAmount($event: number) {
+    if (this.selectedItem.amountOwned > 0) {
+      this.updateRoomItemModelAmount($event, -1, this.selectedItem);
+    }
   }
 }
