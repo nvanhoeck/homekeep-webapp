@@ -83,11 +83,10 @@ export class RoomComponent implements OnInit, OnDestroy {
       this.items.map(item => item.spendedCost).reduce((previousValue, currentValue) => previousValue + currentValue));
   }
 
-  public deleteItem(id: number): () => void {
-    return () => {
-      this.roomItemsSerivce.deleteItem(id).finally();
-      this.selectedItem = undefined;
-    };
+  public deleteItem(): void {
+    this.roomItemsSerivce.deleteItem(this.selectedItem.id).finally();
+    this.selectedItem = undefined;
+    this.loadItems();
   }
 
   private updateRoomItemModelAmount(id: number, amount: number, selectedItem: RoomItemModel) {
@@ -129,5 +128,13 @@ export class RoomComponent implements OnInit, OnDestroy {
     if (this.selectedItem.amountOwned > 0) {
       this.updateRoomItemModelAmount($event, -1, this.selectedItem);
     }
+  }
+
+  viewItem() {
+    // TODO
+  }
+
+  editItem() {
+    // TODO
   }
 }

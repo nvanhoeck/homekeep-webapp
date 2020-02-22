@@ -45,7 +45,6 @@
       </div>
     </app-section>
     <app-section>
-
       <p class="room-overview--items--title">Items</p>
       <div class="room-overview--items">
         <div *ngFor="let item of items"
@@ -59,3 +58,8 @@
     </app-section>
   </ng-template>
 </ng-container>
+<app-action *ngIf="!!selectedItem">
+  <i class="icon icon-bin" (click)="deleteItem()"></i>
+  <i class="icon icon-eye" (click)="viewItem()"></i>
+  <i class="icon icon-pencil" (click)="editItem()"></i>
+</app-action>

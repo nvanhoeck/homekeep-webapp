@@ -7,6 +7,7 @@ import {SubheaderModule} from '../../shared/components/subheader/subheader.modul
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
 import {RoomItemComponent} from './room-item-component/room-item.component';
+import {ActionModule} from '../../shared/components/action/action.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {RoomItemComponent} from './room-item-component/room-item.component';
     RoomRoutingModule,
     SubheaderModule,
     ButtonsModule,
-    SectionModule
+    SectionModule,
+    ActionModule
   ],
   exports: [
     RoomComponent,
