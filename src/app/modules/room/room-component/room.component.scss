@@ -146,6 +146,13 @@
         flex-direction: row;
         justify-content: space-between;
 
+        .room-overview--items--right-side__selected {
+          display: flex;
+          flex-direction: row;
+          width: 25%;
+          justify-content: space-between;
+        }
+
         > .room-overview--items-amount-block__unselected,
         .room-overview--items-amount-block__selected {
           align-self: flex-end;
