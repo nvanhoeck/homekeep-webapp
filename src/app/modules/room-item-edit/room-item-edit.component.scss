@@ -1,0 +1,43 @@
+@import "~src/styles";
+
+:host {
+  app-action {
+    width: 100vw;
+    margin: 0;
+
+    ::ng-deep {
+      .action-bar {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+    }
+  }
+
+  app-container {
+    margin: $gutter;
+
+    ::ng-deep {
+      section {
+        margin-bottom: 7rem;
+      }
+    }
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.edit-item-modal--container {
+  .edit-item-modal--title {
+    color: $color-theme-primary;
+    font-size: 1.25rem;
+    margin-bottom: $gutter;
+  }
+
+  .edit-item-modal--formgroup {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: $gutter;
+  }
+}

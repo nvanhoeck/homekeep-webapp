@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NgxIndexedDBService} from 'ngx-indexed-db';
-import {RoomItemModel, RoomModel} from '../../../../shared/models';
+import {RoomItemModel} from '../../../../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class RoomItemsService {
     return this.dbService.update(this.TABLE_NAME, item);
   }
 
-  public findItemById(id: number): Promise<RoomModel> {
+  public findItemById(id: number): Promise<RoomItemModel> {
     return this.dbService.getByKey(this.TABLE_NAME, id);
   }
 
@@ -44,6 +44,12 @@ export class RoomItemsService {
       roomItems.forEach(roomItem => {
         this.dbService.delete(this.TABLE_NAME, roomItem.id).finally();
       });
+    });
+  }
+
+  findAlternatives(alternatives: number[]): Promise<RoomItemModel[]> {
+    return this.dbService.getAll(this.TABLE_NAME).then((alts: RoomItemModel[]) => {
+      return alts.filter(alt => alternatives.includes(alt.id));
     });
   }
 }

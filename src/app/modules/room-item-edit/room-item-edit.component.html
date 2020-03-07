@@ -1,0 +1,62 @@
+<ng-container class="edit-item-modal--container" *ngIf="!!item">
+  <app-container>
+    <form *ngIf="!!itemForm" #form class="edit-item-modal--container" [formGroup]="itemForm">
+      <h1 class="edit-item-modal--title">Item</h1>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--name-input">Name: </label>
+        <input id="edit-item-modal--name-input" type="text" formControlName="itemName" [(ngModel)]="item.name"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--needed">Amount needed: </label>
+        <input id="edit-item-modal--needed" type="number" formControlName="amountNeeded" [(ngModel)]="item.amountWanted"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--owned">Amount owned: </label>
+        <input id="edit-item-modal--owned" type="number" formControlName="amountOwned" [(ngModel)]="item.amountOwned"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--price">Price per piece: </label>
+        <input id="edit-item-modal--price" type="number" formControlName="price" [(ngModel)]="item.costPerItem"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--image">Image: </label>
+        <input id="edit-item-modal--image" type="text" formControlName="image" [(ngModel)]="item.image"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--colors">Colors: </label>
+        <input id="edit-item-modal--colors" type="text" formControlName="colors" [(ngModel)]="item.colors"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--url">Url: </label>
+        <input id="edit-item-modal--url" type="text" formControlName="urlLink" [(ngModel)]="item.urlLink"/>
+      </div>
+      <div class="edit-item-modal--formgroup">
+        <label for="edit-item-modal--locked">Locked: </label>
+        <input id="edit-item-modal--locked" type="text" formControlName="locked" [(ngModel)]="item.locked"/>
+      </div>
+      <div class="edit-item-modal--formgroup" *ngIf=" item.alternatives && item.alternatives.length > 0">
+        <label>Alternatives: </label>
+        <div *ngFor="let alternativeItem of alternatives"
+             class="edit-item--alternatives-container}}">
+          <app-room-item [item]="alternativeItem" [isSelected]="alternativeItem.id == item?.id">
+          </app-room-item>
+        </div>
+      </div>
+      <div class="edit-item-modal--formgroup" *ngIf="item.alternativeOf > 0">
+        <label for="edit-item-modal--alternative">Alternative of: </label>
+        <input id="edit-item-modal--alternative" type="text" formControlName="alternativeOf" [(ngModel)]="item.alternativeOf"/>
+      </div>
+    </form>
+  </app-container>
+  <app-action>
+    <p class="edit-item-modal--cancel" (click)="cancel()">Cancel</p>
+    <app-default-button class="edit-item-modal--edit-item"
+                        [buttonType]="buttonType"
+                        [buttonSize]="buttonSize"
+                        [buttonClass]="buttonClass"
+                        [borderRadius]="20"
+                        [text]="'Save'"
+                        (click)="handleSubmit()"
+    ></app-default-button>
+  </app-action>
+</ng-container>

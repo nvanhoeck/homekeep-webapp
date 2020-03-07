@@ -78,7 +78,8 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
       costPerItem: this.itemPriceFC.value,
       totalCost: this.itemPriceFC.value * this.itemAmountFC.value,
       spendedCost: 0,
-      roomId: this.room.id
+      roomId: this.room.id,
+      locked: false
     };
 
     this.roomItemsService.addItem(newItem).finally();

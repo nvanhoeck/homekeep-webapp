@@ -27,6 +27,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
 import {DataModule} from './core/services/data/data.module';
+import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {DataModule} from './core/services/data/data.module';
     AddRoomModule,
     RoomModule,
     AddItemModalModule,
+    RoomItemEditModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

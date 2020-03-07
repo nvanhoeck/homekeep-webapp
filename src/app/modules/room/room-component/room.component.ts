@@ -135,6 +135,6 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   editItem() {
-    // TODO
+    this.router.navigate(['/room-item', this.selectedItem.id]).finally();
   }
 }
