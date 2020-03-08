@@ -2,37 +2,192 @@
   <app-container>
     <form *ngIf="!!itemForm" #form class="edit-item-modal--container" [formGroup]="itemForm">
       <h1 class="edit-item-modal--title">Item</h1>
-      <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--name-input">Name: </label>
-        <input id="edit-item-modal--name-input" type="text" formControlName="itemName" [(ngModel)]="item.name"/>
+      <div class="edit-item-modal--formgroup formgroup__name">
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label for="edit-item-modal--name-input">Name: </label>
+          <input *ngIf="editElement === 'name'; else nameText" id="edit-item-modal--name-input" type="text"
+                 formControlName="itemName" [(ngModel)]="item.name" (keydown)="saveInput($event)"/>
+          <ng-template #nameText>
+            <p class="edit-item--name">{{item.name}}</p>
+          </ng-template>
+        </div>
+        <div class="form-block edit-item-modal--formgroup__right-block">
+          <app-default-button *ngIf="editElement !== 'name'" class="edit-item--edit-name-button"
+                              [buttonType]="buttonType"
+                              [buttonSize]="buttonSizeSmall"
+                              [buttonClass]="buttonClassEdit"
+                              [borderRadius]="100"
+                              [width]="'40px'"
+                              [height]="'40px'"
+                              [icon]="'pencil'"
+                              (click)="editElement = 'name'"
+          ></app-default-button>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--needed">Amount needed: </label>
-        <input id="edit-item-modal--needed" type="number" formControlName="amountNeeded" [(ngModel)]="item.amountWanted"/>
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label>Amount needed: </label>
+          <div class="amount-group">
+            <p>{{item.amountWanted}}</p>
+            <div class="amount-group-actions">
+              <app-default-button class="number-action-button"
+                                  [buttonClass]="defaultClass"
+                                  [buttonType]="defaultType"
+                                  [buttonSize]="buttonSizeSmall"
+                                  [borderRadius]="100"
+                                  [width]="'30px'"
+                                  [height]="'30px'"
+                                  [text]="'-'"
+                                  [hasShadow]="true"
+                                  (click)="reduceAmountNeeded()">
+              </app-default-button>
+              <app-default-button class="number-action-button"
+                                  [buttonClass]="defaultClass"
+                                  [buttonType]="defaultType"
+                                  [buttonSize]="buttonSizeSmall"
+                                  [borderRadius]="100"
+                                  [width]="'30px'"
+                                  [height]="'30px'"
+                                  [text]="'+'"
+                                  [hasShadow]="true"
+                                  (click)="addAmountNeeded()">
+              </app-default-button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--owned">Amount owned: </label>
-        <input id="edit-item-modal--owned" type="number" formControlName="amountOwned" [(ngModel)]="item.amountOwned"/>
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label>Amount Owned: </label>
+          <div class="amount-group">
+            <p>{{item.amountOwned}}</p>
+            <div class="amount-group-actions">
+              <app-default-button class="number-action-button"
+                                  [buttonClass]="defaultClass"
+                                  [buttonType]="defaultType"
+                                  [buttonSize]="buttonSizeSmall"
+                                  [borderRadius]="100"
+                                  [width]="'30px'"
+                                  [height]="'30px'"
+                                  [text]="'-'"
+                                  [hasShadow]="true"
+                                  (click)="reduceAmountOwned()">
+              </app-default-button>
+              <app-default-button class="number-action-button"
+                                  [buttonClass]="defaultClass"
+                                  [buttonType]="defaultType"
+                                  [buttonSize]="buttonSizeSmall"
+                                  [borderRadius]="100"
+                                  [width]="'30px'"
+                                  [height]="'30px'"
+                                  [text]="'+'"
+                                  [hasShadow]="true"
+                                  (click)="addAmountOwned()">
+              </app-default-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="edit-item-modal--formgroup formgroup__price">
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label for="edit-item-modal--price">Price per piece: </label>
+          <input id="edit-item-modal--price" type="number" formControlName="price" [(ngModel)]="item.costPerItem"
+                 (keydown)="handleNumberInput($event)"/>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--price">Price per piece: </label>
-        <input id="edit-item-modal--price" type="number" formControlName="price" [(ngModel)]="item.costPerItem"/>
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label>Image: </label>
+          <i class="icon icon-image"></i>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--image">Image: </label>
-        <input id="edit-item-modal--image" type="text" formControlName="image" [(ngModel)]="item.image"/>
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label>Colors: </label>
+          <div class="colors-pickers">
+            <app-default-button class="color-picker-btn"
+                                [buttonClass]="defaultClass"
+                                [buttonType]="defaultType"
+                                [buttonSize]="buttonSizeSmall"
+                                [borderRadius]="100"
+                                [width]="'30px'"
+                                [height]="'30px'"
+                                [text]="!!item.colors && !!item?.colors[0] ? '' : '?'"
+                                [hasShadow]="true"
+                                (click)="selectColor(0)">
+            </app-default-button>
+            <app-default-button class="color-picker-btn"
+                                [buttonClass]="defaultClass"
+                                [buttonType]="defaultType"
+                                [buttonSize]="buttonSizeSmall"
+                                [borderRadius]="100"
+                                [width]="'30px'"
+                                [height]="'30px'"
+                                [text]="!!item.colors && !!item?.colors[1] ? '' : '?'"
+                                [hasShadow]="true"
+                                (click)="selectColor(1)">
+            </app-default-button>
+            <app-default-button class="color-picker-btn"
+                                [buttonClass]="defaultClass"
+                                [buttonType]="defaultType"
+                                [buttonSize]="buttonSizeSmall"
+                                [borderRadius]="100"
+                                [width]="'30px'"
+                                [height]="'30px'"
+                                [text]="!!item.colors && !!item?.colors[2] ? '' : '?'"
+                                [hasShadow]="true"
+                                (click)="selectColor(2)">
+            </app-default-button>
+            <app-default-button class="color-picker-btn"
+                                [buttonClass]="defaultClass"
+                                [buttonType]="defaultType"
+                                [buttonSize]="buttonSizeSmall"
+                                [borderRadius]="100"
+                                [width]="'30px'"
+                                [height]="'30px'"
+                                [text]="!!item.colors && !!item?.colors[3] ? '' : '?'"
+                                [hasShadow]="true"
+                                (click)="selectColor(3)">
+            </app-default-button>
+            <app-default-button class="color-picker-btn"
+                                [buttonClass]="defaultClass"
+                                [buttonType]="defaultType"
+                                [buttonSize]="buttonSizeSmall"
+                                [borderRadius]="100"
+                                [width]="'30px'"
+                                [height]="'30px'"
+                                [text]="!!item.colors && !!item?.colors[4] ? '' : '?'"
+                                [hasShadow]="true"
+                                (click)="selectColor(4)">
+            </app-default-button>
+          </div>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--colors">Colors: </label>
-        <input id="edit-item-modal--colors" type="text" formControlName="colors" [(ngModel)]="item.colors"/>
-      </div>
-      <div class="edit-item-modal--formgroup">
-        <label for="edit-item-modal--url">Url: </label>
-        <input id="edit-item-modal--url" type="text" formControlName="urlLink" [(ngModel)]="item.urlLink"/>
+        <div class="form-block edit-item-modal--formgroup__left-block">
+          <label for="edit-item-modal--url">Url: </label>
+          <input *ngIf="editElement === 'url'; else urlText" id="edit-item-modal--url" type="text"
+                 formControlName="urlLink" [(ngModel)]="item.urlLink" (keydown)="saveInput($event)"/>
+          <ng-template #urlText>
+            <a (click)="openUrl($event)" href="{{item.urlLink || '#'}}">{{item.urlLink || 'no url'}}</a>
+          </ng-template>
+        </div>
+        <div class="form-block edit-item-modal--formgroup__right-block">
+          <app-default-button *ngIf="editElement !== 'url'" class="edit-item--edit-url-button"
+                              [buttonType]="buttonType"
+                              [buttonSize]="buttonSizeSmall"
+                              [buttonClass]="buttonClassEdit"
+                              [borderRadius]="100"
+                              [width]="'40px'"
+                              [height]="'40px'"
+                              [icon]="'pencil'"
+                              (click)="editElement = 'url'"
+          ></app-default-button>
+        </div>
       </div>
       <div class="edit-item-modal--formgroup">
         <label for="edit-item-modal--locked">Locked: </label>
-        <input id="edit-item-modal--locked" type="text" formControlName="locked" [(ngModel)]="item.locked"/>
+        <p>TODO</p>
       </div>
       <div class="edit-item-modal--formgroup" *ngIf=" item.alternatives && item.alternatives.length > 0">
         <label>Alternatives: </label>
@@ -44,7 +199,8 @@
       </div>
       <div class="edit-item-modal--formgroup" *ngIf="item.alternativeOf > 0">
         <label for="edit-item-modal--alternative">Alternative of: </label>
-        <input id="edit-item-modal--alternative" type="text" formControlName="alternativeOf" [(ngModel)]="item.alternativeOf"/>
+        <input id="edit-item-modal--alternative" type="text" formControlName="alternativeOf"
+               [(ngModel)]="item.alternativeOf"/>
       </div>
     </form>
   </app-container>
@@ -52,8 +208,8 @@
     <p class="edit-item-modal--cancel" (click)="cancel()">Cancel</p>
     <app-default-button class="edit-item-modal--edit-item"
                         [buttonType]="buttonType"
-                        [buttonSize]="buttonSize"
-                        [buttonClass]="buttonClass"
+                        [buttonSize]="buttonSizeMed"
+                        [buttonClass]="buttonClassSubmit"
                         [borderRadius]="20"
                         [text]="'Save'"
                         (click)="handleSubmit()"

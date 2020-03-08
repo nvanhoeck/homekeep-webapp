@@ -26,6 +26,9 @@
 
 form {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .edit-item-modal--container {
@@ -33,11 +36,70 @@ form {
     color: $color-theme-primary;
     font-size: 1.25rem;
     margin-bottom: $gutter;
+    width: 100%;
+  }
+
+  .formgroup__name, .formgroup__price {
+    width: 100% !important;
   }
 
   .edit-item-modal--formgroup {
     display: flex;
-    flex-direction: column;
-    padding-bottom: $gutter;
+    flex-direction: row;
+    padding: $gutter;
+    justify-content: space-between;
+    max-width: 300px;
+    width: 100%;
+    @media screen and (min-width: 600px) {
+      width: 50%;
+    }
+
+    .form-block {
+      flex-direction: column;
+      display: flex;
+    }
+
+    .edit-item--name {
+      color: $color-theme-primary;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+  }
+
+  .amount-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .amount-group-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 70%;
+    }
+  }
+}
+
+.number-action-button, .color-picker-btn {
+  ::ng-deep {
+    button {
+      background-color: $color-theme-light-grey;
+      color: $color-white;
+
+      &:hover {
+        background-color: lighten($color-theme-light-grey, 5) !important;
+      }
+    }
+  }
+}
+
+.colors-pickers {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  display: flex;
+
+  .color-picker-btn {
+    margin-right: $gutter;
   }
 }

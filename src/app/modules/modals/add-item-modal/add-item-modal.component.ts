@@ -85,4 +85,10 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
     this.roomItemsService.addItem(newItem).finally();
     this.modalService.closeModal();
   }
+
+  handleNumberInput(keyboardEvent: KeyboardEvent) {
+    if (keyboardEvent.key === 'e' || keyboardEvent.key === 'E' || keyboardEvent.key === '+' || keyboardEvent.key === '-') {
+      keyboardEvent.preventDefault();
+    }
+  }
 }

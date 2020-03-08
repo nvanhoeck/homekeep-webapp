@@ -18,8 +18,14 @@ export class RoomItemEditComponent implements OnInit {
   itemForm: FormGroup;
 
   buttonType: ButtonType = ButtonType.PRIMARY;
-  buttonSize: ButtonSize = ButtonSize.MEDIUM;
-  buttonClass: ButtonClass = ButtonClass.SUBMIT;
+  defaultType: ButtonType = ButtonType.DEFAULT;
+  buttonSizeMed: ButtonSize = ButtonSize.MEDIUM;
+  buttonSizeSmall: ButtonSize = ButtonSize.SMALL;
+  buttonClassSubmit: ButtonClass = ButtonClass.SUBMIT;
+  buttonClassEdit: ButtonClass = ButtonClass.ICON;
+  defaultClass: ButtonClass = ButtonClass.TEXT;
+
+  editElement: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private readonly roomItemsSerivce: RoomItemsService,
@@ -64,11 +70,68 @@ export class RoomItemEditComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.roomItemsSerivce.updateItem(this.item);
+    this.updateAllFields();
     this.router.navigate(['/room', this.item.roomId]).finally();
+  }
+
+  private updateAllFields() {
+    this.item.spendedCost = this.item.amountOwned * this.item.costPerItem;
+    this.item.totalCost = this.item.amountWanted * this.item.costPerItem;
+    this.roomItemsSerivce.updateItem(this.item);
   }
 
   cancel() {
     this.router.navigate(['/room', this.item.roomId]).finally();
+  }
+
+  saveInput(keyboardEvent: KeyboardEvent) {
+    if (keyboardEvent.key === 'Enter') {
+      this.editElement = null;
+    }
+  }
+
+  addAmountNeeded() {
+    this.item.amountWanted += 1;
+  }
+
+  reduceAmountNeeded() {
+    if (this.item.amountWanted > 1) {
+      this.item.amountWanted -= 1;
+      if (this.item.amountOwned > this.item.amountWanted) {
+        this.item.amountOwned = this.item.amountWanted;
+      }
+    }
+  }
+
+  addAmountOwned() {
+    this.item.amountOwned += 1;
+    if (this.item.amountOwned > this.item.amountWanted) {
+      this.item.amountWanted = this.item.amountOwned;
+    }
+  }
+
+  reduceAmountOwned() {
+    if (this.item.amountOwned > 1) {
+      this.item.amountOwned -= 1;
+    }
+  }
+
+  handleNumberInput(keyboardEvent: KeyboardEvent) {
+    if (keyboardEvent.key === 'e' || keyboardEvent.key === 'E' || keyboardEvent.key === '+' || keyboardEvent.key === '-') {
+      keyboardEvent.preventDefault();
+    }
+  }
+
+  selectColor(colorPlace: number) {
+    alert('show color picker');
+  }
+
+  openUrl($event: MouseEvent) {
+    if (!!this.item.urlLink) {
+      window.open(this.item.urlLink, '_blank');
+      $event.preventDefault();
+    } else {
+      $event.preventDefault();
+    }
   }
 }
