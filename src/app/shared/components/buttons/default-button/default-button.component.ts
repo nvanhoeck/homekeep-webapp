@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {ButtonClass, ButtonSize, ButtonType} from '../buttons.enums';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../buttons.enums';
 import {StyleBuilderClass} from '../../../models/style-builder.class';
 import {LoggerService, LogginLevel} from '../../../../core';
 import {BehaviorSubject} from 'rxjs';
@@ -16,6 +16,8 @@ import {ValidationService} from '../../../../core/services/forms/validation.serv
 })
 export class DefaultButtonComponent extends BaseComponent implements OnInit {
 
+  @ViewChild('colorpicker', {static: false}) colorPicker;
+
   @Input() buttonSize: ButtonSize = ButtonSize.MEDIUM;
   @Input() buttonType: ButtonType = ButtonType.DEFAULT;
   @Input() buttonClass: ButtonClass = ButtonClass.TEXT;
@@ -28,6 +30,14 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   @Input() height: string;
   @Input() hasShadow: boolean;
   @Input() formGroup: FormGroup;
+  @Input() color: string;
+  @Input() cpPosition: CPPosition = CPPosition.AUTO;
+  @Input() cpOffset: string;
+
+  @Output()
+  public handleColorChange: EventEmitter<string> = new EventEmitter<string>();
+
+  showColorPicker = false;
 
   private inputValue: BehaviorSubject<string> = new BehaviorSubject('');
 
@@ -68,6 +78,9 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
   public onClick($event: MouseEvent) {
     if (this.clickEvent) {
       this.clickEvent($event);
+    } else if (this.buttonClass === ButtonClass.COLOR_PICKER) {
+      this.showColorPicker = true;
+      this.colorPicker.nativeElement.click();
     } else {
       this.loggerService.log('No click event handler found for ' + $event.target + ' at default button', LogginLevel.WARN);
     }

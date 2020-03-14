@@ -12,7 +12,7 @@ export class RoomItemModel {
   // new
   image?: string;
   urlLink?: string;
-  colors?: string[];
+  colors: string[] = ['', '', '', '', ''];
   locked: false;
   alternatives?: number[];
   alternativeOf?: number;

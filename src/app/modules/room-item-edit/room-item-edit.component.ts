@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@an
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 import {RoomItemModel} from '../../shared/models';
 import {RoomItemsService} from '../../core/services/data/roomItems/room-items.service';
+import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../../shared/components/buttons';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ButtonClass, ButtonSize, ButtonType} from '../../shared/components/buttons';
 
 @Component({
   selector: 'app-room-item-edit',
@@ -24,8 +24,12 @@ export class RoomItemEditComponent implements OnInit {
   buttonClassSubmit: ButtonClass = ButtonClass.SUBMIT;
   buttonClassEdit: ButtonClass = ButtonClass.ICON;
   defaultClass: ButtonClass = ButtonClass.TEXT;
+  colorPickerClass: ButtonClass = ButtonClass.COLOR_PICKER;
 
   editElement: string;
+  cpPositionTopRight: CPPosition = CPPosition.TOP_RIGHT;
+  cpPositionTop: CPPosition = CPPosition.TOP;
+  cpPositionTopLeft: CPPosition = CPPosition.TOP_LEFT;
 
   constructor(private activatedRoute: ActivatedRoute,
               private readonly roomItemsSerivce: RoomItemsService,
@@ -111,7 +115,7 @@ export class RoomItemEditComponent implements OnInit {
   }
 
   reduceAmountOwned() {
-    if (this.item.amountOwned > 1) {
+    if (this.item.amountOwned > 0) {
       this.item.amountOwned -= 1;
     }
   }
@@ -122,10 +126,6 @@ export class RoomItemEditComponent implements OnInit {
     }
   }
 
-  selectColor(colorPlace: number) {
-    alert('show color picker');
-  }
-
   openUrl($event: MouseEvent) {
     if (!!this.item.urlLink) {
       window.open(this.item.urlLink, '_blank');
@@ -133,5 +133,10 @@ export class RoomItemEditComponent implements OnInit {
     } else {
       $event.preventDefault();
     }
+  }
+
+  setColor(id: number, color: string): void {
+    this.item.colors[id] = color;
+    this.cdRef.markForCheck();
   }
 }

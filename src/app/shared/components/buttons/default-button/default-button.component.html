@@ -3,14 +3,26 @@
         (mouseleave)="reelevate()"
         (click)="onClick($event)"
         [ngStyle]="getStyles"
-        [ngClass]="getClasses">
+        [ngClass]="getClasses"
+        [style.background]="!!color ? color : ''">
   <ng-container [ngSwitch]="buttonClass">
     <p *ngSwitchCase="'text'" (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
     <input *ngSwitchCase="'password'" (keyup)="detectInputPassChanges($event)" maxlength="4" type="password"/>
+
+    <input #colorpicker [hidden]="!showColorPicker"
+           *ngSwitchCase="'color'"
+           [(colorPicker)]="color"
+           (colorPickerChange)="handleColorChange.emit($event)"
+           (colorPickerClose)="showColorPicker = !showColorPicker"
+           [cpPosition]="cpPosition"
+           [cpPositionOffset]="cpOffset"
+           [ngStyle]="getStyles"
+           [ngClass]="getClasses"/>
     <p *ngSwitchCase="'icon'" class="icon icon-{{icon}}">{{text}}</p>
+
     <p *ngSwitchDefault (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
   </ng-container>
 </button>
 <ng-template #submit>
-    <button type="submit" [ngStyle]="getStyles" [ngClass]="getClasses" (click)="onSubmit()">{{text}}</button>
+  <button type="submit" [ngStyle]="getStyles" [ngClass]="getClasses" (click)="onSubmit()">{{text}}</button>
 </ng-template>

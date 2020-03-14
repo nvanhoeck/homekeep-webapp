@@ -1,7 +1,7 @@
 export enum ButtonSize {
   SMALL = 'small',
   MEDIUM = 'medium',
-  BIG  = 'big',
+  BIG = 'big',
   XL = 'xl'
 }
 
@@ -23,9 +23,6 @@ export enum ButtonType {
   ERROR_BORDER_AND_TEXT = 'error_border_and_text',
 
   PRIMARY_TEXT_ONLY = 'primary_text_only',
-
-
-
 }
 
 export enum ButtonClass {
@@ -33,5 +30,19 @@ export enum ButtonClass {
   INPUT = 'input',
   PASSWORD = 'password',
   ICON = 'icon',
-  SUBMIT = 'submit'
+  SUBMIT = 'submit',
+  COLOR_PICKER = 'color'
+}
+
+
+export enum CPPosition {
+  AUTO = 'auto',
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+  TOP_LEFT = 'top-left',
+  TOP_RIGHT = 'top-right',
+  BOTTOM_LEFT = 'bottom-left',
+  BOTTOM_RIGHT = 'bottom-right'
 }

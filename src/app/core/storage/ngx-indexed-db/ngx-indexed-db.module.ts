@@ -5,14 +5,20 @@ import {DBConfig, NgxIndexedDBModule} from 'ngx-indexed-db';
 
 // Ahead of time compiles requires an exported function for factories
 export function migrationFactoryExec() {
-  // The animal table was added with version 2 but none of the existing tables or data needed
-  // to be modified so a migrator for that version is not included.
-  return [];
+  return {
+    2: (db, transaction) => {
+      const store = transaction.objectStore('items');
+      store.createIndex('image', 'image', { unique: false });
+      store.createIndex('urlLink', 'urlLink', { unique: false });
+      store.createIndex('colors', 'colors', { unique: false });
+      store.createIndex('locked', 'locked', { unique: false });
+    },
+  };
 }
 
 const dbConfig: DBConfig = {
   name: 'homekeepDatabase',
-  version: 1,
+  version: 2,
   objectStoresMeta: [{
     store: 'rooms',
     storeConfig: {keyPath: 'id', autoIncrement: true},
