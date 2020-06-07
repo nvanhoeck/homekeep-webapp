@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -28,23 +28,6 @@ import {environment} from '../environments/environment';
 import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
 import {DataModule} from './core/services/data/data.module';
 import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
-
-
-export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
-  return (): Promise<any> => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        await keycloak.init(environment.keycloakOptions);
-        console.log('Keycloak is initialized');
-        resolve();
-      } catch (error) {
-        console.log('Error thrown in init ' + error);
-        reject(error);
-      }
-    });
-  };
-}
 
 @NgModule({
   declarations: [
@@ -63,8 +46,6 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     ReactiveFormsModule,
     DirectivesModule,
     NgxIndexedDbModule,
-    KeycloakAngularModule,
-
     ButtonsModule,
     BaseModule,
     SectionModule,
@@ -82,7 +63,6 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     RoomItemEditModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ { provide: APP_INITIALIZER, useFactory: kcInitializer, multi: true, deps: [KeycloakService] }],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent]
 })
