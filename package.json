@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "cypress open",
     "pwa-https": "http-server -c-l dist/homekeep -S -C cert.pem -o",
-    "pwa-http": "http-server -c-l dist/homekeep -o",
+    "pwa-http": "http-server -c-l dist/homekeep -o -p 4200",
     "https": "ng serve --ssl",
     "postinall": "ng build --aot --prod",
     "heroku-postbuild": "ng build --prod"
@@ -30,6 +30,8 @@
     "express": "^4.17.1",
     "file-saver": "latest",
     "http-server-ssl": "0.0.7",
+    "keycloak-angular": "^7.0.1",
+    "keycloak-js": "8.0.1",
     "lodash": "^4.17.15",
     "ngx-color-picker": "^9.0.0",
     "ngx-indexed-db": "^4.0.3",
