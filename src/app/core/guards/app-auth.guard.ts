@@ -14,7 +14,6 @@ export class AppAuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    debugger;
     if (this.authService.isAuthenticated()) {
       return true;
     }

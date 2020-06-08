@@ -80,7 +80,7 @@ export class OauthService {
 
     this.authState$.next(this.authenticated);
 
-    this.router.navigate(['/']);
+    this.router.navigate(['/rooms']);
   }
 
   public logout(returnUrl: string) {

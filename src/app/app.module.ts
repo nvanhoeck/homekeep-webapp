@@ -32,6 +32,7 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import {CallbackModule} from './modules/callback/callback.module';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {AuthInterceptor} from './core/interceptors/auth.interceptor';
     RoomsOverviewModule,
     AddRoomModule,
     RoomModule,
+    CallbackModule,
     AddItemModalModule,
     RoomItemEditModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})

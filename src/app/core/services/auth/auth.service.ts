@@ -15,11 +15,6 @@ export class AuthService {
   validate(keyValue: any): boolean {
     if (keyValue === '0000') {
       return true;
-    } else if (keyValue === '0666') {
-      this.authApiService.authenticate()
-        .subscribe(res => {
-          console.log(res);
-        });
     } else {
       this.messagingService.addMessage('wrong pincode', 'access', AppMessageType.ERROR);
       return false;
