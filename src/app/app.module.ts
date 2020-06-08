@@ -28,6 +28,10 @@ import {environment} from '../environments/environment';
 import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
 import {DataModule} from './core/services/data/data.module';
 import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module';
+import {OAuthModule} from 'angular-oauth2-oidc';
+
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module
     SubheaderModule,
     ModalModule,
     DataModule,
+    OAuthModule.forRoot(),
 
     WrapperModule,
     HomeModule,
@@ -61,7 +66,14 @@ import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module
     RoomModule,
     AddItemModalModule,
     RoomItemEditModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [AppComponent]

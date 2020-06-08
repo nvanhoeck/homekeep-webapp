@@ -5,16 +5,26 @@
       <i class="icon icon-homekeep"></i>
       <h2 class="homepage__subtitle--element">Welcome to your personal home inventory</h2>
       <app-validation [validationClass]="VALIDATION_CLASS">
+<!--        <app-default-button class="homepage__subtitle&#45;&#45;element"-->
+<!--                            [buttonSize]="tapButtonSize"-->
+<!--                            [buttonType]="tapButtonType"-->
+<!--                            [buttonClass]="tapButtonClass"-->
+<!--                            [borderRadius]="30"-->
+<!--                            [text]="text"-->
+<!--                            [clickEvent]="clickEventHandler"-->
+<!--                            [inputPassChangeEvent]="handleChangeInputEventHandler"-->
+<!--                            [icon]="icon"-->
+<!--        >-->
+<!--        </app-default-button>-->
         <app-default-button class="homepage__subtitle--element"
                             [buttonSize]="tapButtonSize"
                             [buttonType]="tapButtonType"
                             [buttonClass]="tapButtonClass"
                             [borderRadius]="30"
                             [text]="text"
-                            [clickEvent]="clickEventHandler"
-                            [inputPassChangeEvent]="changeInputEventHandler"
                             [icon]="icon"
-        >
+                            [clickEvent]="authClickEventHandler">
+
         </app-default-button>
       </app-validation>
     </div>

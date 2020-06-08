@@ -6,6 +6,7 @@ import {MessagingService} from '../../core/services/messaging/messaging.service'
 import {filter, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../shared/components/base/base.component';
 import {Router} from '@angular/router';
+import {OauthService} from '../../core/services/auth/oauth.service';
 
 @Component({
   selector: 'app-home',
@@ -23,15 +24,17 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
   public icon = 'tick';
   public text = 'access';
 
-  private _clickEventHandler = ($event: any) => this.changeButton($event);
-  private _changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
+  private clickEventHandler = ($event: any) => this.changeButton($event);
+  private authClickEventHandler = () => this.oauthService.loginWithRedirect();
+  private changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
 
 
   constructor(private readonly headerService: HeaderService,
               private readonly authService: AuthService,
               private readonly messagingService: MessagingService,
               private readonly cdRef: ChangeDetectorRef,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private readonly oauthService: OauthService) {
     super();
   }
 
@@ -52,12 +55,16 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
     this.headerService.mayShowHeader(false);
   }
 
-  get clickEventHandler(): ($event) => void {
-    return this._clickEventHandler;
+  get defaultClickEventHandler(): ($event) => void {
+    return this.clickEventHandler;
   }
 
-  get changeInputEventHandler(): ($event) => void {
-    return this._changeInputEventHandler;
+  get handleAuthClickEvent(): ($event) => void {
+    return this.clickEventHandler;
+  }
+
+  get handleChangeInputEventHandler(): ($event) => void {
+    return this.changeInputEventHandler;
   }
 
   private changeButton($event: any): void {
