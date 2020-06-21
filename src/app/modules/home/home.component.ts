@@ -61,7 +61,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
     }
 
     get handleAuthClickEvent(): ($event) => void {
-        return this.clickEventHandler;
+        return this.authClickEventHandler;
     }
 
     get handleChangeInputEventHandler(): ($event) => void {
