@@ -24,9 +24,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
     public icon = 'tick';
     public text = 'access';
 
-    private clickEventHandler = ($event: any) => this.changeButton($event);
-    private authClickEventHandler = () => this.handleAccess();
-    private changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
+    clickEventHandler = ($event: any) => this.changeButton($event);
+    authClickEventHandler = () => this.handleAccess();
+    changeInputEventHandler = ($event: any) => this.changeInputHandler($event);
 
 
     constructor(private readonly headerService: HeaderService,
