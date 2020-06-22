@@ -29,13 +29,10 @@ pipeline{
         sh 'ng build --prod --build-optimizer'
       }
     }
-    /*stage ('build image') {
+    stage ('deploy to azure') {
       steps{
-        sh '''
-          rm -rf node_modules
-          oc start-build angular-5-example --from-dir=. --follow
-        '''
+        sh 'echo ok'
       }
-    }*/
+    }
   }
 }
