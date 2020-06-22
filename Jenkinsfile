@@ -36,13 +36,13 @@ pipeline{
         sh '$(npm bin)/ng build --prod --build-optimizer'
       }
     }
-    stage ('build image') {
+    /*stage ('build image') {
       steps{
-        /*sh '''
+        sh '''
           rm -rf node_modules
           oc start-build angular-5-example --from-dir=. --follow
-        '''*/
+        '''
       }
-    }
+    }*/
   }
 }
