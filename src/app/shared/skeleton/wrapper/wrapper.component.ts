@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 })
 export class WrapperComponent implements OnInit {
 
-  public showHeader$: Observable<boolean> = this.headerService.showHeader;
+  public showHeader$: Observable<boolean> = this.headerService.getShowHeader$;
   promptEvent: any;
 
   constructor(private readonly headerService: HeaderService) {

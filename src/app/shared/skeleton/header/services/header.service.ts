@@ -5,18 +5,16 @@ import {BehaviorSubject, Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class HeaderService {
-  private _showHeader: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private showHeader$: Observable<boolean> = this._showHeader.asObservable();
-
+  private showHeader$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   constructor() {
   }
 
   public mayShowHeader(show: boolean): void {
-    this._showHeader.next(show);
+    this.showHeader$.next(show);
   }
 
 
-  get showHeader(): Observable<boolean> {
-    return this._showHeader.asObservable();
+  get getShowHeader$(): Observable<boolean> {
+    return this.showHeader$.asObservable();
   }
 }

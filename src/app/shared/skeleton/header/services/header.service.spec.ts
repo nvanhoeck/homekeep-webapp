@@ -20,13 +20,13 @@ describe('HeaderService', () => {
   describe('mayShowHeader', () => {
     it('should emit a true if shownHeader is true', () => {
       service.mayShowHeader(true);
-      service.showHeader.pipe(take(1))
+      service.getShowHeader$.pipe(take(1))
         .subscribe(value => expect(value).toBeTruthy());
     });
 
     it('should emit a false if shownHeader is false', () => {
       service.mayShowHeader(false);
-      service.showHeader.pipe(take(1))
+      service.getShowHeader$.pipe(take(1))
         .subscribe(value => expect(value).toBeFalsy());
     });
   });

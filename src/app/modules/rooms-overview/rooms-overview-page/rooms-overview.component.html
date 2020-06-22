@@ -39,7 +39,7 @@
       <app-container
         id="'room-'{{room.id}}"
         class="rooms-overview--room-block {{activeElement === room.id ? 'active-room-block' : ''}}"
-        holdable
+        app-holdable
         (click)="navigateToRoom(room.id)"
         (dblclick)="activeElement = room.id"
         (holdTime)="holdHandler($event, room.id)"

@@ -1,6 +1,6 @@
 <section class="app-wrapper">
   <div style="position: relative">
-    <app-header [hidden]="!(showHeader$ | async)"></app-header>
+    <app-header [hidden]="(showHeader$ | async) === false"></app-header>
   </div>
   <div class="app-content--wrapper">
     <div class="app-content">
