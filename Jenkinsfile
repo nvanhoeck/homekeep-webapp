@@ -10,13 +10,12 @@ pipeline{
     stage ('install modules'){
       steps{
       //nodejs('nodejs8')
-        bat 'npm install --verbose -d'
-        bat 'npm install --save classlist.js'
+        bat 'npm install'
       }
     }
     stage ('test'){
       steps{
-        bat 'ng test --single-run --browsers Chrome_no_sandbox'
+        bat 'ng test --browsers Chrome_no_sandbox'
       }
     }
     stage ('code quality'){
