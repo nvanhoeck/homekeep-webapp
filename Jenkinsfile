@@ -1,5 +1,6 @@
 pipeline{
   agent any
+  tools {nodejs "nodejs8"}
   stages{
     stage ('checkout'){
       steps{
@@ -8,7 +9,7 @@ pipeline{
     }
     stage ('install modules'){
       steps{
-      nodejs('nodejs8')
+      //nodejs('nodejs8')
         sh 'npm install --verbose -d'
         sh 'npm install --save classlist.js'
       }
