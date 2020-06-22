@@ -2,7 +2,9 @@ import {Directive, EventEmitter, HostListener, Output} from '@angular/core';
 import {interval, Observable, Subject} from 'rxjs';
 import {filter, takeUntil, tap} from 'rxjs/operators';
 
+
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: '[app-holdable]'
 })
 export class HoldableDirective {
