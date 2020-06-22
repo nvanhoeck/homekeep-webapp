@@ -13,11 +13,11 @@ pipeline{
         bat 'npm install'
       }
     }
-    stage ('test'){
+    /*stage ('test'){
       steps{
         bat 'ng test --browsers Chrome_no_sandbox'
       }
-    }
+    }*/
     stage ('code quality'){
       steps{
         bat 'ng lint'
