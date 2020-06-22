@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  loggingLevel: 0
-};
+  loggingLevel: 0};
 
 /*
  * For easier debugging in development mode, you can import the following file
