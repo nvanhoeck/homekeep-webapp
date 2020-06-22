@@ -9,32 +9,23 @@ pipeline{
     stage ('install modules'){
       steps{
       nodejs('nodejs8')
-        sh '''
-          npm install --verbose -d
-          npm install --save classlist.js
-        '''
+        sh 'npm install --verbose -d'
+        sh 'npm install --save classlist.js'
       }
     }
     stage ('test'){
       steps{
-        sh '''
-          $(npm bin)/ng test --single-run --browsers Chrome_no_sandbox
-        '''
-      }
-      post {
-          always {
-            junit "test-results.xml"
-          }
+        sh 'ng test --single-run --browsers Chrome_no_sandbox'
       }
     }
     stage ('code quality'){
       steps{
-        sh '$(npm bin)/ng lint'
+        sh 'ng lint'
       }
     }
     stage ('build') {
       steps{
-        sh '$(npm bin)/ng build --prod --build-optimizer'
+        sh 'ng build --prod --build-optimizer'
       }
     }
     /*stage ('build image') {
