@@ -7,9 +7,7 @@ const routes: Routes = [
   {
     path: 'rooms',
     component: RoomsOverviewComponent,
-    canActivate: [
-      // TODO
-    ],
+    // canActivate: [AppAuthGuard],
     children: []
   }
 ];

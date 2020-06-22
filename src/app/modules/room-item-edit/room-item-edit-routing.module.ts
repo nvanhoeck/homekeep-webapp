@@ -9,7 +9,7 @@ const routes: Routes = [{
   children: [{
     path: ':id',
     component: RoomItemEditComponent
-  }]
+  }],
 }];
 
 @NgModule({

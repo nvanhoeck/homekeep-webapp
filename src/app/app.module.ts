@@ -28,6 +28,11 @@ import {environment} from '../environments/environment';
 import {NgxIndexedDbModule} from './core/storage/ngx-indexed-db/ngx-indexed-db.module';
 import {DataModule} from './core/services/data/data.module';
 import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module';
+import {OAuthModule} from 'angular-oauth2-oidc';
+
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import {CallbackModule} from './modules/callback/callback.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,6 @@ import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module
     ReactiveFormsModule,
     DirectivesModule,
     NgxIndexedDbModule,
-
     ButtonsModule,
     BaseModule,
     SectionModule,
@@ -54,18 +58,27 @@ import {RoomItemEditModule} from './modules/room-item-edit/room-item-edit.module
     SubheaderModule,
     ModalModule,
     DataModule,
+    OAuthModule.forRoot(),
 
     WrapperModule,
     HomeModule,
     RoomsOverviewModule,
     AddRoomModule,
     RoomModule,
+    CallbackModule,
     AddItemModalModule,
     RoomItemEditModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [AppComponent]
 })
 export class AppModule {
 }

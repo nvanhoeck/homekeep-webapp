@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {MessagingService} from '../messaging/messaging.service';
 import {AppMessageType} from '../../../shared/models/app-message.class';
+import {AuthApiService} from './auth-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private readonly messagingService: MessagingService) {
+  constructor(private readonly messagingService: MessagingService,
+              private readonly authApiService: AuthApiService) {
   }
 
   validate(keyValue: any): boolean {
