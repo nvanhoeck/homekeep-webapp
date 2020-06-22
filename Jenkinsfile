@@ -8,6 +8,7 @@ pipeline{
     }
     stage ('install modules'){
       steps{
+      nodejs('nodejs8')
         sh '''
           npm install --verbose -d
           npm install --save classlist.js
