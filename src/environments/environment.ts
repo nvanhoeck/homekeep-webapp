@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  loggingLevel: 0};
+  loggingLevel: 0,
+  roomsService: 'http://localhost:7001/'
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
