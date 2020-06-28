@@ -7,8 +7,9 @@
       [validationClass]="validationClass"
       [control]="roomForm.controls['roomName']"
     >
-      <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}" type="text"
-      [formControl]="roomForm.controls['roomName']"/>
+      <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}"
+             type="text"
+             [formControl]="roomForm.controls['roomName']"/>
     </app-validation>
   </app-section>
   <app-section class="add-room--icons-container">
@@ -25,17 +26,19 @@
     </div>
     <div class="submit--container">
       <p class="submit__cancel" (click)="cancel()">Cancel</p>
-      <app-default-button
-        [buttonSize]="submitButtonSize"
-        [buttonType]="submitButtonType"
-        [buttonClass]="submitButtonClass"
-        [text]="'Save Room'"
-        [borderRadius]="20"
-        [height]="'35px'"
-        [width]="'100px'"
-        [hasShadow]="true"
-        [formGroup]="roomForm"
-      ></app-default-button>
+      <app-validation [validationClass]="addRoomValidationClass">
+        <app-default-button
+          [buttonSize]="submitButtonSize"
+          [buttonType]="submitButtonType"
+          [buttonClass]="submitButtonClass"
+          [text]="'Save Room'"
+          [borderRadius]="20"
+          [height]="'35px'"
+          [width]="'100px'"
+          [hasShadow]="true"
+          [formGroup]="roomForm"
+        ></app-default-button>
+      </app-validation>
     </div>
   </app-section>
 </form>

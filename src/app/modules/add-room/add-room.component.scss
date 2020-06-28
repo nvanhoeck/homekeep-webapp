@@ -96,6 +96,13 @@
           cursor: pointer;
         }
       }
+
+      ::ng-deep {
+        app-validation p {
+          text-align: center;
+          margin: $gutter;
+        }
+      }
     }
 
     ::ng-deep {

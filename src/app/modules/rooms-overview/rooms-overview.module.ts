@@ -9,21 +9,23 @@ import {SectionModule} from '../../shared/components/section/section.module';
 import {ContainerModule} from '../../shared/components/container/container.module';
 import {DirectivesModule} from '../../shared/directives/directives.module';
 import {ActionModule} from '../../shared/components/action/action.module';
+import {ValidationModule} from '../../shared/components/validation/validation.module';
 
 
 @NgModule({
   declarations: [RoomsOverviewComponent],
-  imports: [
-    CommonModule,
-    RoomsOverviewRoutingModule,
-    SubheaderModule,
-    ButtonsModule,
-    SectionModule,
-    ContainerModule,
-    ActionModule,
+    imports: [
+        CommonModule,
+        RoomsOverviewRoutingModule,
+        SubheaderModule,
+        ButtonsModule,
+        SectionModule,
+        ContainerModule,
+        ActionModule,
 
-    DirectivesModule,
-  ],
+        DirectivesModule,
+        ValidationModule,
+    ],
   exports: [RoomsOverviewComponent]
 })
 export class RoomsOverviewModule {

@@ -22,6 +22,7 @@ export class AddRoomComponent implements OnInit {
     roomName: this.roomName,
     icon: this.icon,
   });
+  addRoomValidationClass = 'add-room';
 
   public submitButtonSize: ButtonSize = ButtonSize.MEDIUM;
   public submitButtonType: ButtonType = ButtonType.PRIMARY;
@@ -133,7 +134,6 @@ export class AddRoomComponent implements OnInit {
   public handleSubmit(): void {
     if (this.roomForm.valid) {
       this.saveForm();
-      this.navigateToRoomsOverview();
     }
   }
 
@@ -152,6 +152,8 @@ export class AddRoomComponent implements OnInit {
       items: []
     } as RoomModel;
 
-    this.roomsService.addRoom(room).finally();
+    this.roomsService.addRoom$(room).subscribe(newRoom => {
+      this.navigateToRoomsOverview();
+    });
   }
 }
