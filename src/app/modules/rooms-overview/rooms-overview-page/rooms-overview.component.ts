@@ -21,16 +21,16 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomButtonType: ButtonType = ButtonType.PRIMARY_TEXT_ONLY;
   addRoomButtonSize: ButtonSize = ButtonSize.XL;
 
-  public rooms: RoomModel[];
 
+  public rooms: RoomModel[];
   public activeElement: number;
 
   constructor(private readonly headerService: HeaderService,
               private readonly cdref: ChangeDetectorRef,
               private readonly router: Router,
               // TODO place in facade
-              private readonly roomsDBService: RoomService,
-              private readonly roomsItemDbService: RoomItemsService) {
+              private readonly roomsService: RoomService,
+              private readonly roomsItemService: RoomItemsService) {
   }
 
   ngOnInit() {
@@ -65,10 +65,11 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   public deleteRoom() {
-    this.roomsDBService.deleteRoom(this.activeElement).finally();
-    this.roomsItemDbService.deleteItemsByRoomId(this.activeElement);
-    this.activeElement = null;
-    this.loadRooms();
+    this.roomsService.deleteRoom$(this.activeElement).subscribe(isDeleted => {
+      this.roomsItemService.deleteItemsByRoomId(this.activeElement);
+      this.activeElement = null;
+      this.loadRooms();
+    });
   }
 
   public navigateToRoom(id: number) {
@@ -86,7 +87,7 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   private loadRooms(): void {
-    this.roomsDBService.findAll()
+    this.roomsService.findAll()
       .then(rooms => {
         this.rooms = rooms;
         this.cdref.markForCheck();
