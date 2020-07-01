@@ -7,7 +7,7 @@ export const environment = {
   loggingLevel: 0,
   roomsService: 'http://localhost:7001/api/',
   roomsItemsService: 'https://homekeep-apim.azure-api.net/homekeep-rooms-items'
-}
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
