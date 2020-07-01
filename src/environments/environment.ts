@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   loggingLevel: 0,
   roomsService: 'http://localhost:7001/api/',
-  roomsItemsService: 'https://homekeep-apim.azure-api.net/homekeep-rooms-items'
+  roomsItemsService: 'http://localhost:7002/api/'
 };
 
 /*
