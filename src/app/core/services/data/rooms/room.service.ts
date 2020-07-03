@@ -69,8 +69,6 @@ export class RoomService {
   }
 
   findAllLocally() {
-    return from(this.dbService.getAll<RoomModel>(this.TABLE_NAME)).pipe(tap(() => {
-      debugger;
-    }));
+    return from(this.dbService.getAll<RoomModel>(this.TABLE_NAME));
   }
 }
