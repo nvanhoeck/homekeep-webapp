@@ -4,7 +4,7 @@ import {RoomModel} from '../../../../shared/models';
 import {RoomApiService} from '../api/room-api.service';
 import {MessagingService} from '../../messaging/messaging.service';
 import {AppMessageType} from '../../../../shared/models/app-message.class';
-import {Observable, throwError} from 'rxjs';
+import {from, Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -46,8 +46,11 @@ export class RoomService {
     return this.dbService.getByKey(this.TABLE_NAME, id);
   }
 
-  public findAll(): Promise<RoomModel[]> {
-    return this.dbService.getAll(this.TABLE_NAME);
+  public findAll$(): Observable<RoomModel[]> {
+    return this.roomApiService.getRooms$().pipe(
+      tap(() => this.dbService.clear(this.TABLE_NAME)),
+      tap(rooms => this.dbService.add(this.TABLE_NAME, rooms)),
+    );
   }
 
   public deleteRoom$(id: number): Observable<boolean> {
@@ -63,5 +66,11 @@ export class RoomService {
             this.messageService.addMessage('Could not delete room', 'delete-room', AppMessageType.ERROR);
         }
       ));
+  }
+
+  findAllLocally() {
+    return from(this.dbService.getAll<RoomModel>(this.TABLE_NAME)).pipe(tap(() => {
+      debugger;
+    }));
   }
 }

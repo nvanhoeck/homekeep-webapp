@@ -1,7 +1,7 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container" (mousedown)="deactivateElement()">
   <i class="rooms-overview--background-logo icon icon-grid"></i>
-  <app-section *ngIf="!rooms || rooms.length === 0; else roomsSection" class="rooms-overview--empty-block">
+  <app-section *ngIf="(!(rooms$ | async)) || (rooms$ | async)?.length === 0; else roomsSection" class="rooms-overview--empty-block">
     <div class="rooms-overview--empty-block--upper-part">
       <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
       <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build
@@ -43,7 +43,7 @@
         (click)="navigateToRoom(room.id)"
         (dblclick)="activeElement = room.id"
         (holdTime)="holdHandler($event, room.id)"
-        *ngFor="let room of rooms;"
+        *ngFor="let room of rooms$ | async;"
         [width]="'8rem'"
         [height]="'12rem'">
         <div class="rooms-overview--content-block">
@@ -57,7 +57,7 @@
     </div>
   </ng-template>
 </section>
-<app-action *ngIf="hasActiveElement()" [title]="getActiveElementName()">
+<app-action *ngIf="hasActiveElement()" [title]="(roomName$ | async)">
   <i class="icon icon-bin" (click)="deleteRoom()"></i>
   <i class="icon icon-pencil"></i>
 </app-action>

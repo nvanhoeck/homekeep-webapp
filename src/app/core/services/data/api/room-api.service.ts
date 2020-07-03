@@ -21,5 +21,9 @@ export class RoomApiService {
   public deleteRoom$(id: number): Observable<boolean> {
     return this.http.delete<boolean>(environment.roomsService + 'rooms/' + id);
   }
+
+  getRooms$() {
+    return this.http.get<RoomModel[]>(environment.roomsService + 'rooms');
+  }
 }
 
