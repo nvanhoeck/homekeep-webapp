@@ -1,7 +1,7 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container" (mousedown)="deactivateElement()">
   <i class="rooms-overview--background-logo icon icon-grid"></i>
-  <app-section *ngIf="(!(rooms$ | async)) || (rooms$ | async)?.length === 0; else roomsSection" class="rooms-overview--empty-block">
+  <app-section *ngIf="((rooms$ | async) == false) || (rooms$ | async)?.length === 0; else roomsSection" class="rooms-overview--empty-block">
     <div class="rooms-overview--empty-block--upper-part">
       <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
       <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build
