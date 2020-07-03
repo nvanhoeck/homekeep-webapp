@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {RoomModel} from '../../../shared/models';
 import {RoomService} from '../../../core/services/data/rooms/room.service';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
+import {Observable} from 'rxjs';
+import {map, take, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -22,7 +24,15 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomButtonSize: ButtonSize = ButtonSize.XL;
 
 
-  public rooms: RoomModel[];
+  public rooms$: Observable<RoomModel[]> = this.roomsService.findAllLocally();
+  public roomName$: Observable<string> = this.rooms$.pipe(map(rooms => {
+    if (!!rooms && rooms.length > 0) {
+      const activeRoom = rooms.find(room => room.id === this.activeElement);
+      return (!!activeRoom && !!activeRoom.name) ? activeRoom.name : '';
+    } else {
+      return '';
+    }
+  }));
   public activeElement: number;
 
   constructor(private readonly headerService: HeaderService,
@@ -60,10 +70,6 @@ export class RoomsOverviewComponent implements OnInit {
     this.activeElement = null;
   }
 
-  public getActiveElementName(): string {
-    return this.getActiveElementRoom().name;
-  }
-
   public deleteRoom() {
     this.roomsService.deleteRoom$(this.activeElement).subscribe(isDeleted => {
       this.roomsItemService.deleteItemsByRoomId(this.activeElement);
@@ -82,15 +88,11 @@ export class RoomsOverviewComponent implements OnInit {
     return !!this.activeElement;
   }
 
-  private getActiveElementRoom(): RoomModel {
-    return this.rooms.find(value => value.id === this.activeElement);
+  private loadRooms(): void {
+    this.rooms$ = this.roomsService.findAll$().pipe(take(1), tap(() => this.cdref.detectChanges()));
   }
 
-  private loadRooms(): void {
-    this.roomsService.findAll()
-      .then(rooms => {
-        this.rooms = rooms;
-        this.cdref.markForCheck();
-      });
+  roomsIsAvailable(roomModels: RoomModel[]) {
+    return !!roomModels;
   }
 }

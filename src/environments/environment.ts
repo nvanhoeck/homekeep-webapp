@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   loggingLevel: 0,
-  roomsService: 'http://localhost:7001/api/'
+  roomsService: 'http://localhost:7001/api/',
+  roomsItemsService: 'http://localhost:7002/api/'
 };
 
 /*
