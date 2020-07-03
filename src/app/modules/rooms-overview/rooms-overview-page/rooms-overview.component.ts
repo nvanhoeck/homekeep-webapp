@@ -91,4 +91,8 @@ export class RoomsOverviewComponent implements OnInit {
   private loadRooms(): void {
     this.rooms$ = this.roomsService.findAll$().pipe(take(1), tap(() => this.cdref.detectChanges()));
   }
+
+  roomsIsAvailable(roomModels: RoomModel[]) {
+    return !!roomModels;
+  }
 }
