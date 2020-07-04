@@ -6,6 +6,7 @@ import {MessagingService} from '../../messaging/messaging.service';
 import {AppMessageType} from '../../../../shared/models/app-message.class';
 import {from, Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {LoadingService} from '../../loading/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class RoomService {
 
   constructor(private readonly dbService: NgxIndexedDBService,
               private readonly roomApiService: RoomApiService,
-              private readonly messageService: MessagingService) {
+              private readonly messageService: MessagingService,
+              private readonly loadingService: LoadingService) {
   }
 
 
@@ -49,7 +51,8 @@ export class RoomService {
   public findAll$(): Observable<RoomModel[]> {
     return this.roomApiService.getRooms$().pipe(
       tap(() => this.dbService.clear(this.TABLE_NAME)),
-      tap(rooms => this.dbService.add(this.TABLE_NAME, rooms)),
+      tap(rooms => rooms.forEach(room => this.dbService.add(this.TABLE_NAME, room))),
+      tap(() => this.loadingService.stopLoading('rooms')),
     );
   }
 
@@ -68,7 +71,7 @@ export class RoomService {
       ));
   }
 
-  findAllLocally() {
+  findAllLocally$() {
     return from(this.dbService.getAll<RoomModel>(this.TABLE_NAME));
   }
 }

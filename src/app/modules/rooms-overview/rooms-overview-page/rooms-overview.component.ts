@@ -6,7 +6,8 @@ import {RoomModel} from '../../../shared/models';
 import {RoomService} from '../../../core/services/data/rooms/room.service';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 import {Observable} from 'rxjs';
-import {map, take, tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
+import {LoadingService} from '../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-rooms-overview',
@@ -23,8 +24,9 @@ export class RoomsOverviewComponent implements OnInit {
   addRoomButtonType: ButtonType = ButtonType.PRIMARY_TEXT_ONLY;
   addRoomButtonSize: ButtonSize = ButtonSize.XL;
 
+  public isLoading$ = this.loadingService.isLoading$('rooms');
 
-  public rooms$: Observable<RoomModel[]> = this.roomsService.findAllLocally();
+  public rooms$: Observable<RoomModel[]> = this.roomsService.findAllLocally$().pipe(tap(() => this.cdref.detectChanges()));
   public roomName$: Observable<string> = this.rooms$.pipe(map(rooms => {
     if (!!rooms && rooms.length > 0) {
       const activeRoom = rooms.find(room => room.id === this.activeElement);
@@ -40,7 +42,8 @@ export class RoomsOverviewComponent implements OnInit {
               private readonly router: Router,
               // TODO place in facade
               private readonly roomsService: RoomService,
-              private readonly roomsItemService: RoomItemsService) {
+              private readonly roomsItemService: RoomItemsService,
+              private readonly loadingService: LoadingService) {
   }
 
   ngOnInit() {
@@ -71,6 +74,7 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   public deleteRoom() {
+    this.loadingService.addLoading('rooms');
     this.roomsService.deleteRoom$(this.activeElement).subscribe(isDeleted => {
       this.roomsItemService.deleteItemsByRoomId(this.activeElement);
       this.activeElement = null;
@@ -89,10 +93,13 @@ export class RoomsOverviewComponent implements OnInit {
   }
 
   private loadRooms(): void {
-    this.rooms$ = this.roomsService.findAll$().pipe(take(1), tap(() => this.cdref.detectChanges()));
-  }
-
-  roomsIsAvailable(roomModels: RoomModel[]) {
-    return !!roomModels;
+    this.loadingService.addLoading('rooms');
+    this.cdref.markForCheck();
+    this.roomsService.findAll$()
+      .pipe(switchMap(() => this.roomsService.findAllLocally$()))
+      .subscribe((rooms) => {
+        this.rooms$ = this.roomsService.findAllLocally$().pipe(tap(() => this.cdref.detectChanges()));
+        this.cdref.markForCheck();
+      });
   }
 }

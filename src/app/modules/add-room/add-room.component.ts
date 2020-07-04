@@ -6,6 +6,9 @@ import {IconModel} from '../../shared/models/icon-model';
 import {RoomModel} from '../../shared/models';
 import {Router} from '@angular/router';
 import {RoomService} from '../../core/services/data/rooms/room.service';
+import {LoadingService} from '../../core/services/loading/loading.service';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-room',
@@ -114,7 +117,8 @@ export class AddRoomComponent implements OnInit {
 
   constructor(private readonly cdRef: ChangeDetectorRef,
               private readonly router: Router,
-              private readonly roomsService: RoomService) {
+              private readonly roomsService: RoomService,
+              private readonly loadingService: LoadingService) {
   }
 
   ngOnInit() {
@@ -133,12 +137,17 @@ export class AddRoomComponent implements OnInit {
 
   public handleSubmit(): void {
     if (this.roomForm.valid) {
+      this.loadingService.addLoading('add-room');
       this.saveForm();
     }
   }
 
   public cancel(): void {
     this.navigateToRoomsOverview();
+  }
+
+  public isLoading$(): Observable<boolean> {
+    return this.loadingService.isLoading$('add-room').pipe(tap((l) => console.log('status:' + l)));
   }
 
   private navigateToRoomsOverview(): void {
@@ -153,6 +162,7 @@ export class AddRoomComponent implements OnInit {
     } as RoomModel;
 
     this.roomsService.addRoom$(room).subscribe(newRoom => {
+      this.loadingService.stopLoading('add-room');
       this.navigateToRoomsOverview();
     });
   }

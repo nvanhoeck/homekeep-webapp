@@ -10,6 +10,7 @@ import {ContainerModule} from '../../shared/components/container/container.modul
 import {DirectivesModule} from '../../shared/directives/directives.module';
 import {ActionModule} from '../../shared/components/action/action.module';
 import {ValidationModule} from '../../shared/components/validation/validation.module';
+import {LoadingSpinnerModule} from '../../shared/components/loading-spinner/loading-spinner.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {ValidationModule} from '../../shared/components/validation/validation.mo
 
         DirectivesModule,
         ValidationModule,
+        LoadingSpinnerModule,
     ],
   exports: [RoomsOverviewComponent]
 })

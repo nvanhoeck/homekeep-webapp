@@ -7,6 +7,7 @@ import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../base/base.component';
 import {FormGroup} from '@angular/forms';
 import {ValidationService} from '../../../../core/services/forms/validation.service';
+import {LoadingService} from '../../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-default-button',
@@ -44,7 +45,8 @@ export class DefaultButtonComponent extends BaseComponent implements OnInit {
 
   constructor(private readonly loggerService: LoggerService,
               private readonly cdRef: ChangeDetectorRef,
-              private readonly validationService: ValidationService) {
+              private readonly validationService: ValidationService,
+              private readonly loadingService: LoadingService) {
     super();
   }
 
