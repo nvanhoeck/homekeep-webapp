@@ -1,13 +1,16 @@
 <app-subheader [icon]="'homekeep'" [iconPosition]="'center'"></app-subheader>
 <section class="rooms-overview--container" (mousedown)="deactivateElement()">
   <i class="rooms-overview--background-logo icon icon-grid"></i>
-  <app-section *ngIf="roomsIsAvailable(rooms$ | async) || (rooms$ | async)?.length === 0; else roomsSection" class="rooms-overview--empty-block">
-    <div class="rooms-overview--empty-block--upper-part">
-      <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
-      <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to build
-        some rooms</h4>
-    </div>
-    <div class="rooms-overview--empty-block--lower-part">
+  <div *ngIf="rooms$ | async as rooms">
+    <app-section *ngIf="rooms?.length === 0; else roomsSection"
+                 class="rooms-overview--empty-block">
+      <div class="rooms-overview--empty-block--upper-part">
+        <h1 class="rooms-overview--empty-block-title">Add rooms to your keep</h1>
+        <h4 class="rooms-overview--empty-block-desc">Before you can add items to your keep rooms, you first need to
+          build
+          some rooms</h4>
+      </div>
+      <div class="rooms-overview--empty-block--lower-part">
         <app-default-button class="rooms-overview--empty-block-button"
                             [buttonClass]="addRoomEmptyButtonClass"
                             [buttonType]="addRoomEmptyButtonType"
@@ -19,10 +22,14 @@
                             [hasShadow]="true"
                             [clickEvent]="addRoomRedirect()">
         </app-default-button>
-      <p class="rooms-overview--empty-block-action-text">or load starters template</p>
-    </div>
-  </app-section>
+        <p class="rooms-overview--empty-block-action-text">or load starters template</p>
+      </div>
+    </app-section>
+  </div>
   <ng-template #roomsSection>
+    <ng-container *ngIf="(isLoading$ | async) === true">
+      <app-loading-spinner></app-loading-spinner>
+    </ng-container>
     <div class="rooms-overview--room-block-container">
       <app-container (click)="navigateToAddRoom()" class="rooms-overview--room-block__add-room" [width]="'8rem'"
                      [height]="'12rem'">
@@ -37,13 +44,13 @@
         </div>
       </app-container>
       <app-container
+        *ngFor="let room of rooms$ | async;"
         id="'room-'{{room.id}}"
         class="rooms-overview--room-block {{activeElement === room.id ? 'active-room-block' : ''}}"
         app-holdable
         (click)="navigateToRoom(room.id)"
         (dblclick)="activeElement = room.id"
         (holdTime)="holdHandler($event, room.id)"
-        *ngFor="let room of rooms$ | async;"
         [width]="'8rem'"
         [height]="'12rem'">
         <div class="rooms-overview--content-block">

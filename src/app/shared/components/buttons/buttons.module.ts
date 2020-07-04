@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {DefaultButtonComponent} from './default-button/default-button.component';
 import {FormsModule} from '@angular/forms';
 import {ColorPickerModule} from 'ngx-color-picker';
+import {SpinnerModule} from '../spinner/spinner.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {ColorPickerModule} from 'ngx-color-picker';
     imports: [
         CommonModule,
         FormsModule,
-        ColorPickerModule
+        ColorPickerModule,
+        SpinnerModule
     ],
   exports: [DefaultButtonComponent]
 })

@@ -33,6 +33,8 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
 import {CallbackModule} from './modules/callback/callback.module';
+import {SpinnerModule} from './shared/components/spinner/spinner.module';
+import {LoadingSpinnerModule} from './shared/components/loading-spinner/loading-spinner.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import {CallbackModule} from './modules/callback/callback.module';
     ModalModule,
     DataModule,
     OAuthModule.forRoot(),
+    SpinnerModule,
+    LoadingSpinnerModule,
 
     WrapperModule,
     HomeModule,

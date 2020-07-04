@@ -5,8 +5,7 @@
     <label id="add-room--room-name__label" for="add-room--room-name__input">Room name</label>
     <app-validation
       [validationClass]="validationClass"
-      [control]="roomForm.controls['roomName']"
-    >
+      [control]="roomForm.controls['roomName']">
       <input id="add-room--room-name__input" class="{{roomName.touched && !roomName.valid  ? 'invalid' : ''}}"
              type="text"
              [formControl]="roomForm.controls['roomName']"/>
@@ -19,26 +18,27 @@
            (click)="selectIcon(icon)"
            class="add-room--icon-block {{isSelected(icon) ?
            'add-room--icon-block__active' :
-           'add-room--icon-block__non-active'}}"
-      >
+           'add-room--icon-block__non-active'}}">
         <i ngDefaultControl class="icon icon-{{icon.name}}"></i>
       </div>
     </div>
     <div class="submit--container">
       <p class="submit__cancel" (click)="cancel()">Cancel</p>
       <app-validation [validationClass]="addRoomValidationClass">
-        <app-default-button
-          [buttonSize]="submitButtonSize"
-          [buttonType]="submitButtonType"
-          [buttonClass]="submitButtonClass"
-          [text]="'Save Room'"
-          [borderRadius]="20"
-          [height]="'35px'"
-          [width]="'100px'"
-          [hasShadow]="true"
-          [formGroup]="roomForm"
+        <app-default-button *ngIf="(isLoading$() | async) === false"
+                            [buttonSize]="submitButtonSize"
+                            [buttonType]="submitButtonType"
+                            [buttonClass]="submitButtonClass"
+                            [text]="'Save Room'"
+                            [borderRadius]="20"
+                            [height]="'35px'"
+                            [width]="'100px'"
+                            [hasShadow]="true"
+                            [formGroup]="roomForm"
         ></app-default-button>
       </app-validation>
+      <app-spinner *ngIf="(isLoading$() | async) === true" [name]="'add-room'"></app-spinner>
     </div>
+
   </app-section>
 </form>

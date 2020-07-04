@@ -19,7 +19,6 @@
            [ngStyle]="getStyles"
            [ngClass]="getClasses"/>
     <p *ngSwitchCase="'icon'" class="icon icon-{{icon}}">{{text}}</p>
-
     <p *ngSwitchDefault (click)="$event.stopPropagation(); passEventToParent($event)">{{text}}</p>
   </ng-container>
 </button>

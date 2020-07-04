@@ -31,7 +31,8 @@ export enum ButtonClass {
   PASSWORD = 'password',
   ICON = 'icon',
   SUBMIT = 'submit',
-  COLOR_PICKER = 'color'
+  COLOR_PICKER = 'color',
+  SPINNER = 'loading'
 }
 
 
