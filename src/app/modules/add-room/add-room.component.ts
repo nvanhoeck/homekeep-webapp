@@ -8,7 +8,6 @@ import {Router} from '@angular/router';
 import {RoomService} from '../../core/services/data/rooms/room.service';
 import {LoadingService} from '../../core/services/loading/loading.service';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-room',
@@ -147,7 +146,7 @@ export class AddRoomComponent implements OnInit {
   }
 
   public isLoading$(): Observable<boolean> {
-    return this.loadingService.isLoading$('add-room').pipe(tap((l) => console.log('status:' + l)));
+    return this.loadingService.isLoading$('add-room');
   }
 
   private navigateToRoomsOverview(): void {

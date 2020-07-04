@@ -29,6 +29,11 @@ pipeline{
       }
     }
     stage ('deploy to azure') {
+      when {
+        expression {
+          BRANCH_NAME == 'develop'
+        }
+      }
       steps{
         bat 'az storage blob upload-batch -d $web -s "./dist/homekeep" --connection-string "DefaultEndpointsProtocol=https;AccountName=homekeep;AccountKey=8saB1puIu/8NiiTcVktIQhzQ2cgk2uqlm1Hh29tWW3/vWa5HQMAX1Lwk6wdFtRrDCei8has24WUNWj8Anrec0g==;EndpointSuffix=core.windows.net"'
       }
