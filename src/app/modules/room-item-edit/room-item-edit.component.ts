@@ -81,7 +81,7 @@ export class RoomItemEditComponent implements OnInit {
   private updateAllFields() {
     this.item.spendedCost = this.item.amountOwned * this.item.costPerItem;
     this.item.totalCost = this.item.amountWanted * this.item.costPerItem;
-    this.roomItemsSerivce.updateItem(this.item);
+    this.roomItemsSerivce.updateItem$(this.item);
   }
 
   cancel() {

@@ -7,6 +7,7 @@ import {AppMessageType} from '../../../../shared/models/app-message.class';
 import {from, Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {LoadingService} from '../../loading/loading.service';
+import {RoomItemsService} from '../roomItems/room-items.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class RoomService {
   constructor(private readonly dbService: NgxIndexedDBService,
               private readonly roomApiService: RoomApiService,
               private readonly messageService: MessagingService,
-              private readonly loadingService: LoadingService) {
+              private readonly loadingService: LoadingService,
+              //TODO place in facade
+              private readonly roomItemsService: RoomItemsService) {
   }
 
 
@@ -50,9 +53,18 @@ export class RoomService {
 
   public findAll$(): Observable<RoomModel[]> {
     return this.roomApiService.getRooms$().pipe(
+      catchError((err) => {
+        console.error(err);
+        this.messageService.addMessage('Unable to load rooms, working with offline data', 'rooms-overview', AppMessageType.ERROR);
+        return throwError('Unable to load rooms');
+      }),
       tap(() => this.dbService.clear(this.TABLE_NAME)),
       tap(rooms => rooms.forEach(room => this.dbService.add(this.TABLE_NAME, room))),
+      // TODO place in facade & refactoring
+      tap(rooms => rooms.forEach(room => this.loadingService.addLoading(room.name))),
+      tap(rooms => this.roomItemsService.findAll$(rooms).subscribe()),
       tap(() => this.loadingService.stopLoading('rooms')),
+      tap(() => this.messageService.clear())
     );
   }
 
@@ -60,7 +72,7 @@ export class RoomService {
     return this.roomApiService.deleteRoom$(id).pipe(
       catchError(err => {
         console.error(err);
-        this.messageService.addMessage('Could not delete room', 'delete-actions', AppMessageType.ERROR);
+        this.messageService.addMessage('Could not delete room', 'delete-room', AppMessageType.ERROR);
         return throwError('Could not delete room');
       }),
       tap(result => {

@@ -83,8 +83,9 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
       colors: ['', '', '', '', '']
     };
 
-    this.roomItemsService.addItem(newItem).finally();
-    this.modalService.closeModal();
+    this.roomItemsService.addItem$(newItem).subscribe(addedItem => {
+      this.modalService.closeModal();
+    });
   }
 
   handleNumberInput(keyboardEvent: KeyboardEvent) {
