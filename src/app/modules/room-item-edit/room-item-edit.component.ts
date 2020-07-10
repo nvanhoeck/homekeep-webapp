@@ -4,6 +4,7 @@ import {RoomItemModel} from '../../shared/models';
 import {RoomItemsService} from '../../core/services/data/roomItems/room-items.service';
 import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../../shared/components/buttons';
 import {FormControl, FormGroup} from '@angular/forms';
+import {RoomItemColor} from '../../shared/models/room-item-color';
 
 @Component({
   selector: 'app-room-item-edit',
@@ -135,8 +136,8 @@ export class RoomItemEditComponent implements OnInit {
     }
   }
 
-  setColor(id: number, color: string): void {
-    this.item.colors[id] = color;
+  setColor(indx: number, id: number, color: string): void {
+    this.item.colors[indx] = {id, value: color, roomItem: this.item.colors[indx].roomItem} as RoomItemColor;
     this.cdRef.markForCheck();
   }
 }
