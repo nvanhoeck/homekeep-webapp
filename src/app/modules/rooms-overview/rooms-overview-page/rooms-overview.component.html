@@ -27,6 +27,8 @@
     </app-section>
   </div>
   <ng-template #roomsSection>
+    <!--TODO add offline backend state, which allows read only-->
+    <app-validation [validationClass]="'rooms-overview'"></app-validation>
     <ng-container *ngIf="(isLoading$ | async) === true">
       <app-loading-spinner></app-loading-spinner>
     </ng-container>

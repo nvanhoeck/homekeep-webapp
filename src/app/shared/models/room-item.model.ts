@@ -1,3 +1,5 @@
+import {RoomItemColor} from './room-item-color';
+
 export class RoomItemModel {
   id?: number;
   name: string;
@@ -12,7 +14,7 @@ export class RoomItemModel {
   // new
   image?: string;
   urlLink?: string;
-  colors: string[] = ['', '', '', '', ''];
+  colors: RoomItemColor[] = [];
   locked: false;
   alternatives?: number[];
   alternativeOf?: number;

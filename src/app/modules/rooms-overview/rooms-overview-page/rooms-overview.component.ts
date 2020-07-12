@@ -6,7 +6,7 @@ import {RoomModel} from '../../../shared/models';
 import {RoomService} from '../../../core/services/data/rooms/room.service';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 import {Observable} from 'rxjs';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap, take, tap} from 'rxjs/operators';
 import {LoadingService} from '../../../core/services/loading/loading.service';
 
 @Component({
@@ -96,10 +96,13 @@ export class RoomsOverviewComponent implements OnInit {
     this.loadingService.addLoading('rooms');
     this.cdref.markForCheck();
     this.roomsService.findAll$()
-      .pipe(switchMap(() => this.roomsService.findAllLocally$()))
+      .pipe(
+        take(1),
+        switchMap(() => this.roomsService.findAllLocally$())
+      )
       .subscribe((rooms) => {
         this.rooms$ = this.roomsService.findAllLocally$().pipe(tap(() => this.cdref.detectChanges()));
         this.cdref.markForCheck();
-      });
+      }, err => this.loadingService.stopLoading('rooms'));
   }
 }
