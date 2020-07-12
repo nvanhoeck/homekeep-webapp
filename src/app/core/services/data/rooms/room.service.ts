@@ -19,7 +19,7 @@ export class RoomService {
               private readonly roomApiService: RoomApiService,
               private readonly messageService: MessagingService,
               private readonly loadingService: LoadingService,
-              //TODO place in facade
+              // TODO place in facade
               private readonly roomItemsService: RoomItemsService) {
   }
 
