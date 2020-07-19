@@ -96,9 +96,13 @@
         </div>
       </div>
       <div class="edit-item-modal--formgroup">
-        <div class="form-block edit-item-modal--formgroup__left-block">
+        <div class="form-block edit-item-modal--formgroup__left-block image-container">
           <label>Image: </label>
-          <i class="icon icon-image"></i>
+          <app-validation [validationClass]="'edit-image'">
+            <img [src]="getImageHtml()" style="max-height:300px;max-width:300px;"/>
+            <input id="imageUpload" type="file" accept="image/x-png" [hidden]="true" (change)="addImage($event)"/>
+            <div class="icon-image" (click)="clickImage()"></div>
+          </app-validation>
         </div>
       </div>
       <div class="edit-item-modal--formgroup">
@@ -212,13 +216,15 @@
   </app-container>
   <app-action>
     <p class="edit-item-modal--cancel" (click)="cancel()">Cancel</p>
-    <app-default-button class="edit-item-modal--edit-item"
-                        [buttonType]="buttonType"
-                        [buttonSize]="buttonSizeMed"
-                        [buttonClass]="buttonClassSubmit"
-                        [borderRadius]="20"
-                        [text]="'Save'"
-                        (click)="handleSubmit()"
-    ></app-default-button>
+    <app-validation [validationClass]="'update-room-item'">
+      <app-default-button class="edit-item-modal--edit-item"
+                          [buttonType]="buttonType"
+                          [buttonSize]="buttonSizeMed"
+                          [buttonClass]="buttonClassSubmit"
+                          [borderRadius]="20"
+                          [text]="'Save'"
+                          (click)="handleSubmit()"
+      ></app-default-button>
+    </app-validation>
   </app-action>
 </ng-container>

@@ -8,6 +8,8 @@ import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {SectionModule} from '../../shared/components/section/section.module';
 import {RoomItemComponent} from './room-item-component/room-item.component';
 import {ActionModule} from '../../shared/components/action/action.module';
+import {ViewImageModalComponent} from '../view-image/view-image-modal/view-image-modal.component';
+import {ViewImageModule} from '../view-image/view-image.module';
 
 
 @NgModule({
@@ -18,12 +20,14 @@ import {ActionModule} from '../../shared/components/action/action.module';
     SubheaderModule,
     ButtonsModule,
     SectionModule,
-    ActionModule
+    ActionModule,
+    ViewImageModule
   ],
   exports: [
     RoomComponent,
     RoomItemComponent
-  ]
+  ],
+  entryComponents: [ViewImageModalComponent]
 })
 export class RoomModule {
 }

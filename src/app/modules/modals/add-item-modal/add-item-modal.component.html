@@ -6,19 +6,23 @@
   </div>
   <div class="add-item-modal--formgroup">
     <label for="add-item-modal--price-input">Price /piece</label>
-    <input id="add-item-modal--price-input" type="number" [formControl]="itemForm.controls['itemPrice']" (keydown)="handleNumberInput($event)" [(ngModel)]="itemPrice"/>
+    <input id="add-item-modal--price-input" type="number" [formControl]="itemForm.controls['itemPrice']"
+           (keydown)="handleNumberInput($event)" [(ngModel)]="itemPrice"/>
   </div>
   <div class="add-item-modal--formgroup">
     <label for="add-item-modal--needed-input">Amount</label>
-    <input id="add-item-modal--needed-input" type="number" [formControl]="itemForm.controls['itemAmount']" [(ngModel)]="itemAmount" (keydown)="handleNumberInput($event)"/>
+    <input id="add-item-modal--needed-input" type="number" [formControl]="itemForm.controls['itemAmount']"
+           [(ngModel)]="itemAmount" (keydown)="handleNumberInput($event)"/>
   </div>
   <div class="add-item-modal--actions">
     <p class="add-item-modal--cancel" (click)="cancel()">Cancel</p>
-    <app-default-button class="add-item-modal--add-item"
-                        [buttonType]="buttonType"
-                        [buttonSize]="buttonSize"
-                        [buttonClass]="buttonClass"
-                        [text]="'+ Add item'"
-    ></app-default-button>
+    <app-validation [validationClass]="'add-room-item'">
+      <app-default-button class="add-item-modal--add-item"
+                          [buttonType]="buttonType"
+                          [buttonSize]="buttonSize"
+                          [buttonClass]="buttonClass"
+                          [text]="'+ Add item'"
+      ></app-default-button>
+    </app-validation>
   </div>
 </form>
