@@ -109,13 +109,13 @@
                                 [buttonClass]="colorPickerClass"
                                 [buttonType]="defaultType"
                                 [buttonSize]="buttonSizeSmall"
-                                [color]="!!item.colors && !!item?.colors[0] ? item?.colors[0] : '?'"
+                                [color]="!!item.colors && !!item?.colors[0]?.value ? item?.colors[0]?.value : '?'"
                                 [borderRadius]="100"
                                 [width]="'30px'"
                                 [height]="'30px'"
                                 [hasShadow]="true"
                                 [cpPosition]="cpPositionTopRight"
-                                (handleColorChange)="setColor(0, $event)">
+                                (handleColorChange)="setColor(0, item?.colors[0].id, $event)">
             </app-default-button>
             <app-default-button class="color-picker-btn"
                                 [buttonClass]="colorPickerClass"
@@ -124,10 +124,10 @@
                                 [borderRadius]="100"
                                 [width]="'30px'"
                                 [height]="'30px'"
-                                [color]="!!item.colors && !!item?.colors[1] ? item?.colors[1] : '?'"
+                                [color]="!!item.colors && !!item?.colors[1]?.value ? item?.colors[1]?.value : '?'"
                                 [hasShadow]="true"
                                 [cpPosition]="cpPositionTopRight"
-                                (handleColorChange)="setColor(1, $event)">
+                                (handleColorChange)="setColor(1, item?.colors[1].id, $event)">
             </app-default-button>
             <app-default-button class="color-picker-btn"
                                 [buttonClass]="colorPickerClass"
@@ -136,11 +136,11 @@
                                 [borderRadius]="100"
                                 [width]="'30px'"
                                 [height]="'30px'"
-                                [color]="!!item.colors && !!item?.colors[2] ? item?.colors[2] : '?'"
+                                [color]="!!item.colors && !!item?.colors[2]?.value ? item?.colors[2]?.value : '?'"
                                 [hasShadow]="true"
                                 [cpPosition]="cpPositionTop"
                                 [cpOffset]="'-100%'"
-                                (handleColorChange)="setColor(2, $event)">
+                                (handleColorChange)="setColor(2, item?.colors[2].id, $event)">
             </app-default-button>
             <app-default-button class="color-picker-btn"
                                 [buttonClass]="colorPickerClass"
@@ -149,10 +149,10 @@
                                 [borderRadius]="100"
                                 [width]="'30px'"
                                 [height]="'30px'"
-                                [color]="!!item.colors && !!item?.colors[3] ? item?.colors[3] : '?'"
+                                [color]="!!item.colors && !!item?.colors[3]?.value ? item?.colors[3]?.value : '?'"
                                 [hasShadow]="true"
                                 [cpPosition]="cpPositionTopLeft"
-                                (handleColorChange)="setColor(3, $event)">
+                                (handleColorChange)="setColor(3, item?.colors[3].id, $event)">
             </app-default-button>
             <app-default-button class="color-picker-btn"
                                 [buttonClass]="colorPickerClass"
@@ -161,10 +161,10 @@
                                 [borderRadius]="100"
                                 [width]="'30px'"
                                 [height]="'30px'"
-                                [color]="!!item.colors && !!item?.colors[4] ? item?.colors[4] : '?'"
+                                [color]="!!item.colors && !!item?.colors[4]?.value ? item?.colors[4]?.value : '?'"
                                 [hasShadow]="true"
                                 [cpPosition]="cpPositionTopLeft"
-                                (handleColorChange)="setColor(4, $event)">
+                                (handleColorChange)="setColor(4, item?.colors[4].id, $event)">
             </app-default-button>
           </div>
         </div>

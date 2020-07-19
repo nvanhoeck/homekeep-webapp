@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {take, takeUntil} from 'rxjs/operators';
 import * as _ from 'lodash';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
 import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/buttons';
@@ -84,15 +84,16 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   public deleteItem(): void {
-    this.roomItemsSerivce.deleteItem(this.selectedItem.id).finally();
-    this.selectedItem = undefined;
-    this.loadItems();
+    this.roomItemsSerivce.deleteItem$(this.selectedItem.id).subscribe(deleted => {
+      this.selectedItem = undefined;
+      this.loadItems();
+    });
   }
 
   private updateRoomItemModelAmount(id: number, amount: number, selectedItem: RoomItemModel) {
     selectedItem.amountOwned += amount;
     this.calculatePriceAndToPay(selectedItem);
-    this.roomItemsSerivce.updateItem(selectedItem).finally();
+    this.roomItemsSerivce.updateItem$(selectedItem).pipe(take(1)).subscribe(updatedRoomItem => this.loadItems());
   }
 
   private loadRoomWithItems(): void {

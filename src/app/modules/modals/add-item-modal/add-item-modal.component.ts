@@ -3,7 +3,7 @@ import {ButtonClass, ButtonSize, ButtonType} from '../../../shared/components/bu
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalService} from '../../../shared/components/modal/services/modal.service';
 import {Subject} from 'rxjs';
-import {debounceTime, takeUntil} from 'rxjs/operators';
+import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 
@@ -41,14 +41,15 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.itemPriceFC.valueChanges.pipe(
       takeUntil(this.destroy$),
-      debounceTime(400)
+      debounceTime(400),
+      filter(val => !!val)
     ).subscribe((value: number) => {
       this.itemPrice = +(value.toFixed(2));
     });
-
     this.itemAmountFC.valueChanges.pipe(
       takeUntil(this.destroy$),
-      debounceTime(400)
+      debounceTime(400),
+      filter(val => !!val)
     ).subscribe((value: number) => {
       const amount = +(value.toFixed(0));
       this.itemAmount = amount >= 0 ? amount : 0;
@@ -73,18 +74,19 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   private saveForm(): void {
     const newItem: RoomItemModel = {
       name: this.itemNameFC.value,
-      amountWanted: this.itemAmountFC.value,
-      amountOwned: 0,
-      costPerItem: this.itemPriceFC.value,
-      totalCost: this.itemPriceFC.value * this.itemAmountFC.value,
-      spendedCost: 0,
+      amountWanted: this.itemAmountFC.value as number,
+      amountOwned: 0 as number,
+      costPerItem: this.itemPriceFC.value as number,
+      totalCost: (this.itemPriceFC.value as number) * (this.itemAmountFC.value as number),
+      spendedCost: 0 as number,
       roomId: this.room.id,
       locked: false,
-      colors: ['', '', '', '', '']
+      colors: []
     };
 
-    this.roomItemsService.addItem(newItem).finally();
-    this.modalService.closeModal();
+    this.roomItemsService.addItem$(newItem).subscribe(addedItem => {
+      this.modalService.closeModal();
+    });
   }
 
   handleNumberInput(keyboardEvent: KeyboardEvent) {
