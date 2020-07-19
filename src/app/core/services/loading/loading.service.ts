@@ -21,6 +21,7 @@ export class LoadingService {
   }
 
   public stopLoading(name: string): void {
+    debugger;
     const loadingProcess = this.loadingProcesses$[name];
     if (!!loadingProcess) {
       this.loadingProcesses$[name].next(false);

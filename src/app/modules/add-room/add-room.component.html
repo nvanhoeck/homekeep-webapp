@@ -25,7 +25,7 @@
     <div class="submit--container">
       <p class="submit__cancel" (click)="cancel()">Cancel</p>
       <app-validation [validationClass]="addRoomValidationClass">
-        <app-default-button *ngIf="(isLoading$() | async) === false else loading"
+        <app-default-button *ngIf="(isLoading$() | async) === false; else loading"
                             [buttonSize]="submitButtonSize"
                             [buttonType]="submitButtonType"
                             [buttonClass]="submitButtonClass"
@@ -38,10 +38,8 @@
         ></app-default-button>
       </app-validation>
       <ng-template #loading>
-        <app-spinner *ngIf="(isLoading$() | async) === true" [name]="'add-room'"></app-spinner>
+        <app-loading-spinner></app-loading-spinner>
       </ng-template>
-
     </div>
-
   </app-section>
 </form>
