@@ -65,7 +65,6 @@ form {
       font-size: 1.25rem;
     }
   }
-
   .amount-group {
     display: flex;
     flex-direction: row;
@@ -102,4 +101,8 @@ form {
   .color-picker-btn {
     margin-right: $gutter;
   }
+}
+
+img, .icon-image {
+  padding: $gutter;
 }

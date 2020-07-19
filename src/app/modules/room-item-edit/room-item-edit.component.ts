@@ -6,6 +6,9 @@ import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../../shared/comp
 import {FormControl, FormGroup} from '@angular/forms';
 import {RoomItemColor} from '../../shared/models/room-item-color';
 import {ImageTransformerService} from '../../core/services/image/image-transformer.service';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {MessagingService} from '../../core/services/messaging/messaging.service';
+import {AppMessageType} from '../../shared/models/app-message.class';
 
 @Component({
   selector: 'app-room-item-edit',
@@ -33,10 +36,10 @@ export class RoomItemEditComponent implements OnInit {
   cpPositionTop: CPPosition = CPPosition.TOP;
   cpPositionTopLeft: CPPosition = CPPosition.TOP_LEFT;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute, private readonly messagingService: MessagingService,
               private readonly roomItemsSerivce: RoomItemsService,
               private cdRef: ChangeDetectorRef, private readonly  imageTransformerService: ImageTransformerService,
-              private router: Router) {
+              private router: Router, private readonly sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -144,10 +147,27 @@ export class RoomItemEditComponent implements OnInit {
   }
 
   addImage(event: Event) {
-    debugger
     const file = (event.target as HTMLInputElement).files[0];
-    this.imageTransformerService.convertImage(file).then(img => {
-      this.item.image = img;
-    });
+    if (!file) {
+      this.messagingService.addMessage('No image selected', 'edit-image', AppMessageType.ERROR);
+    }
+    if (file.size >= 1048576) {
+      this.messagingService.addMessage('Image too big', 'edit-image', AppMessageType.ERROR);
+    } else {
+      this.messagingService.clear();
+      this.cdRef.markForCheck();
+      this.imageTransformerService.convertImage(file).then(img => {
+        this.item.image = img;
+        this.cdRef.markForCheck();
+      });
+    }
+  }
+
+  getImageHtml(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustUrl('data:image/x-png;base64,' + this.item.image);
+  }
+
+  clickImage() {
+    document.getElementById('imageUpload').click();
   }
 }
