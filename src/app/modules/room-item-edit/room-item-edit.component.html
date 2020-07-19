@@ -98,7 +98,7 @@
       <div class="edit-item-modal--formgroup">
         <div class="form-block edit-item-modal--formgroup__left-block">
           <label>Image: </label>
-          <i class="icon icon-image"></i>
+          <input class="icon icon-image" type="file" accept="image/x-png,image/jpeg,image/gif" (change)="addImage($event)"/>
         </div>
       </div>
       <div class="edit-item-modal--formgroup">

@@ -5,6 +5,7 @@ import {RoomItemsService} from '../../core/services/data/roomItems/room-items.se
 import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../../shared/components/buttons';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RoomItemColor} from '../../shared/models/room-item-color';
+import {ImageTransformerService} from '../../core/services/image/image-transformer.service';
 
 @Component({
   selector: 'app-room-item-edit',
@@ -34,7 +35,7 @@ export class RoomItemEditComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private readonly roomItemsSerivce: RoomItemsService,
-              private cdRef: ChangeDetectorRef,
+              private cdRef: ChangeDetectorRef, private readonly  imageTransformerService: ImageTransformerService,
               private router: Router) {
   }
 
@@ -140,5 +141,13 @@ export class RoomItemEditComponent implements OnInit {
   setColor(indx: number, id: number, color: string): void {
     this.item.colors[indx] = {id, value: color, roomItem: this.item.colors[indx].roomItem} as RoomItemColor;
     this.cdRef.markForCheck();
+  }
+
+  addImage(event: Event) {
+    debugger
+    const file = (event.target as HTMLInputElement).files[0];
+    this.imageTransformerService.convertImage(file).then(img => {
+      this.item.image = img;
+    });
   }
 }

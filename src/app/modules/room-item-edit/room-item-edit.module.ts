@@ -10,6 +10,7 @@ import {SubheaderModule} from '../../shared/components/subheader/subheader.modul
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RoomModule} from '../room/room.module';
 import {ValidationModule} from '../../shared/components/validation/validation.module';
+import {ImageModule} from '../../core/services/image/image.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {ValidationModule} from '../../shared/components/validation/validation.mo
         ReactiveFormsModule,
         FormsModule,
         RoomModule,
-        ValidationModule
+        ValidationModule,
+      ImageModule
     ]
 })
 export class RoomItemEditModule { }
