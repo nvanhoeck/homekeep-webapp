@@ -212,13 +212,15 @@
   </app-container>
   <app-action>
     <p class="edit-item-modal--cancel" (click)="cancel()">Cancel</p>
-    <app-default-button class="edit-item-modal--edit-item"
-                        [buttonType]="buttonType"
-                        [buttonSize]="buttonSizeMed"
-                        [buttonClass]="buttonClassSubmit"
-                        [borderRadius]="20"
-                        [text]="'Save'"
-                        (click)="handleSubmit()"
-    ></app-default-button>
+    <app-validation [validationClass]="'update-room-item'">
+      <app-default-button class="edit-item-modal--edit-item"
+                          [buttonType]="buttonType"
+                          [buttonSize]="buttonSizeMed"
+                          [buttonClass]="buttonClassSubmit"
+                          [borderRadius]="20"
+                          [text]="'Save'"
+                          (click)="handleSubmit()"
+      ></app-default-button>
+    </app-validation>
   </app-action>
 </ng-container>

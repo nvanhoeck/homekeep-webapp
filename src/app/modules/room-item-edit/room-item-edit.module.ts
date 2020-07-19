@@ -9,20 +9,22 @@ import {ActionModule} from '../../shared/components/action/action.module';
 import {SubheaderModule} from '../../shared/components/subheader/subheader.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RoomModule} from '../room/room.module';
+import {ValidationModule} from '../../shared/components/validation/validation.module';
 
 
 @NgModule({
   declarations: [RoomItemEditComponent],
-  imports: [
-    CommonModule,
-    RoomItemEditRoutingModule,
-    ContainerModule,
-    ButtonsModule,
-    ActionModule,
-    SubheaderModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RoomModule
-  ]
+    imports: [
+        CommonModule,
+        RoomItemEditRoutingModule,
+        ContainerModule,
+        ButtonsModule,
+        ActionModule,
+        SubheaderModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RoomModule,
+        ValidationModule
+    ]
 })
 export class RoomItemEditModule { }

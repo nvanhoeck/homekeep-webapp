@@ -76,13 +76,14 @@ export class RoomItemEditComponent implements OnInit {
 
   handleSubmit() {
     this.updateAllFields();
-    this.router.navigate(['/room', this.item.roomId]).finally();
   }
 
   private updateAllFields() {
     this.item.spendedCost = this.item.amountOwned * this.item.costPerItem;
     this.item.totalCost = this.item.amountWanted * this.item.costPerItem;
-    this.roomItemsSerivce.updateItem$(this.item);
+    this.roomItemsSerivce.updateItem$(this.item).subscribe(updated => {
+      this.router.navigate(['/room', this.item.roomId]).finally();
+    });
   }
 
   cancel() {
