@@ -5,6 +5,10 @@ import {RoomItemsService} from '../../core/services/data/roomItems/room-items.se
 import {ButtonClass, ButtonSize, ButtonType, CPPosition} from '../../shared/components/buttons';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RoomItemColor} from '../../shared/models/room-item-color';
+import {ImageTransformerService} from '../../core/services/image/image-transformer.service';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {MessagingService} from '../../core/services/messaging/messaging.service';
+import {AppMessageType} from '../../shared/models/app-message.class';
 
 @Component({
   selector: 'app-room-item-edit',
@@ -32,10 +36,10 @@ export class RoomItemEditComponent implements OnInit {
   cpPositionTop: CPPosition = CPPosition.TOP;
   cpPositionTopLeft: CPPosition = CPPosition.TOP_LEFT;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(private activatedRoute: ActivatedRoute, private readonly messagingService: MessagingService,
               private readonly roomItemsSerivce: RoomItemsService,
-              private cdRef: ChangeDetectorRef,
-              private router: Router) {
+              private cdRef: ChangeDetectorRef, private readonly  imageTransformerService: ImageTransformerService,
+              private router: Router, private readonly sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -76,13 +80,14 @@ export class RoomItemEditComponent implements OnInit {
 
   handleSubmit() {
     this.updateAllFields();
-    this.router.navigate(['/room', this.item.roomId]).finally();
   }
 
   private updateAllFields() {
     this.item.spendedCost = this.item.amountOwned * this.item.costPerItem;
     this.item.totalCost = this.item.amountWanted * this.item.costPerItem;
-    this.roomItemsSerivce.updateItem$(this.item);
+    this.roomItemsSerivce.updateItem$(this.item).subscribe(updated => {
+      this.router.navigate(['/room', this.item.roomId]).finally();
+    });
   }
 
   cancel() {
@@ -139,5 +144,30 @@ export class RoomItemEditComponent implements OnInit {
   setColor(indx: number, id: number, color: string): void {
     this.item.colors[indx] = {id, value: color, roomItem: this.item.colors[indx].roomItem} as RoomItemColor;
     this.cdRef.markForCheck();
+  }
+
+  addImage(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (!file) {
+      this.messagingService.addMessage('No image selected', 'edit-image', AppMessageType.ERROR);
+    }
+    if (file.size >= 1048576) {
+      this.messagingService.addMessage('Image too big', 'edit-image', AppMessageType.ERROR);
+    } else {
+      this.messagingService.clear();
+      this.cdRef.markForCheck();
+      this.imageTransformerService.convertImage(file).then(img => {
+        this.item.image = img;
+        this.cdRef.markForCheck();
+      });
+    }
+  }
+
+  getImageHtml(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustUrl('data:image/x-png;base64,' + this.item.image);
+  }
+
+  clickImage() {
+    document.getElementById('imageUpload').click();
   }
 }

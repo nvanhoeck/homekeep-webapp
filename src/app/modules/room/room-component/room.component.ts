@@ -9,6 +9,7 @@ import {ModalService} from '../../../shared/components/modal/services/modal.serv
 import {RoomService} from '../../../core/services/data/rooms/room.service';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
 import {AddItemModalComponent} from '../../modals/add-item-modal/add-item-modal.component';
+import {ViewImageModalComponent} from '../../view-image/view-image-modal/view-image-modal.component';
 
 @Component({
   selector: 'app-room',
@@ -132,7 +133,8 @@ export class RoomComponent implements OnInit, OnDestroy {
   }
 
   viewItem() {
-    // TODO
+    this.modalService.openModal(ViewImageModalComponent, [{attributePath: 'image', value: this.selectedItem.image}]);
+    this.modalService.addListener(this);
   }
 
   editItem() {

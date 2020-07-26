@@ -65,6 +65,7 @@ export class RoomsOverviewComponent implements OnInit {
 
   public holdHandler(time: number, id: number): void {
     if (time >= 400) {
+      console.log(id);
       this.activeElement = id;
     }
   }

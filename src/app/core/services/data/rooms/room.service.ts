@@ -29,6 +29,7 @@ export class RoomService {
       .pipe(
         catchError((err) => {
           this.messageService.addMessage('Could not add room', 'add-room', AppMessageType.ERROR);
+          this.loadingService.stopLoading('add-room');
           return throwError('Could not add room');
         }),
         tap(newRoom => {

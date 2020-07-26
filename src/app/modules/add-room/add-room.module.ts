@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonsModule} from '../../shared/components/buttons/buttons.module';
 import {ValidationModule} from '../../shared/components/validation/validation.module';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
+import {LoadingSpinnerModule} from '../../shared/components/loading-spinner/loading-spinner.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
         ButtonsModule,
 
         ValidationModule,
-        SpinnerModule
+        SpinnerModule,
+        LoadingSpinnerModule
     ],
   exports: [AddRoomComponent]
 })

@@ -42,7 +42,12 @@ export class RoomItemsService {
 
   public updateItem$(item: RoomItemModel): Observable<RoomItemModel> {
     return this.roomItemsApiService.updateRoomItem$(item)
-      .pipe(tap(updatedRoomItem => {
+      .pipe(
+        catchError((err) => {
+          this.messageService.addMessage('Could not update room-item', 'update-room-item', AppMessageType.ERROR);
+          return throwError('Could not update room-item');
+        }),
+        tap(updatedRoomItem => {
         this.dbService.update(this.TABLE_NAME, updatedRoomItem);
       }, () => {
         this.messageService.addMessage('Could not update room-item', 'update-room-item', AppMessageType.ERROR);
