@@ -26,6 +26,7 @@ export class RoomItemsService {
       .pipe(
         catchError((err) => {
           this.messageService.addMessage('Could not add room-item', 'add-room-item', AppMessageType.ERROR);
+          this.loadingService.stopLoading('add-item');
           return throwError('Could not add room-item');
         }),
         tap(newRoom => {
