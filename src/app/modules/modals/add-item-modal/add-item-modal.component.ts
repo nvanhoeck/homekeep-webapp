@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 import {debounceTime, filter, takeUntil} from 'rxjs/operators';
 import {RoomItemModel, RoomModel} from '../../../shared/models';
 import {RoomItemsService} from '../../../core/services/data/roomItems/room-items.service';
+import {LoadingService} from '../../../core/services/loading/loading.service';
 
 @Component({
   selector: 'app-add-item-modal',
@@ -35,7 +36,8 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
   });
 
   constructor(private readonly modalService: ModalService,
-              private readonly roomItemsService: RoomItemsService) {
+              private readonly roomItemsService: RoomItemsService,
+              private readonly loadingService: LoadingService) {
   }
 
   ngOnInit() {
@@ -83,15 +85,22 @@ export class AddItemModalComponent implements OnInit, OnDestroy {
       locked: false,
       colors: []
     };
+    this.loadingService.addLoading('add-item');
 
-    this.roomItemsService.addItem$(newItem).subscribe(addedItem => {
-      this.modalService.closeModal();
-    });
+    this.roomItemsService.addItem$(newItem)
+      .subscribe(addedItem => {
+        this.loadingService.stopLoading('add-item');
+        this.modalService.closeModal();
+      });
   }
 
   handleNumberInput(keyboardEvent: KeyboardEvent) {
     if (keyboardEvent.key === 'e' || keyboardEvent.key === 'E' || keyboardEvent.key === '+' || keyboardEvent.key === '-') {
       keyboardEvent.preventDefault();
     }
+  }
+
+  isLoading$() {
+    return this.loadingService.isLoading$('add-item');
   }
 }

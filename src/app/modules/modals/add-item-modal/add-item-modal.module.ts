@@ -4,6 +4,7 @@ import {AddItemModalComponent} from './add-item-modal.component';
 import {ButtonsModule} from '../../../shared/components/buttons/buttons.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ValidationModule} from '../../../shared/components/validation/validation.module';
+import {LoadingSpinnerModule} from '../../../shared/components/loading-spinner/loading-spinner.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {ValidationModule} from '../../../shared/components/validation/validation
         CommonModule,
         ButtonsModule,
         ReactiveFormsModule,
-        ValidationModule
+        ValidationModule,
+        LoadingSpinnerModule
     ],
   exports: [AddItemModalComponent],
   entryComponents: [AddItemModalComponent]

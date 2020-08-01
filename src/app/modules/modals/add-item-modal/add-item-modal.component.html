@@ -17,12 +17,15 @@
   <div class="add-item-modal--actions">
     <p class="add-item-modal--cancel" (click)="cancel()">Cancel</p>
     <app-validation [validationClass]="'add-room-item'">
-      <app-default-button class="add-item-modal--add-item"
+      <app-default-button *ngIf="(isLoading$() | async) === false; else loading" class="add-item-modal--add-item"
                           [buttonType]="buttonType"
                           [buttonSize]="buttonSize"
                           [buttonClass]="buttonClass"
                           [text]="'+ Add item'"
       ></app-default-button>
     </app-validation>
+    <ng-template #loading>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
   </div>
 </form>
