@@ -30,7 +30,7 @@
     "angular-http-server": "^1.9.0",
     "angular-oauth2-oidc": "^9.2.2",
     "angular-oauth2-oidc-jwks": "^9.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "file-saver": "latest",
     "http-server-ssl": "0.0.7",
     "keycloak-angular": "^7.0.1",
